@@ -30,6 +30,10 @@
 </header>
 <main class="container">
   <h1>Projects</h1>
+  <section class="contribution-section">
+    <h2 class="contribution-title">🚀 Contribution Graph</h2>
+    <div id="contribution-graph" class="contribution-graph"></div>
+  </section>
   <p class="muted">Public repositories from <a href="https://github.com/MaiwulanjiangMaiming" target="_blank" rel="noopener">@MaiwulanjiangMaiming</a></p>
   <div id="github-repos" class="grid"></div>
 </main>
@@ -39,6 +43,6 @@
   </div>
 </footer>
 <script src="assets/site.js"></script>
-<script>renderGitHubRepos('MaiwulanjiangMaiming');</script>
+<script>renderContributionGraph('MaiwulanjiangMaiming');renderGitHubRepos('MaiwulanjiangMaiming');</script>
 </body>
 </html>
