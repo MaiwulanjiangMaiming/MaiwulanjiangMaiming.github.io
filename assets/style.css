@@ -139,10 +139,5 @@ article{animation:fadeUp var(--duration-slow) var(--ease-out-expo)}
 section h2{font-family:var(--font-heading);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;margin:2rem 0 1rem}
 .contribution-section{margin:1.5rem 0}
 .contribution-title{font-family:var(--font-heading);font-weight:600;font-size:1.1rem;letter-spacing:-.01em;margin:0 0 1rem}
-.contribution-graph{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow-x:auto}
-.contribution-graph canvas{display:block}
-.contribution-legend{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;font-size:.75rem;color:var(--muted)}
-.contribution-legend span{display:inline-flex;align-items:center;gap:.25rem}
-.contribution-legend .legend-box{width:10px;height:10px;border-radius:2px}
-.contribution-stats{display:flex;gap:1.5rem;margin-bottom:1rem;font-size:.85rem;color:var(--muted)}
-.contribution-stats strong{color:var(--text);font-weight:600}
+.contribution-graph{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow-x:auto;display:flex;justify-content:center}
+.contribution-graph img,.contribution-graph picture{display:block;max-width:100%;height:auto}
