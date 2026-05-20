@@ -139,6 +139,16 @@ article{animation:fadeUp var(--duration-slow) var(--ease-out-expo)}
 section h2{font-family:var(--font-heading);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;margin:2rem 0 1rem}
 .contribution-section{margin:1.5rem 0}
 .contribution-title{font-family:var(--font-heading);font-weight:600;font-size:1.1rem;letter-spacing:-.01em;margin:0 0 1rem}
-.contribution-graph{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow-x:auto;display:flex;justify-content:center}
+.contribution-graph{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow-x:auto}
+.contribution-graph-inner{display:flex;flex-direction:column;align-items:center;gap:.5rem;width:100%}
 .contribution-svg-wrapper{width:100%;max-width:720px}
 .contribution-svg-wrapper svg{width:100%;height:auto;display:block}
+.contribution-stats{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:720px;gap:1rem;flex-wrap:wrap;margin-bottom:.25rem}
+.stat-item{display:flex;align-items:center;gap:.4rem}
+.stat-value{font-family:var(--font-mono);font-size:1.5rem;font-weight:600;color:var(--accent);line-height:1}
+.stat-label{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.year-progress{width:120px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.year-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width 1s var(--ease-out-expo)}
+.contribution-months{display:flex;justify-content:space-between;width:100%;max-width:720px;padding:0 2px;margin-top:.25rem;gap:2px}
+.month-label{font-size:.6rem;color:var(--muted);font-family:var(--font-mono);padding:2px 4px;border-radius:4px;transition:all var(--duration-fast) var(--ease-smooth);flex:1;text-align:center}
+.month-label.current{background:var(--accent);color:var(--bg);font-weight:600}
