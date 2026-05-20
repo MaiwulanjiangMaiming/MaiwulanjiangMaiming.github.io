@@ -140,4 +140,5 @@ section h2{font-family:var(--font-heading);font-weight:600;font-size:1.4rem;lett
 .contribution-section{margin:1.5rem 0}
 .contribution-title{font-family:var(--font-heading);font-weight:600;font-size:1.1rem;letter-spacing:-.01em;margin:0 0 1rem}
 .contribution-graph{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow-x:auto;display:flex;justify-content:center}
-.contribution-graph img,.contribution-graph picture{display:block;max-width:100%;height:auto}
+.contribution-svg-wrapper{width:100%;max-width:720px}
+.contribution-svg-wrapper svg{width:100%;height:auto;display:block}
