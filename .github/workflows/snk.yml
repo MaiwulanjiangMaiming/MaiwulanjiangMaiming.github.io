@@ -15,9 +15,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: Platane/snk/svg-only@v3
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Generate snake contribution graph
+        uses: Platane/snk/svg-only@v3
         with:
           github_user_name: MaiwulanjiangMaiming
           outputs: |
