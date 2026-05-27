@@ -6,7 +6,6 @@
     "period": "Aug 2025 – Present",
     "supervisors": "Prof. Tian Li & Dr. Chenyang Liu",
     "summary": "Accelerated non-Cartesian spiral MRF reconstruction via reengineered self-calibrating GROG for precise spiral-to-Cartesian gridding.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Spiral%20k-space%20trajectory%20MRI%20reconstruction%20diagram%2C%20non-Cartesian%20gridding%20visualization%2C%20scientific%20illustration%2C%20dark%20blue%20background%2C%20clean%20minimal&image_size=landscape_16_9",
     "bullets": [
       "Resolved the fundamental speed bottleneck of non-Cartesian MRF to enable fast, high-fidelity quantitative imaging."
     ]
@@ -18,7 +17,6 @@
     "period": "Aug 2025 – Present",
     "supervisors": "Prof. Song Gao",
     "summary": "Leading an anatomy-aware AI foundation model for automated cerebrovascular diagnosis with multicenter MRA database construction.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Brain%20MRA%20angiography%20with%20AI%20segmentation%20overlay%2C%20cerebrovascular%20stenosis%20detection%2C%20deep%20learning%20visualization%2C%20scientific%20illustration&image_size=landscape_16_9",
     "bullets": [
       "Integrates advanced deep learning to overcome subjectivity and inconsistency in traditional vascular analysis."
     ]
@@ -30,7 +28,6 @@
     "period": "Oct 2024 – Present",
     "supervisors": "Prof. Song Gao & Prof. Xinwei Cai",
     "summary": "First superconducting joints for multi-filament MgB₂ wires using Mg(BH₄)₂ precursor; device and process optimization for joint density.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Superconducting%20wire%20cross-section%20microscopy%2C%20MgB2%20material%20science%2C%20cryogenic%20engineering%2C%20scientific%20illustration%2C%20blue%20metallic&image_size=landscape_16_9",
     "bullets": [
       "Developed custom filling device and optimized joint density to enable next-generation MgB₂ MRI systems."
     ]
@@ -42,7 +39,6 @@
     "period": "Sep 2023 – Present",
     "supervisors": "Prof. Yao Sui",
     "summary": "First fMRI study validating cortical functional changes following Cuistow surgery.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Brain%20fMRI%20activation%20map%2C%20cortical%20functional%20mapping%2C%20neuroimaging%20visualization%2C%20colorful%20brain%20overlay%2C%20scientific&image_size=landscape_16_9",
     "bullets": [
       "Led patient recruitment, MRI scanning, and statistical analysis for actionable neuroimaging insights in postoperative assessment."
     ]
@@ -54,7 +50,6 @@
     "period": "May – Nov 2024",
     "supervisors": "Prof. Yao Sui",
     "summary": "Accelerated reconstruction pipeline fusing orthogonal MRI acquisitions into isotropic high-resolution volumes with quantitative T₁ and PD maps.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Quantitative%20T1%20mapping%20MRI%2C%20super-resolution%20reconstruction%2C%20multi-orientation%20fusion%2C%20color%20map%20visualization%2C%20scientific&image_size=landscape_16_9",
     "bullets": [
       "Iterative estimation combining multi-orientation acquisitions for improved resolution."
     ]
@@ -66,7 +61,6 @@
     "period": "Oct 2023 – Jan 2024",
     "supervisors": "Prof. Yaohui Zhao",
     "summary": "Population-based analysis linking standing balance with cognitive and depressive status using three waves of CHARLS data.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Epidemiology%20data%20visualization%2C%20population%20health%20statistics%2C%20balance%20assessment%2C%20elderly%20cohort%20study%2C%20clean%20infographic&image_size=landscape_16_9",
     "bullets": [
       "Validated clinically meaningful associations for aging research and public health."
     ]
@@ -78,7 +72,6 @@
     "period": "Sep 2023 – Jun 2024",
     "supervisors": "Prof. Xu Yang",
     "summary": "Radiomics and machine learning on 3D-FLAIR/T1 vestibular MRI to improve UPVD diagnosis.",
-    "image": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Vestibular%20MRI%20radiomics%20feature%20extraction%2C%20machine%20learning%20classification%2C%20inner%20ear%20imaging%2C%20scientific%20illustration&image_size=landscape_16_9",
     "bullets": [
       "Extracted >1,500 features and implemented XGBoost classification for clinically actionable insights."
     ]
