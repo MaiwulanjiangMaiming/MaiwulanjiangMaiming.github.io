@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Maiwulanjiang Maiming — Publications</title>
+    <link>https://mawlan.me/papers.html</link>
+    <description>Academic publications in medical imaging, MRI reconstruction, and clinical AI.</description>
+    <language>en</language>
+  <item>
+    <title>Enhanced vestibular disorder diagnosis using machine learning and structural data integration: A study on UPVD patients</title>
+    <link>#</link>
+    <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+    <description>Radiomics and machine learning applied to vestibular MRI for improved UPVD diagnosis.</description>
+  </item>
+  <item>
+    <title>Superconducting joints for 30-filament MgB₂ wires using Mg(BH₄)₂ as precursor</title>
+    <link>#</link>
+    <pubDate>Thu, 01 Jan 2026 00:00:00 GMT</pubDate>
+    <description>Oral, accepted. Abstract ID: 30049</description>
+  </item>
+  </channel>
+</rss>
