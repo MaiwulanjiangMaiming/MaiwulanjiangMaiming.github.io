@@ -40,7 +40,7 @@ function processDirectory(dir, outputFile) {
   console.log('Generated ' + outputFile + ' from ' + files.length + ' files');
 }
 
-const contentDir = path.join(__dirname, '..', 'content');
-processDirectory(path.join(contentDir, 'papers'), path.join(contentDir, 'papers.json'));
-processDirectory(path.join(contentDir, 'research'), path.join(contentDir, 'research.json'));
-processDirectory(path.join(contentDir, 'projects'), path.join(contentDir, 'projects.json'));
+const dataDir = path.join(__dirname, '..', 'data');
+processDirectory(path.join(dataDir, 'papers'), path.join(dataDir, 'papers.json'));
+processDirectory(path.join(dataDir, 'research'), path.join(dataDir, 'research.json'));
+processDirectory(path.join(dataDir, 'projects'), path.join(dataDir, 'projects.json'));

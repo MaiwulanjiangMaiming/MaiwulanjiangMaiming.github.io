@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const papersPath = path.join(__dirname, '..', 'content', 'papers.json');
+const papersPath = path.join(__dirname, '..', 'data', 'papers.json');
 const papers = JSON.parse(fs.readFileSync(papersPath, 'utf8'));
 
 const items = papers.map(function(p) {

@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Academic publications and research papers in medical imaging, MRI reconstruction, and neuroimaging.">
-<meta property="og:title" content="Publications - Maiwulanjiang Maiming">
-<meta property="og:description" content="Academic publications in medical imaging and AI.">
+<meta name="description" content="Personal moments and gallery from life and travel.">
+<meta property="og:title" content="Moments - Maiwulanjiang Maiming">
+<meta property="og:description" content="Personal gallery and life moments.">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta property="og:image" content="https://mawlan.me/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://mawlan.me/images/og-image.png">
 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://mawlan.me/feed.xml">
-<title>Publications - Maiwulanjiang Maiming</title>
+<title>Moments - Maiwulanjiang Maiming</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="prefetch" href="content/papers.json">
-<link rel="prefetch" href="content/research.json">
-<link rel="prefetch" href="content/projects.json">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="prefetch" href="../data/papers.json">
+<link rel="prefetch" href="../data/research.json">
+<link rel="prefetch" href="../data/projects.json">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
 </head>
 <body>
@@ -34,23 +34,16 @@
     </nav>
   </div>
 </header>
-<main class="container two-col">
-  <aside class="timeline"><div id="timeline"></div></aside>
-  <section>
-    <h1>Publications</h1>
-    <div id="papers" class="list"></div>
-  </section>
+<main class="container">
+  <h1>Moments</h1>
+  <div id="gallery" class="gallery"></div>
 </main>
 <footer class="site-footer">
   <div class="container">© <span id="year"></span> Maiwulanjiang Maiming
     <div class="motto">"Everything negative — pressure, challenges — is all an opportunity for me to rise." — Kobe Bryant</div>
   </div>
 </footer>
-<script src="assets/site.js"></script>
-<script>
-renderPapers();
-renderResearch();
-renderResearchProjects();
-</script>
+<script src="../js/site.js"></script>
+<script>renderMoments();</script>
 </body>
 </html>

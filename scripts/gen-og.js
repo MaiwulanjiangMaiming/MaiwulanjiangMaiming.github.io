@@ -44,7 +44,7 @@ ctx.fillStyle = '#5b9cf5';
 ctx.font = '24px sans-serif';
 ctx.fillText('mawlan.me', 80, 530);
 
-const outDir = path.join(__dirname, '..', 'assets');
+const outDir = path.join(__dirname, '..', 'images');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 const outPath = path.join(outDir, 'og-image.png');
 fs.writeFileSync(outPath, canvas.toBuffer('image/png'));

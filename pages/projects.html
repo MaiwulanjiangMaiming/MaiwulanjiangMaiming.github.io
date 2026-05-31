@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Research experience in medical imaging, MRI technologies, and neuroimaging analysis.">
-<meta property="og:title" content="Research Experience - Maiwulanjiang Maiming">
-<meta property="og:description" content="Research in medical imaging and quantitative analysis.">
+<meta name="description" content="GitHub projects showcasing code in medical imaging, machine learning, and research.">
+<meta property="og:title" content="Projects - Maiwulanjiang Maiming">
+<meta property="og:description" content="Open source projects in medical imaging and machine learning.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta property="og:image" content="https://mawlan.me/assets/og-image.png">
+<meta property="og:image" content="https://mawlan.me/images/og-image.png">
 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://mawlan.me/feed.xml">
-<title>Research Experience - Maiwulanjiang Maiming</title>
+<title>Projects - Maiwulanjiang Maiming</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="prefetch" href="content/papers.json">
-<link rel="prefetch" href="content/research.json">
-<link rel="prefetch" href="content/projects.json">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="prefetch" href="../data/papers.json">
+<link rel="prefetch" href="../data/research.json">
+<link rel="prefetch" href="../data/projects.json">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
 </head>
 <body>
@@ -35,15 +35,20 @@
   </div>
 </header>
 <main class="container">
-  <h1>Research Experience</h1>
-  <div id="research" class="research"></div>
+  <h1>Projects</h1>
+  <section class="contribution-section">
+    <h2 class="contribution-title">🚀 Contribution Graph</h2>
+    <div id="contribution-graph" class="contribution-graph"></div>
+  </section>
+  <p class="muted">Public repositories from <a href="https://github.com/MaiwulanjiangMaiming" target="_blank" rel="noopener">@MaiwulanjiangMaiming</a></p>
+  <div id="github-repos" class="grid"></div>
 </main>
 <footer class="site-footer">
   <div class="container">© <span id="year"></span> Maiwulanjiang Maiming
     <div class="motto">"Everything negative — pressure, challenges — is all an opportunity for me to rise." — Kobe Bryant</div>
   </div>
 </footer>
-<script src="assets/site.js"></script>
-<script>renderResearch();</script>
+<script src="../js/site.js"></script>
+<script>renderContributionGraph('MaiwulanjiangMaiming');renderGitHubRepos('MaiwulanjiangMaiming');</script>
 </body>
 </html>
