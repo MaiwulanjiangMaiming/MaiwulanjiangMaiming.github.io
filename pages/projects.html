@@ -39,7 +39,7 @@
   <section class="contribution-section">
     <h2 class="contribution-title">🚀 GitHub Resonance Imaging</h2>
     <div id="contribution-graph" class="contribution-graph">
-      <iframe id="gri-frame" src="https://maiwulanjiangmaiming.github.io/GRI-contribution-graph/github_resonance_imaging_scanner.html" style="width:100%;height:520px;border:none;border-radius:var(--radius);display:block;" title="GitHub Resonance Imaging Scanner" loading="lazy"></iframe>
+      <iframe id="gri-frame" src="../gri-scanner-dark.html" style="width:100%;height:520px;border:none;border-radius:var(--radius);display:block;" title="GitHub Resonance Imaging Scanner" loading="lazy"></iframe>
     </div>
   </section>
   <p class="muted">Public repositories from <a href="https://github.com/MaiwulanjiangMaiming" target="_blank" rel="noopener">@MaiwulanjiangMaiming</a></p>
@@ -53,7 +53,7 @@
 <script src="../js/site-v5.js"></script>
 <script>
 function getGRITheme(){var theme=document.documentElement.getAttribute('data-theme');if(theme==='light')return 'light';if(theme==='dark')return 'dark';return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
-function updateGRIScanner(){var frame=document.getElementById('gri-frame');if(!frame)return;var theme=getGRITheme();var src='https://maiwulanjiangmaiming.github.io/GRI-contribution-graph/github_resonance_imaging_scanner'+(theme==='light'?'_light':'')+'.html';if(frame.src!==src)frame.src=src;}
+function updateGRIScanner(){var frame=document.getElementById('gri-frame');if(!frame)return;var theme=getGRITheme();var src='../gri-scanner-'+(theme==='light'?'light':'dark')+'.html';if(frame.getAttribute('src')!==src)frame.setAttribute('src',src);}
 updateGRIScanner();
 document.documentElement.addEventListener('themechange',updateGRIScanner);
 renderGitHubRepos('MaiwulanjiangMaiming');
