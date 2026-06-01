@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Interactive demo of GitHub Resonance Imaging - visualize any GitHub user's contributions as an MRI scan.">
+<meta name="description" content="GitHub Resonance Imaging - Interactive MRI-style contribution graph scanner">
 <title>GRI Demo - Maiwulanjiang Maiming</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +14,16 @@
   max-width: 720px;
   margin: 0 auto;
 }
-.gri-input-group {
+
+.user-input {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
   align-items: center;
   flex-wrap: wrap;
 }
-.gri-input-group input {
+
+.user-input input {
   flex: 1;
   min-width: 200px;
   padding: 8px 14px;
@@ -31,30 +33,45 @@
   color: var(--text);
   font-size: 14px;
   outline: none;
-  font-family: var(--font-body);
+  transition: border-color 0.15s ease;
 }
-.gri-input-group input:focus {
+
+.user-input input:focus {
   border-color: var(--accent);
 }
-.gri-input-group input::placeholder {
+
+.user-input input::placeholder {
   color: var(--muted);
 }
-.gri-input-group button {
-  padding: 8px 20px;
+
+.user-input button {
+  padding: 8px 16px;
   border-radius: var(--radius);
-  border: 1px solid var(--accent);
-  background: var(--accent);
-  color: white;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: var(--font-body);
 }
-.gri-input-group button:hover {
+
+.user-input button:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+}
+
+.user-input button.primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.user-input button.primary:hover {
   opacity: 0.9;
 }
-.gri-tabs {
+
+.tabs {
   display: flex;
   gap: 4px;
   margin-bottom: 16px;
@@ -64,7 +81,8 @@
   border: 1px solid var(--border);
   width: fit-content;
 }
-.gri-tab {
+
+.tab {
   padding: 6px 16px;
   border-radius: 6px;
   border: none;
@@ -74,58 +92,59 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: var(--font-body);
 }
-.gri-tab.active {
+
+.tab.active {
   background: var(--bg);
   color: var(--text);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
-.gri-tab:hover:not(.active) {
-  color: var(--text);
-}
-.gri-status {
+
+.status-msg {
   font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
   min-height: 18px;
 }
-.gri-status.error {
+
+.status-msg.error {
   color: #f85149;
 }
-.gri-status.success {
+
+.status-msg.success {
   color: #3fb950;
 }
-.gri-embed {
-  margin-top: 32px;
+
+.embed-code {
+  width: 100%;
+  max-width: 640px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 12px;
   overflow: hidden;
+  margin-top: 24px;
 }
-.gri-embed-header {
+
+.embed-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
   border-bottom: 1px solid var(--border);
 }
-.gri-embed-header h3 {
+
+.embed-header h3 {
   font-size: 14px;
   font-weight: 600;
   margin: 0;
 }
-.gri-embed-header button {
-  padding: 4px 12px;
+
+.embed-header button {
+  padding: 4px 10px;
   font-size: 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  cursor: pointer;
-  font-family: var(--font-body);
 }
-.gri-embed pre {
+
+pre {
   padding: 16px;
   overflow-x: auto;
   font-size: 12px;
@@ -133,32 +152,9 @@
   color: var(--muted);
   margin: 0;
 }
-.gri-embed code {
-  font-family: var(--font-mono);
-}
-.gri-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-top: 32px;
-}
-.gri-feature {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-.gri-feature h4 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--accent);
-}
-.gri-feature p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.5;
-  margin: 0;
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace;
 }
 </style>
 </head>
@@ -177,62 +173,37 @@
   </div>
 </header>
 <main class="container">
-  <h1>GitHub Resonance Imaging</h1>
-  <p class="muted">Visualize any GitHub user's contributions as an animated MRI scan</p>
+  <div class="hero" style="padding: 3rem 0 2rem;">
+    <h1>GitHub Resonance Imaging</h1>
+    <p style="color: var(--muted); font-size: 1.1rem; line-height: 1.7;">Watch any GitHub user's contribution graph transform into a mesmerizing MRI scan. Complete with k-space filling, echo formation, and image reconstruction.</p>
+  </div>
 
   <div class="gri-demo-container">
-    <!-- Input -->
-    <div class="gri-input-group">
+    <div class="user-input">
       <input type="text" id="username-input" placeholder="Enter GitHub username (e.g., torvalds)" value="MaiwulanjiangMaiming">
-      <button onclick="loadUser()">Load</button>
+      <button class="primary" onclick="loadUser()">Load</button>
     </div>
 
-    <!-- Theme Tabs -->
-    <div class="gri-tabs">
-      <button class="gri-tab active" data-theme="dark" onclick="switchTheme('dark')">Dark</button>
-      <button class="gri-tab" data-theme="light" onclick="switchTheme('light')">Light</button>
+    <div class="tabs">
+      <button class="tab active" data-theme="dark" onclick="switchTheme('dark')">Dark</button>
+      <button class="tab" data-theme="light" onclick="switchTheme('light')">Light</button>
     </div>
 
-    <!-- Scanner -->
     <div id="scanner-wrapper">
-      <div id="gri-scanner-card" style="max-width:640px;margin:0 auto;background:#0b0f14;border:1px solid #1e2b38;border-radius:16px;padding:20px 24px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfeae4;overflow-x:auto;">
-        <!-- Content will be generated by JS -->
-      </div>
+      <iframe id="scanner-frame" src="../gri-scanner-dark.html" style="width:100%;height:420px;border:none;border-radius:12px;" title="GRI Scanner"></iframe>
     </div>
+    <div id="status-msg" class="status-msg"></div>
 
-    <div id="gri-status" class="gri-status"></div>
-
-    <!-- Embed Code -->
-    <div class="gri-embed">
-      <div class="gri-embed-header">
+    <div class="embed-code">
+      <div class="embed-header">
         <h3>Add to your README</h3>
-        <button onclick="copyCode()">Copy</button>
+        <button class="btn" onclick="copyCode()">Copy</button>
       </div>
       <pre><code id="embed-code">&lt;picture&gt;
   &lt;source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/MaiwulanjiangMaiming/GRI-contribution-graph/output/gri-dark.svg" /&gt;
   &lt;source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/MaiwulanjiangMaiming/GRI-contribution-graph/output/gri-light.svg" /&gt;
   &lt;img alt="GitHub Resonance Imaging" src="https://raw.githubusercontent.com/MaiwulanjiangMaiming/GRI-contribution-graph/output/gri-dark.svg" /&gt;
 &lt;/picture&gt;</code></pre>
-    </div>
-
-    <!-- Features -->
-    <div class="gri-features">
-      <div class="gri-feature">
-        <h4>MRI Simulation</h4>
-        <p>Realistic pulse sequence with k-space filling, echo formation, and image reconstruction</p>
-      </div>
-      <div class="gri-feature">
-        <h4>Auto Theme</h4>
-        <p>Seamless dark/light mode switching based on system preferences</p>
-      </div>
-      <div class="gri-feature">
-        <h4>GitHub Action</h4>
-        <p>Automatically generate updated visualizations daily via GitHub Actions</p>
-      </div>
-      <div class="gri-feature">
-        <h4>Interactive</h4>
-        <p>Pause, play, and re-scan with full control over the animation</p>
-      </div>
     </div>
   </div>
 </main>
@@ -243,104 +214,16 @@
 </footer>
 <script src="../js/site-v5.js?v=11"></script>
 <script>
-(function(){
-  var currentTheme = 'dark';
-  var currentData = null;
+  let currentTheme = 'dark';
 
   function setStatus(msg, type) {
-    var el = document.getElementById('gri-status');
+    const el = document.getElementById('status-msg');
     el.textContent = msg;
-    el.className = 'gri-status' + (type ? ' ' + type : '');
+    el.className = 'status-msg' + (type ? ' ' + type : '');
   }
 
-  // Fetch contributions using free API
-  function fetchContributions(username) {
-    return fetch('https://github-contributions-api.deno.dev/' + username + '.json')
-      .then(function(r) {
-        if (!r.ok) throw new Error('API error: ' + r.status);
-        return r.json();
-      })
-      .then(function(result) {
-        if (!result.contributions) throw new Error('No contributions data');
-        var weeks = result.contributions;
-        var grid = [], kmag = [], dates = [], counts = [];
-        var levelMap = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
-        for (var w = 0; w < weeks.length && w < 52; w++) {
-          grid[w] = []; kmag[w] = []; dates[w] = []; counts[w] = [];
-          var days = weeks[w];
-          var maxCount = 1;
-          for (var d = 0; d < days.length; d++) {
-            if (days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
-          }
-          for (var d = 0; d < 7; d++) {
-            var day = days[d];
-            grid[w][d] = levelMap[day.contributionLevel] || 0;
-            kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
-            dates[w][d] = day.date;
-            counts[w][d] = day.contributionCount;
-          }
-        }
-        while (grid.length < 52) {
-          var empty = [0,0,0,0,0,0,0];
-          grid.push(empty.slice()); kmag.push(empty.slice());
-          dates.push(empty.slice()); counts.push(empty.slice());
-        }
-        return { grid: grid, kmag: kmag, dates: dates, counts: counts };
-      });
-  }
-
-  function generateScannerHTML(data, theme) {
-    var isDark = theme === 'dark';
-    var C = isDark ? {
-      accent: '#45e0d8', dim: '#5d7686',
-      sig: ['#122a1e','#1f5c3a','#2f9c5b','#46d07e','#86f2b0'],
-      unacq: '#0d141b', bg: '#080c11', panelBg: '#0f1620', border: '#1e2b38',
-      text: '#cfeae4', textSecondary: '#9fc4bd', textMain: '#cfeae4',
-      doneColor: '#86f2b0', echoGrid: '#27414f',
-      cardBg: '#0b0f14', cardBorder: '#1e2b38', badgeBg: '#0f1f1c', badgeBorder: '#1a3d36',
-      shadow: '0 1px 3px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.3)',
-      btnBg: '#0f1620', btnBorder: '#2a3b49', btnHoverBg: '#162233', btnHoverBorder: '#3a5063'
-    } : {
-      accent: '#0891b2', dim: '#94a3b8',
-      sig: ['#e2e8f0','#99f6e4','#5eead4','#2dd4bf','#14b8a6'],
-      unacq: '#f1f5f9', bg: '#ffffff', panelBg: '#f8fafc', border: '#e2e8f0',
-      text: '#1e293b', textSecondary: '#64748b', textMain: '#334155',
-      doneColor: '#059669', echoGrid: '#cbd5e1',
-      cardBg: '#ffffff', cardBorder: '#e8ecf1', badgeBg: '#f0fdfa', badgeBorder: '#ccfbf1',
-      shadow: '0 1px 3px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.04)',
-      btnBg: '#ffffff', btnBorder: '#d1d5db', btnHoverBg: '#f9fafb', btnHoverBorder: '#9ca3af'
-    };
-
-    // Calculate month labels from dates
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var monthLabels = [];
-    var seenMonths = new Set();
-    for (var w = 0; w < data.dates.length; w++) {
-      for (var d = 0; d < 7; d++) {
-        if (!data.dates[w][d]) continue;
-        var date = new Date(data.dates[w][d]);
-        var month = date.getMonth();
-        var day = date.getDate();
-        if (day <= 7 && !seenMonths.has(month)) {
-          seenMonths.add(month);
-          monthLabels.push({month: month, week: w, label: months[month]});
-        }
-      }
-    }
-
-    var total = 0;
-    for (var a = 0; a < 52; a++) for (var b = 0; b < 7; b++) total += data.counts[a][b];
-
-    // Generate HTML (simplified version)
-    return '<div style="text-align:center;padding:40px;color:' + C.dim + '">' +
-      '<p>Scanner for <strong style="color:' + C.accent + '">' + document.getElementById('username-input').value + '</strong></p>' +
-      '<p style="margin-top:8px">Total contributions: <strong style="color:' + C.accent + '">' + total + '</strong></p>' +
-      '<p style="margin-top:8px;font-size:12px">(Full scanner implementation coming soon)</p>' +
-      '</div>';
-  }
-
-  function loadUser() {
-    var username = document.getElementById('username-input').value.trim();
+  async function loadUser() {
+    const username = document.getElementById('username-input').value.trim();
     if (!username) {
       setStatus('Please enter a GitHub username', 'error');
       return;
@@ -348,45 +231,48 @@
 
     setStatus('Loading...');
 
-    fetchContributions(username)
-      .then(function(data) {
-        currentData = data;
-        setStatus('Loaded contribution data for ' + username, 'success');
-        renderScanner();
-      })
-      .catch(function(err) {
-        console.error(err);
-        setStatus('Error: ' + err.message, 'error');
-      });
-  }
+    try {
+      // Use the free API
+      const res = await fetch('https://github-contributions-api.deno.dev/' + username + '.json');
+      if (!res.ok) throw new Error('API error: ' + res.status);
+      const result = await res.json();
+      if (!result.contributions) throw new Error('No contributions data');
 
-  function renderScanner() {
-    if (!currentData) return;
-    var card = document.getElementById('gri-scanner-card');
-    card.innerHTML = generateScannerHTML(currentData, currentTheme);
+      setStatus('Loaded real contribution data for ' + username, 'success');
+
+      // Reload iframe with current theme
+      const frame = document.getElementById('scanner-frame');
+      const src = currentTheme === 'light'
+        ? '../gri-scanner-light.html'
+        : '../gri-scanner-dark.html';
+      frame.src = src + '?user=' + encodeURIComponent(username) + '&t=' + Date.now();
+    } catch (err) {
+      setStatus(err.message, 'error');
+    }
   }
 
   function switchTheme(theme) {
     currentTheme = theme;
-    document.querySelectorAll('.gri-tab').forEach(function(t) {
-      t.classList.toggle('active', t.dataset.theme === theme);
-    });
-    renderScanner();
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.theme === theme));
+    const frame = document.getElementById('scanner-frame');
+    const src = theme === 'light'
+      ? '../gri-scanner-light.html'
+      : '../gri-scanner-dark.html';
+    frame.src = src + '?t=' + Date.now();
   }
 
   function copyCode() {
-    var code = document.getElementById('embed-code').textContent;
-    navigator.clipboard.writeText(code).then(function() {
-      var btn = document.querySelector('.gri-embed-header button');
-      var original = btn.textContent;
+    const code = document.getElementById('embed-code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.querySelector('.embed-header button');
+      const original = btn.textContent;
       btn.textContent = 'Copied!';
-      setTimeout(function() { btn.textContent = original; }, 1500);
+      setTimeout(() => btn.textContent = original, 1500);
     });
   }
 
   // Load default user on page load
   loadUser();
-})();
 </script>
 </body>
 </html>
