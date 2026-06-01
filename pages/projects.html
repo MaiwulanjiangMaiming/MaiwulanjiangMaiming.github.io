@@ -19,6 +19,22 @@
 <link rel="prefetch" href="../data/research.json">
 <link rel="prefetch" href="../data/projects.json">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
+<style>
+.gri-iframe-wrap {
+  width: 100%;
+  max-width: 688px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  line-height: 0;
+}
+.gri-iframe-wrap iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  transition: height 0.3s ease;
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -38,8 +54,8 @@
   <h1>Projects</h1>
   <section class="contribution-section">
     <h2 class="contribution-title">🚀 GitHub Resonance Imaging</h2>
-    <div id="contribution-graph" class="contribution-graph">
-      <iframe id="gri-frame" src="../gri-scanner-dark.html" style="width:100%;height:520px;border:none;border-radius:var(--radius);display:block;" title="GitHub Resonance Imaging Scanner" loading="lazy"></iframe>
+    <div id="contribution-graph" class="gri-iframe-wrap">
+      <iframe id="gri-frame" src="../gri-scanner.html" style="height:420px;" title="GitHub Resonance Imaging Scanner" loading="lazy"></iframe>
     </div>
   </section>
   <p class="muted">Public repositories from <a href="https://github.com/MaiwulanjiangMaiming" target="_blank" rel="noopener">@MaiwulanjiangMaiming</a></p>
@@ -52,11 +68,92 @@
 </footer>
 <script src="../js/site-v5.js"></script>
 <script>
-function getGRITheme(){var theme=document.documentElement.getAttribute('data-theme');if(theme==='light')return 'light';if(theme==='dark')return 'dark';return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
-function updateGRIScanner(){var frame=document.getElementById('gri-frame');if(!frame)return;var theme=getGRITheme();var src='../gri-scanner-'+(theme==='light'?'light':'dark')+'.html';if(frame.getAttribute('src')!==src)frame.setAttribute('src',src);}
-updateGRIScanner();
-document.documentElement.addEventListener('themechange',updateGRIScanner);
-renderGitHubRepos('MaiwulanjiangMaiming');
+(function(){
+  var frame = document.getElementById('gri-frame');
+
+  function getGRITheme() {
+    var theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'light') return 'light';
+    if (theme === 'dark') return 'dark';
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function sendTheme() {
+    if (frame && frame.contentWindow) {
+      frame.contentWindow.postMessage({ type: 'setTheme', theme: getGRITheme() }, '*');
+    }
+  }
+
+  // Listen for height updates from iframe
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'gri-height') {
+      frame.style.height = e.data.height + 'px';
+    }
+  });
+
+  // Send theme when iframe loads
+  frame.addEventListener('load', function() {
+    sendTheme();
+    // Also try to fetch and send real contribution data
+    loadRealContributionData();
+  });
+
+  // Listen for theme changes
+  document.documentElement.addEventListener('themechange', sendTheme);
+
+  // Also watch for attribute changes on html element (backup)
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'data-theme') sendTheme();
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  // Fetch real GitHub contribution data
+  function loadRealContributionData() {
+    var username = 'MaiwulanjiangMaiming';
+    fetch('https://github-contributions-api.deno.dev/' + username + '.json')
+      .then(function(r) { return r.json(); })
+      .then(function(result) {
+        if (!result.contributions) return;
+        var weeks = result.contributions;
+        var grid = [];
+        var kmag = [];
+        var levelMap = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
+        for (var w = 0; w < weeks.length && w < 52; w++) {
+          grid[w] = [];
+          kmag[w] = [];
+          var days = weeks[w];
+          var maxCount = 1;
+          for (var d = 0; d < days.length; d++) {
+            if (days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
+          }
+          for (var d = 0; d < 7; d++) {
+            var day = days[d];
+            grid[w][d] = levelMap[day.contributionLevel] || 0;
+            kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
+          }
+        }
+        // Pad to 52 weeks
+        while (grid.length < 52) {
+          var empty = [0,0,0,0,0,0,0];
+          grid.push(empty.slice());
+          kmag.push(empty.slice());
+        }
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage({ type: 'setData', grid: grid, kmag: kmag }, '*');
+        }
+      })
+      .catch(function(err) {
+        console.log('Contribution data fetch failed, using fallback:', err);
+      });
+  }
+
+  // Initial theme send (in case iframe is already loaded)
+  setTimeout(sendTheme, 500);
+
+  renderGitHubRepos('MaiwulanjiangMaiming');
+})();
 </script>
 </body>
 </html>
