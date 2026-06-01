@@ -181,28 +181,6 @@
     }
   }
 
-  // GRI letter overlay
-  var GL={G:["01110","10001","10000","10011","10001","10001","01110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["11111","00100","00100","00100","00100","00100","11111"]};
-  var letters=['G','R','I'], sx=17;
-  for(var li=0;li<3;li++){
-    var g=GL[letters[li]];
-    for(var cy=0;cy<7;cy++){
-      var row=g[cy];
-      for(var cx=0;cx<5;cx++){
-        if(row[cx]==='1'){
-          var ww=sx+cx;
-          if(ww<WEEKS && cy<DAYS){
-            isGRI[ww][cy]=true;
-            grid[ww][cy]=4;
-            counts[ww][cy]=15+Math.floor(rnd()*5);
-            kmag[ww][cy]=counts[ww][cy]/20;
-          }
-        }
-      }
-    }
-    sx+=6;
-  }
-
   var total=0;
   for(var a=0;a<WEEKS;a++)for(var b=0;b<DAYS;b++)total+=counts[a][b];
 
@@ -300,11 +278,10 @@
     for(var w=0;w<WEEKS;w++){
       for(var d=0;d<DAYS;d++){
         var X=LP+w*P, Y=TP+d*P;
-        var letter=isGRI[w][d];
         var level=grid[w][d];
 
         if(acq>=w+1){
-          mx.fillStyle=letter ? C.gri[level] : C.sig[level];
+          mx.fillStyle=C.sig[level];
         }else{
           mx.fillStyle=C.unacq;
         }
@@ -597,27 +574,6 @@
             kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
             dates[w][d] = day.date;
           }
-        }
-
-        // Re-apply GRI letter overlay on top of real data
-        var letters=['G','R','I'], sx=17;
-        for(var li=0;li<3;li++){
-          var g=GL[letters[li]];
-          for(var cy=0;cy<7;cy++){
-            var row=g[cy];
-            for(var cx=0;cx<5;cx++){
-              if(row[cx]==='1'){
-                var ww=sx+cx;
-                if(ww<WEEKS && cy<DAYS){
-                  isGRI[ww][cy]=true;
-                  grid[ww][cy]=4;
-                  counts[ww][cy]=Math.max(counts[ww][cy], 15);
-                  kmag[ww][cy]=counts[ww][cy]/20;
-                }
-              }
-            }
-          }
-          sx+=6;
         }
 
         // Recalculate total
