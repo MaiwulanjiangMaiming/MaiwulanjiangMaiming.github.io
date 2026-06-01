@@ -55,7 +55,7 @@
 <script src="../js/site-v5.js?v=8"></script>
 
 <!-- GRI Scanner -->
-<script src="https://cdn.jsdelivr.net/gh/MaiwulanjiangMaiming/GRI-contribution-graph@output/gri-core.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/MaiwulanjiangMaiming/GRI-contribution-graph@output/gri-core.js?v=2"></script>
 <script>
 (function(){
   var griRenderer = null;
@@ -67,38 +67,82 @@
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
+  function fetchContributionsFree(username) {
+    return fetch('https://github-contributions-api.deno.dev/' + username + '.json')
+      .then(function(res) {
+        if (!res.ok) throw new Error('API error: ' + res.status);
+        return res.json();
+      })
+      .then(function(result) {
+        if (!result.contributions) throw new Error('No contributions data');
+        var weeks = result.contributions;
+        var grid = [], kmag = [], dates = [], counts = [];
+        var levelMap = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
+        for (var w = 0; w < weeks.length && w < 52; w++) {
+          grid[w] = []; kmag[w] = []; dates[w] = []; counts[w] = [];
+          var days = weeks[w];
+          var maxCount = 1;
+          for (var d = 0; d < days.length; d++) {
+            if (days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
+          }
+          for (var d = 0; d < 7; d++) {
+            var day = days[d];
+            grid[w][d] = levelMap[day.contributionLevel] || 0;
+            kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
+            dates[w][d] = day.date;
+            counts[w][d] = day.contributionCount;
+          }
+        }
+        while (grid.length < 52) {
+          var empty = [0,0,0,0,0,0,0];
+          grid.push(empty.slice()); kmag.push(empty.slice());
+          dates.push(empty.slice()); counts.push(empty.slice());
+        }
+        return { grid: grid, kmag: kmag, dates: dates, counts: counts };
+      });
+  }
+
   function initGRI() {
     var container = document.getElementById('gri-container');
-    if (!container || typeof GRI === 'undefined') {
-      console.log('GRI not loaded yet, retrying...');
-      setTimeout(initGRI, 500);
+    if (!container) return;
+
+    if (typeof GRI === 'undefined') {
+      console.log('GRI library not loaded, retrying...');
+      setTimeout(initGRI, 1000);
       return;
     }
 
-    container.innerHTML = '';
+    container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Loading GRI scanner...</p>';
 
-    GRI.init({
-      container: '#gri-container',
-      username: 'MaiwulanjiangMaiming',
-      theme: getTheme(),
-      showKSpace: true,
-      showEcho: true,
-      showHUD: true,
-      autoPlay: true,
-    }).then(function(renderer) {
-      griRenderer = renderer;
-    }).catch(function(err) {
-      console.error('GRI init failed:', err);
-      container.innerHTML = '<p style="text-align:center;color:var(--muted)">Failed to load GRI scanner. Please refresh.</p>';
-    });
+    fetchContributionsFree('MaiwulanjiangMaiming')
+      .then(function(data) {
+        if (GRI.init) {
+          return GRI.init({
+            container: '#gri-container',
+            username: 'MaiwulanjiangMaiming',
+            theme: getTheme(),
+            showKSpace: true,
+            showEcho: true,
+            showHUD: true,
+            autoPlay: true,
+          });
+        } else {
+          throw new Error('GRI.init not available');
+        }
+      })
+      .then(function(renderer) {
+        griRenderer = renderer;
+      })
+      .catch(function(err) {
+        console.error('GRI error:', err);
+        container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">GRI scanner temporarily unavailable. <a href="https://github.com/MaiwulanjiangMaiming" target="_blank">View my GitHub profile</a></p>';
+      });
   }
 
   // Listen for theme changes
   function onThemeChange() {
     if (griRenderer && griRenderer.setTheme) {
       griRenderer.setTheme(getTheme());
-    } else {
-      initGRI();
     }
   }
 
