@@ -148,7 +148,7 @@
   for(var w=0;w<dates.length;w++){for(var d=0;d<7;d++){if(!dates[w][d])continue;var date=new Date(dates[w][d]);var month=date.getMonth();var day=date.getDate();if(day<=7&&!seenMonths.has(month)){seenMonths.add(month);monthLabels.push({month:month,week:w,label:months[month]});}}}
 
   function dpr(cv,w,h){var rr=window.devicePixelRatio||1;cv.width=w*rr;cv.height=h*rr;cv.style.width=w+'px';cv.style.height=h+'px';var x=cv.getContext('2d');x.setTransform(rr,0,0,rr,0,0);return x;}
-  var MW=596,MH=93,LP=24,TP=16,P=11,CELL=9;
+  var MW=560,MH=93,LP=24,TP=16,P=10,CELL=8;
   var mx=dpr(document.getElementById('gri-main'),MW,MH);
   var KW=168,KH=96,kx=dpr(document.getElementById('gri-k'),KW,KH);
   var EW=196,EH=96,ex=dpr(document.getElementById('gri-echo'),EW,EH);
