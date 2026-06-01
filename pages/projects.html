@@ -19,10 +19,6 @@
 <link rel="prefetch" href="../data/research.json">
 <link rel="prefetch" href="../data/projects.json">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
-<style>
-#scanner-card{transition:background-color .3s ease,border-color .3s ease,color .3s ease,box-shadow .3s ease}
-#scanner-card *{transition:background-color .3s ease,border-color .3s ease,color .3s ease,stroke .3s ease,fill .3s ease}
-</style>
 </head>
 <body>
 <header class="site-header">
@@ -44,60 +40,80 @@
   <!-- GRI Scanner -->
   <section class="contribution-section">
     <h2 class="contribution-title">🚀 GitHub Resonance Imaging</h2>
-    <div id="scanner-card" style="max-width:640px;margin:0 auto;background:#0b0f14;border:1px solid #1e2b38;border-radius:16px;padding:20px 24px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfeae4;overflow-x:auto;box-shadow:0 1px 3px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.3);">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <svg id="hdr-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#45e0d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-          <span id="hdr-title" style="font-size:14px;color:#cfeae4;letter-spacing:0.3px;font-weight:500;">GitHub Resonance Imaging <span id="hdr-gri" style="color:#45e0d8;font-weight:600;">(GRI)</span></span>
-        </div>
-        <span id="hdr-badge" style="display:flex;align-items:center;gap:6px;font-size:11px;background:#0f1f1c;border:1px solid #1a3d36;border-radius:20px;padding:3px 10px;">
-          <span style="width:6px;height:6px;border-radius:50%;background:#45e0d8;animation:pulse 2s ease-in-out infinite;"></span>
-          <span id="gri-status" style="color:#45e0d8;font-weight:500;">ACQUIRING</span>
-        </span>
-      </div>
-      <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
-      <div id="params-row" style="display:flex;flex-wrap:nowrap;gap:4px;margin-bottom:16px;font-size:10px;overflow-x:auto;">
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Seq <span class="param-val" style="color:#45e0d8;font-weight:600;">GitEcho</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TR <span class="param-val" style="color:#45e0d8;font-weight:600;">7 d</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TE <span class="param-val" style="color:#45e0d8;font-weight:600;">24 h</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FA <span class="param-val" style="color:#45e0d8;font-weight:600;">42°</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Matrix <span class="param-val" style="color:#45e0d8;font-weight:600;">52×7</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FOV <span class="param-val" style="color:#45e0d8;font-weight:600;">365 d</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">NEX <span class="param-val" style="color:#45e0d8;font-weight:600;">1</span></span>
-        <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Slice <span class="param-val" style="color:#45e0d8;font-weight:600;">main</span></span>
-      </div>
-      <div id="main-wrap" style="background:#080c11;border:1px solid #1e2b38;border-radius:12px;padding:12px 14px;">
-        <canvas id="gri-main" style="display:block;"></canvas>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;align-items:flex-start;">
-        <div style="flex:0 0 auto;">
-          <div id="k-label" style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">k-space</div>
-          <canvas id="gri-k" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
-        </div>
-        <div style="flex:0 0 auto;">
-          <div id="e-label" style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">MR signal (echo)</div>
-          <canvas id="gri-echo" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
-        </div>
-        <div id="hud-panel" style="flex:1;min-width:140px;background:#0f1620;border:1px solid #1e2b38;border-radius:10px;padding:12px 14px;font-size:12px;color:#5d7686;line-height:2;">
-          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
-            <span>PE line</span>
-            <span id="gri-pe" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 / 52</span>
+    <div id="gri-scanner">
+      <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Animated demo of a GitHub contribution graph styled as an MRI scan. Weeks act as phase-encode lines, days as frequency-encode, commits as signal intensity. A scan line sweeps left to right, filling k-space and forming an echo, then reconstructs a contribution image that reads GRI.</h2>
+      <div style="padding:1rem 0;">
+        <div id="scanner-card" style="max-width:640px;margin:0 auto;background:#0b0f14;border:1px solid #1e2b38;border-radius:16px;padding:20px 24px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfeae4;overflow-x:auto;box-shadow:0 1px 3px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.3);">
+          <!-- Header -->
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#45e0d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              <span style="font-size:14px;color:#cfeae4;letter-spacing:0.3px;font-weight:500;">GitHub Resonance Imaging <span style="color:#45e0d8;font-weight:600;">(GRI)</span></span>
+            </div>
+            <span style="display:flex;align-items:center;gap:6px;font-size:11px;background:#0f1f1c;border:1px solid #1a3d36;border-radius:20px;padding:3px 10px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#45e0d8;animation:pulse 2s ease-in-out infinite;"></span>
+              <span id="gri-status" style="color:#45e0d8;font-weight:500;">ACQUIRING</span>
+            </span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
-            <span>TR elapsed</span>
-            <span id="gri-tr" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 wk</span>
+          <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
+
+          <!-- Parameters -->
+          <div style="display:flex;flex-wrap:nowrap;gap:4px;margin-bottom:16px;font-size:10px;overflow-x:auto;">
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Seq <span style="color:#45e0d8;font-weight:600;">GitEcho</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TR <span style="color:#45e0d8;font-weight:600;">7 d</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TE <span style="color:#45e0d8;font-weight:600;">24 h</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FA <span style="color:#45e0d8;font-weight:600;">42°</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Matrix <span style="color:#45e0d8;font-weight:600;">52×7</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FOV <span style="color:#45e0d8;font-weight:600;">365 d</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">NEX <span style="color:#45e0d8;font-weight:600;">1</span></span>
+            <span style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Slice <span style="color:#45e0d8;font-weight:600;">main</span></span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span>Σ signal</span>
-            <span id="gri-total" style="color:#86f2b0;font-weight:600;font-family:ui-monospace,monospace;">— au</span>
+
+          <!-- Tooltip -->
+          <div id="gri-tooltip" style="position:fixed;background:#161b22;border:1px solid #30363d;border-radius:6px;padding:6px 10px;font-size:11px;color:#cfeae4;pointer-events:none;opacity:0;transition:opacity 0.15s ease;z-index:1000;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.3);"></div>
+
+          <!-- Main Canvas -->
+          <div style="background:#080c11;border:1px solid #1e2b38;border-radius:12px;padding:12px 14px;position:relative;">
+            <canvas id="gri-main" style="display:block;"></canvas>
+          </div>
+
+          <!-- Bottom Panel -->
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;align-items:flex-start;">
+            <!-- k-space -->
+            <div style="flex:0 0 auto;">
+              <div style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">k-space</div>
+              <canvas id="gri-k" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
+            </div>
+            <!-- Echo -->
+            <div style="flex:0 0 auto;">
+              <div style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">MR signal (echo)</div>
+              <canvas id="gri-echo" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
+            </div>
+            <!-- HUD -->
+            <div style="flex:1;min-width:140px;background:#0f1620;border:1px solid #1e2b38;border-radius:10px;padding:12px 14px;font-size:12px;color:#5d7686;line-height:2;">
+              <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
+                <span>PE line</span>
+                <span id="gri-pe" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 / 52</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
+                <span>TR elapsed</span>
+                <span id="gri-tr" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 wk</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span>Σ signal</span>
+                <span id="gri-total" style="color:#86f2b0;font-weight:600;font-family:ui-monospace,monospace;">— au</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <button id="gri-play" aria-label="Pause or play scan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 12px;font:inherit;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            </button>
+            <button id="gri-rescan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">Re-scan</button>
           </div>
         </div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:14px;">
-        <button id="gri-play" aria-label="Pause or play scan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 12px;font:inherit;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
-        </button>
-        <button id="gri-rescan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">Re-scan</button>
       </div>
     </div>
   </section>
@@ -110,335 +126,122 @@
     <div class="motto">"Everything negative — pressure, challenges — is all an opportunity for me to rise." — Kobe Bryant</div>
   </div>
 </footer>
-<script src="../js/site-v5.js?v=9"></script>
+<script src="../js/site-v5.js?v=10"></script>
 <script>
 (function(){
-  var THEMES = {
-    dark: {
-      accent: '#45e0d8', dim: '#5d7686',
-      sig: ['#122a1e','#1f5c3a','#2f9c5b','#46d07e','#86f2b0'],
-      unacq: '#0d141b', bg: '#080c11', panelBg: '#0f1620', border: '#1e2b38',
-      text: '#cfeae4', textSecondary: '#9fc4bd', textMain: '#cfeae4',
-      doneColor: '#86f2b0', hudBorder: '#1e2b38', echoGrid: '#27414f',
-      cardBg: '#0b0f14', cardBorder: '#1e2b38', badgeBg: '#0f1f1c', badgeBorder: '#1a3d36',
-      shadow: '0 1px 3px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.3)',
-      btnBg: '#0f1620', btnBorder: '#2a3b49', btnHoverBg: '#162233', btnHoverBorder: '#3a5063'
-    },
-    light: {
-      accent: '#0891b2', dim: '#94a3b8',
-      sig: ['#e2e8f0','#99f6e4','#5eead4','#2dd4bf','#14b8a6'],
-      unacq: '#f1f5f9', bg: '#ffffff', panelBg: '#f8fafc', border: '#e2e8f0',
-      text: '#1e293b', textSecondary: '#64748b', textMain: '#334155',
-      doneColor: '#059669', hudBorder: '#e2e8f0', echoGrid: '#cbd5e1',
-      cardBg: '#ffffff', cardBorder: '#e8ecf1', badgeBg: '#f0fdfa', badgeBorder: '#ccfbf1',
-      shadow: '0 1px 3px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.04)',
-      btnBg: '#ffffff', btnBorder: '#d1d5db', btnHoverBg: '#f9fafb', btnHoverBorder: '#9ca3af'
-    }
-  };
-
-  var currentTheme = 'dark';
-  var C = THEMES.dark;
-  var WEEKS = 52, DAYS = 7;
-  var data = [], kmag = [], total = 0;
-
+  var C={accent:'#45e0d8',dim:'#5d7686',sig:['#122a1e','#1f5c3a','#2f9c5b','#46d07e','#86f2b0'],unacq:'#0d141b'};
+  var WEEKS=52,DAYS=7;
   function mul(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-  var rnd = mul(20260531);
-  var GL = {G:["01110","10001","10000","10011","10001","10001","01110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["11111","00100","00100","00100","00100","00100","11111"]};
+  var rnd=mul(20260531);
+  var GL={G:["01110","10001","10000","10011","10001","10001","01110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["11111","00100","00100","00100","00100","00100","11111"]};
+  var data=[],kmag=[],dates=[],counts=[];
+  var today=new Date();
+  for(var w=0;w<WEEKS;w++){data[w]=[];kmag[w]=[];dates[w]=[];counts[w]=[];for(var d=0;d<DAYS;d++){var r=rnd();var lv=r>0.82?2:(r>0.55?1:0);data[w][d]=lv;counts[w][d]=Math.floor(r*10);var sw=6.0,sd=2.0;kmag[w][d]=Math.exp(-Math.pow(w-25.5,2)/(2*sw*sw))*Math.exp(-Math.pow(d-3,2)/(2*sd*sd))*(0.85+0.3*rnd());var dayDate=new Date(today);dayDate.setDate(today.getDate()-((51-w)*7+(6-d)));dates[w][d]=dayDate.toISOString().split('T')[0];}}
+  var letters=['G','R','I'],sx=17;
+  for(var li=0;li<3;li++){var g=GL[letters[li]];for(var cy=0;cy<7;cy++){var row=g[cy];for(var cx=0;cx<5;cx++){if(row[cx]==='1'){var ww=sx+cx;if(ww<WEEKS)data[ww][cy]=(rnd()>0.35?4:3);}}}sx+=6;}
+  var total=0;for(var a=0;a<WEEKS;a++)for(var b=0;b<DAYS;b++)total+=data[a][b];
 
-  function initData(realGrid, realKmag) {
-    data = []; kmag = []; total = 0;
-    if (realGrid && realKmag && realGrid.length >= 52) {
-      for (var w = 0; w < WEEKS; w++) {
-        data[w] = []; kmag[w] = [];
-        for (var d = 0; d < DAYS; d++) {
-          data[w][d] = realGrid[w] && realGrid[w][d] !== undefined ? realGrid[w][d] : 0;
-          kmag[w][d] = realKmag[w] && realKmag[w][d] !== undefined ? realKmag[w][d] : 0;
-          total += data[w][d];
-        }
-      }
-    } else {
-      rnd = mul(20260531);
-      for (var w = 0; w < WEEKS; w++) {
-        data[w] = []; kmag[w] = [];
-        for (var d = 0; d < DAYS; d++) {
-          var r = rnd();
-          var lv = r > 0.82 ? 2 : (r > 0.55 ? 1 : 0);
-          data[w][d] = lv;
-          var sw = 6.0, sd = 2.0;
-          kmag[w][d] = Math.exp(-Math.pow(w-25.5,2)/(2*sw*sw)) * Math.exp(-Math.pow(d-3,2)/(2*sd*sd)) * (0.85 + 0.3*rnd());
-          total += lv;
-        }
-      }
-      var letters = ['G','R','I'], sx = 17;
-      for (var li = 0; li < 3; li++) {
-        var g = GL[letters[li]];
-        for (var cy = 0; cy < 7; cy++) {
-          var row = g[cy];
-          for (var cx = 0; cx < 5; cx++) {
-            if (row[cx] === '1') {
-              var ww = sx + cx;
-              if (ww < WEEKS) data[ww][cy] = (rnd() > 0.35 ? 4 : 3);
-            }
-          }
-        }
-        sx += 6;
-      }
+  // Calculate month positions from actual dates
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var monthLabels=[];
+  var seenMonths=new Set();
+  for(var w=0;w<dates.length;w++){for(var d=0;d<7;d++){if(!dates[w][d])continue;var date=new Date(dates[w][d]);var month=date.getMonth();var day=date.getDate();if(day<=7&&!seenMonths.has(month)){seenMonths.add(month);monthLabels.push({month:month,week:w,label:months[month]});}}}
+
+  function dpr(cv,w,h){var rr=window.devicePixelRatio||1;cv.width=w*rr;cv.height=h*rr;cv.style.width=w+'px';cv.style.height=h+'px';var x=cv.getContext('2d');x.setTransform(rr,0,0,rr,0,0);return x;}
+  var MW=596,MH=93,LP=24,TP=16,P=11,CELL=9;
+  var mx=dpr(document.getElementById('gri-main'),MW,MH);
+  var KW=168,KH=96,kx=dpr(document.getElementById('gri-k'),KW,KH);
+  var EW=196,EH=96,ex=dpr(document.getElementById('gri-echo'),EW,EH);
+  var dayLab={1:'Mon',3:'Wed',5:'Fri'};
+
+  // Tooltip
+  var tooltip=document.getElementById('gri-tooltip');
+  var canvasEl=document.getElementById('gri-main');
+
+  function showTooltip(e,w,d){
+    var count=counts[w][d];
+    var date=dates[w][d];
+    if(!date)return;
+    tooltip.innerHTML='<strong>'+count+'</strong> contributions on <strong>'+date+'</strong>';
+    tooltip.style.opacity='1';
+    updateTooltipPos(e);
+  }
+  function hideTooltip(){tooltip.style.opacity='0';}
+  function updateTooltipPos(e){
+    tooltip.style.left=(e.clientX+10)+'px';
+    tooltip.style.top=(e.clientY-30)+'px';
+  }
+  canvasEl.addEventListener('mousemove',function(e){
+    var rect=canvasEl.getBoundingClientRect();
+    var x=e.clientX-rect.left;
+    var y=e.clientY-rect.top;
+    var w=Math.floor((x-LP)/P);
+    var d=Math.floor((y-TP)/P);
+    if(w>=0&&w<WEEKS&&d>=0&&d<DAYS&&dates[w][d]){
+      showTooltip(e,w,d);
+      canvasEl.style.cursor='pointer';
+    }else{hideTooltip();canvasEl.style.cursor='default';}
+  });
+  canvasEl.addEventListener('mouseleave',hideTooltip);
+
+  function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+  function drawMain(frac){
+    mx.clearRect(0,0,MW,MH);var acq=frac*WEEKS;
+    mx.font='10px ui-monospace,monospace';mx.textBaseline='alphabetic';mx.fillStyle=C.dim;
+    // Draw month labels based on actual dates
+    for(var i=0;i<monthLabels.length;i++){
+      var m=monthLabels[i];
+      mx.fillText(m.label,LP+m.week*P,11);
     }
+    mx.textBaseline='middle';
+    for(var k in dayLab)mx.fillText(dayLab[k],0,TP+(+k)*P+CELL/2);
+    for(var w=0;w<WEEKS;w++)for(var d=0;d<DAYS;d++){var X=LP+w*P,Y=TP+d*P;mx.fillStyle=(acq>=w+1)?C.sig[data[w][d]]:C.unacq;rr(mx,X,Y,CELL,CELL,2);mx.fill();}
+    if(frac>0&&frac<1){var sxp=LP+acq*P;mx.save();mx.strokeStyle=C.accent;mx.lineWidth=1.5;mx.shadowColor='rgba(69,224,216,0.35)';mx.shadowBlur=6;mx.beginPath();mx.moveTo(sxp,TP-3);mx.lineTo(sxp,TP+DAYS*P-2);mx.stroke();mx.restore();}
   }
-
-  function dpr(cv, w, h) {
-    var rr = window.devicePixelRatio || 1;
-    cv.width = w * rr; cv.height = h * rr;
-    cv.style.width = w + 'px'; cv.style.height = h + 'px';
-    var x = cv.getContext('2d');
-    x.setTransform(rr, 0, 0, rr, 0, 0);
-    return x;
-  }
-
-  var MW = 596, MH = 93, LP = 24, TP = 16, P = 11, CELL = 9;
-  var mx = dpr(document.getElementById('gri-main'), MW, MH);
-  var KW = 168, KH = 96, kx = dpr(document.getElementById('gri-k'), KW, KH);
-  var EW = 196, EH = 96, ex = dpr(document.getElementById('gri-echo'), EW, EH);
-
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var mPos = [0,4,9,13,17,22,26,30,35,39,44,48];
-  var dayLab = {1:'Mon',3:'Wed',5:'Fri'};
-
-  function rr(c, x, y, w, h, r) {
-    c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r);
-    c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath();
-  }
-
-  function drawMain(frac) {
-    mx.clearRect(0,0,MW,MH);
-    var acq = frac * WEEKS;
-    mx.font = '10px ui-monospace,monospace';
-    mx.textBaseline = 'alphabetic'; mx.fillStyle = C.dim;
-    for (var i = 0; i < 12; i++) mx.fillText(months[i], LP + mPos[i]*P, 11);
-    mx.textBaseline = 'middle';
-    for (var k in dayLab) mx.fillText(dayLab[k], 0, TP + (+k)*P + CELL/2);
-    for (var w = 0; w < WEEKS; w++) {
-      for (var d = 0; d < DAYS; d++) {
-        var X = LP + w*P, Y = TP + d*P;
-        mx.fillStyle = (acq >= w+1) ? C.sig[data[w][d]] : C.unacq;
-        rr(mx, X, Y, CELL, CELL, 2); mx.fill();
-      }
-    }
-    if (frac > 0 && frac < 1) {
-      var sxp = LP + acq*P;
-      mx.save();
-      mx.strokeStyle = C.accent; mx.lineWidth = 1.5;
-      var rgb = currentTheme === 'dark' ? '69,224,216' : '8,145,178';
-      mx.shadowColor = 'rgba(' + rgb + ',0.35)'; mx.shadowBlur = 6;
-      mx.beginPath(); mx.moveTo(sxp, TP-3); mx.lineTo(sxp, TP+DAYS*P-2); mx.stroke();
-      mx.restore();
-    }
-  }
-
-  function drawK(frac) {
+  function drawK(frac){
     kx.clearRect(0,0,KW,KH);
-    var acq = frac * WEEKS, gx = 8, gy = 20, gw = KW-16, gh = KH-32;
-    var cw = gw/WEEKS, ch = gh/DAYS;
-    for (var w = 0; w < WEEKS; w++) {
-      var filled = acq >= w+1;
-      for (var d = 0; d < DAYS; d++) {
-        var v = filled ? kmag[w][d] : 0;
-        if (filled) {
-          if (currentTheme === 'dark') {
-            var gg = Math.round(30 + v*215);
-            kx.fillStyle = 'rgb(' + Math.round(v*110) + ',' + gg + ',' + Math.round(170+v*70) + ')';
-          } else {
-            var intensity = Math.round(80 + v*175);
-            kx.fillStyle = 'rgb(' + Math.round(intensity*0.4) + ',' + intensity + ',' + Math.round(intensity*0.9) + ')';
-          }
-        } else {
-          kx.fillStyle = C.unacq;
-        }
-        kx.fillRect(gx+w*cw, gy+d*ch, Math.max(cw-0.3,0.8), ch-0.5);
-      }
-    }
-    kx.fillStyle = C.dim; kx.font = '9px ui-monospace,monospace';
-    kx.fillText('PE → (weeks)', 8, KH-5);
+    var acq=frac*WEEKS,gx=8,gy=20,gw=KW-16,gh=KH-32,cw=gw/WEEKS,ch=gh/DAYS;
+    for(var w=0;w<WEEKS;w++){var filled=acq>=w+1;for(var d=0;d<DAYS;d++){var v=filled?kmag[w][d]:0;if(filled){var gg=Math.round(30+v*215);kx.fillStyle='rgb('+Math.round(v*110)+','+gg+','+Math.round(170+v*70)+')';}else kx.fillStyle='#0d141b';kx.fillRect(gx+w*cw,gy+d*ch,Math.max(cw-0.3,0.8),ch-0.5);}}
+    kx.fillStyle=C.dim;kx.font='9px ui-monospace,monospace';kx.fillText('PE → (weeks)',8,KH-5);
   }
-
-  function drawEcho(frac) {
+  function drawEcho(frac){
     ex.clearRect(0,0,EW,EH);
-    var acq = frac * WEEKS, w = Math.min(WEEKS-1, Math.floor(acq)), A = 0;
-    for (var d = 0; d < DAYS; d++) A += kmag[w][d];
-    A = Math.min(1, A/2.2);
-    var x0 = 8, x1 = EW-8, y0 = 22, y1 = EH-14;
-    var cx = (x0+x1)/2, baseY = (y0+y1)/2 + 6;
-    ex.strokeStyle = C.echoGrid; ex.setLineDash([3,3]); ex.lineWidth = 1;
-    ex.beginPath(); ex.moveTo(cx,y0); ex.lineTo(cx,y1); ex.stroke(); ex.setLineDash([]);
-    ex.fillStyle = C.dim; ex.font = '9px ui-monospace,monospace'; ex.fillText('TE', cx+3, y1);
-    var sig = 14, freq = 0.55, amp = (baseY-y0)*0.92*(0.14+0.86*A);
-    ex.strokeStyle = C.accent; ex.lineWidth = 1.4; ex.beginPath();
-    for (var x = x0; x <= x1; x++) {
-      var t = x-cx, env = Math.exp(-(t*t)/(2*sig*sig));
-      var y = baseY - amp*env*Math.cos(t*freq);
-      if (x === x0) ex.moveTo(x,y); else ex.lineTo(x,y);
-    }
+    var acq=frac*WEEKS,w=Math.min(WEEKS-1,Math.floor(acq)),A=0;for(var d=0;d<DAYS;d++)A+=kmag[w][d];A=Math.min(1,A/2.2);
+    var x0=8,x1=EW-8,y0=22,y1=EH-14,cx=(x0+x1)/2,baseY=(y0+y1)/2+6;
+    ex.strokeStyle='#27414f';ex.setLineDash([3,3]);ex.lineWidth=1;ex.beginPath();ex.moveTo(cx,y0);ex.lineTo(cx,y1);ex.stroke();ex.setLineDash([]);
+    ex.fillStyle=C.dim;ex.font='9px ui-monospace,monospace';ex.fillText('TE',cx+3,y1);
+    var sig=14,freq=0.55,amp=(baseY-y0)*0.92*(0.14+0.86*A);
+    ex.strokeStyle=C.accent;ex.lineWidth=1.4;ex.beginPath();
+    for(var x=x0;x<=x1;x++){var t=x-cx,env=Math.exp(-(t*t)/(2*sig*sig)),y=baseY-amp*env*Math.cos(t*freq);if(x===x0)ex.moveTo(x,y);else ex.lineTo(x,y);}
     ex.stroke();
   }
-
-  var statusEl = document.getElementById('gri-status');
-  var peEl = document.getElementById('gri-pe');
-  var trEl = document.getElementById('gri-tr');
-  var totalEl = document.getElementById('gri-total');
-
-  function setHUD(mode, pe) {
-    statusEl.textContent = mode==='ACQ'?'ACQUIRING':(mode==='REC'?'RECON · iFFT':'SCAN COMPLETE');
-    statusEl.style.color = mode==='DONE'?C.doneColor:(mode==='REC'?C.accent:C.accent);
-    peEl.textContent = pe + ' / ' + WEEKS;
-    trEl.textContent = pe + ' wk';
-    totalEl.textContent = (mode==='DONE'||mode==='REC') ? total + ' au' : '— au';
-    totalEl.style.color = mode==='DONE' ? C.doneColor : C.text;
-  }
-
-  var SCAN = 6000, RECON = 900, DONE = 2400, CYC = SCAN+RECON+DONE;
-  var acc = 0, last = null, running = true;
-
-  function tick(ts) {
-    if (last == null) last = ts;
-    if (running) acc += ts - last;
-    last = ts;
-    var e = acc % CYC, frac, mode;
-    if (e < SCAN) { frac = e/SCAN; mode = 'ACQ'; }
-    else if (e < SCAN+RECON) { frac = 1; mode = 'REC'; }
-    else { frac = 1; mode = 'DONE'; }
-
+  var statusEl=document.getElementById('gri-status'),peEl=document.getElementById('gri-pe'),trEl=document.getElementById('gri-tr'),totalEl=document.getElementById('gri-total');
+  function setHUD(mode,pe){statusEl.textContent=mode==='ACQ'?'ACQUIRING':(mode==='REC'?'RECON · iFFT':'SCAN COMPLETE');statusEl.style.color=mode==='DONE'?'#86f2b0':(mode==='REC'?'#45e0d8':'#45e0d8');peEl.textContent=pe+' / '+WEEKS;trEl.textContent=pe+' wk';totalEl.textContent=(mode==='DONE'||mode==='REC')?total+' au':'— au';}
+  var SCAN=6000,RECON=900,DONE=2400,CYC=SCAN+RECON+DONE,acc=0,last=null,running=true;
+  function tick(ts){
+    if(last==null)last=ts;if(running)acc+=ts-last;last=ts;var e=acc%CYC,frac,mode;
+    if(e<SCAN){frac=e/SCAN;mode='ACQ';}else if(e<SCAN+RECON){frac=1;mode='REC';}else{frac=1;mode='DONE';}
     drawMain(frac);
-    if (mode === 'REC') {
-      var p = (e-SCAN)/RECON, xp = LP + p*WEEKS*P;
-      mx.save();
-      var rgb = currentTheme === 'dark' ? '69,224,216' : '8,145,178';
-      mx.fillStyle = 'rgba(' + rgb + ',0.08)';
-      mx.fillRect(LP, TP-2, Math.max(0, xp-LP), DAYS*P);
-      mx.strokeStyle = 'rgba(' + rgb + ',0.6)'; mx.lineWidth = 2;
-      mx.shadowColor = 'rgba(' + rgb + ',0.2)'; mx.shadowBlur = 8;
-      mx.beginPath(); mx.moveTo(xp, TP-3); mx.lineTo(xp, TP+DAYS*P-2); mx.stroke();
-      mx.restore();
-    }
-    drawK(frac); drawEcho(frac);
-    var pe = mode==='ACQ' ? Math.min(WEEKS, Math.ceil(frac*WEEKS)) : WEEKS;
-    setHUD(mode, pe);
+    if(mode==='REC'){var p=(e-SCAN)/RECON,xp=LP+p*WEEKS*P;mx.save();mx.fillStyle='rgba(69,224,216,0.08)';mx.fillRect(LP,TP-2,Math.max(0,xp-LP),DAYS*P);mx.strokeStyle='rgba(69,224,216,0.6)';mx.lineWidth=2;mx.shadowColor='rgba(69,224,216,0.2)';mx.shadowBlur=8;mx.beginPath();mx.moveTo(xp,TP-3);mx.lineTo(xp,TP+DAYS*P-2);mx.stroke();mx.restore();}
+    drawK(frac);drawEcho(frac);
+    var pe=mode==='ACQ'?Math.min(WEEKS,Math.ceil(frac*WEEKS)):WEEKS;setHUD(mode,pe);
     requestAnimationFrame(tick);
   }
-
-  var playBtn = document.getElementById('gri-play');
-  function updPlay() {
-    var isPause = running;
-    var svg = isPause
-      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>'
-      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>';
-    playBtn.innerHTML = svg;
-  }
-  playBtn.onclick = function() { running = !running; updPlay(); };
-  document.getElementById('gri-rescan').onclick = function() { acc = 0; running = true; updPlay(); };
-
-  function applyTheme(themeName) {
-    currentTheme = themeName;
-    C = THEMES[themeName];
-
-    var card = document.getElementById('scanner-card');
-    var mainWrap = document.getElementById('main-wrap');
-    var hud = document.getElementById('hud-panel');
-    var badge = document.getElementById('hdr-badge');
-    var icon = document.getElementById('hdr-icon');
-    var title = document.getElementById('hdr-title');
-    var gri = document.getElementById('hdr-gri');
-    var kLabel = document.getElementById('k-label');
-    var eLabel = document.getElementById('e-label');
-    var play = document.getElementById('gri-play');
-    var rescan = document.getElementById('gri-rescan');
-
-    card.style.background = C.cardBg;
-    card.style.borderColor = C.cardBorder;
-    card.style.color = C.textMain;
-    card.style.boxShadow = C.shadow;
-
-    mainWrap.style.background = C.bg;
-    mainWrap.style.borderColor = C.border;
-
-    hud.style.background = C.panelBg;
-    hud.style.borderColor = C.border;
-    hud.style.color = C.dim;
-
-    badge.style.background = C.badgeBg;
-    badge.style.borderColor = C.badgeBorder;
-
-    icon.setAttribute('stroke', C.accent);
-    title.style.color = C.text;
-    gri.style.color = C.accent;
-
-    kLabel.style.color = C.dim;
-    eLabel.style.color = C.dim;
-
-    document.getElementById('gri-k').style.borderColor = C.border;
-    document.getElementById('gri-k').style.background = C.bg;
-    document.getElementById('gri-echo').style.borderColor = C.border;
-    document.getElementById('gri-echo').style.background = C.bg;
-
-    play.style.background = C.btnBg;
-    play.style.borderColor = C.btnBorder;
-    play.style.color = C.text;
-    play.setAttribute('onmouseover', "this.style.background='" + C.btnHoverBg + "';this.style.borderColor='" + C.btnHoverBorder + "'");
-    play.setAttribute('onmouseout', "this.style.background='" + C.btnBg + "';this.style.borderColor='" + C.btnBorder + "'");
-
-    rescan.style.background = C.btnBg;
-    rescan.style.borderColor = C.btnBorder;
-    rescan.style.color = C.text;
-    rescan.setAttribute('onmouseover', "this.style.background='" + C.btnHoverBg + "';this.style.borderColor='" + C.btnHoverBorder + "'");
-    rescan.setAttribute('onmouseout', "this.style.background='" + C.btnBg + "';this.style.borderColor='" + C.btnBorder + "'");
-
-    var chips = document.querySelectorAll('.param-chip');
-    chips.forEach(function(chip) {
-      chip.style.background = C.panelBg;
-      chip.style.borderColor = C.border;
-      chip.style.color = C.textSecondary;
-    });
-    var vals = document.querySelectorAll('.param-val');
-    vals.forEach(function(v) { v.style.color = C.accent; });
-
-    peEl.style.color = C.text;
-    trEl.style.color = C.text;
-
-    drawMain(1); drawK(1); drawEcho(1);
-    setHUD('DONE', WEEKS);
-  }
-
-  function getGRITheme() {
-    var theme = document.documentElement.getAttribute('data-theme');
-    if (theme === 'light') return 'light';
-    if (theme === 'dark') return 'dark';
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  }
-
-  document.documentElement.addEventListener('themechange', function() {
-    applyTheme(getGRITheme());
-  });
-
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.attributeName === 'data-theme') applyTheme(getGRITheme());
-    });
-  });
-  observer.observe(document.documentElement, { attributes: true });
+  var playBtn=document.getElementById('gri-play');
+  function updPlay(){var isPause=running;var svg=isPause?'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>';playBtn.innerHTML=svg;}
+  playBtn.onclick=function(){running=!running;updPlay();};
+  document.getElementById('gri-rescan').onclick=function(){acc=0;running=true;updPlay();};
+  requestAnimationFrame(tick);
 
   // Fetch real GitHub contribution data
   function loadRealContributionData() {
-    var username = 'MaiwulanjiangMaiming';
-    fetch('https://github-contributions-api.deno.dev/' + username + '.json')
+    fetch('https://github-contributions-api.deno.dev/MaiwulanjiangMaiming.json')
       .then(function(r) { return r.json(); })
       .then(function(result) {
         if (!result.contributions) return;
         var weeks = result.contributions;
-        var grid = [];
-        var kmag = [];
         var levelMap = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
         for (var w = 0; w < weeks.length && w < 52; w++) {
-          grid[w] = [];
-          kmag[w] = [];
           var days = weeks[w];
           var maxCount = 1;
           for (var d = 0; d < days.length; d++) {
@@ -446,31 +249,38 @@
           }
           for (var d = 0; d < 7; d++) {
             var day = days[d];
-            grid[w][d] = levelMap[day.contributionLevel] || 0;
+            data[w][d] = levelMap[day.contributionLevel] || 0;
+            counts[w][d] = day.contributionCount;
             kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
+            dates[w][d] = day.date;
           }
         }
-        while (grid.length < 52) {
-          var empty = [0,0,0,0,0,0,0];
-          grid.push(empty.slice());
-          kmag.push(empty.slice());
+        // Recalculate total
+        total = 0;
+        for (var a = 0; a < WEEKS; a++) for (var b = 0; b < DAYS; b++) total += data[a][b];
+        // Recalculate month labels
+        monthLabels = [];
+        seenMonths = new Set();
+        for (var w = 0; w < dates.length; w++) {
+          for (var d = 0; d < 7; d++) {
+            if (!dates[w][d]) continue;
+            var date = new Date(dates[w][d]);
+            var month = date.getMonth();
+            var day = date.getDate();
+            if (day <= 7 && !seenMonths.has(month)) {
+              seenMonths.add(month);
+              monthLabels.push({month: month, week: w, label: months[month]});
+            }
+          }
         }
-        initData(grid, kmag);
         acc = 0; running = true; updPlay();
       })
       .catch(function(err) {
-        console.log('Contribution data fetch failed, using fallback:', err);
+        console.log('Contribution data fetch failed:', err);
       });
   }
 
-  // Init
-  initData();
-  requestAnimationFrame(tick);
   loadRealContributionData();
-
-  // Apply current theme
-  setTimeout(function() { applyTheme(getGRITheme()); }, 100);
-
   renderGitHubRepos('MaiwulanjiangMaiming');
 })();
 </script>
