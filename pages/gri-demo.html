@@ -235,15 +235,15 @@ code {
           <canvas id="gri-echo" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
         </div>
         <div id="hud-panel" style="flex:1;min-width:140px;background:#0f1620;border:1px solid #1e2b38;border-radius:10px;padding:12px 14px;font-size:12px;color:#5d7686;line-height:2;">
-          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
+          <div class="hud-row" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
             <span>PE line</span>
             <span id="gri-pe" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 / 52</span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
+          <div class="hud-row" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
             <span>TR elapsed</span>
             <span id="gri-tr" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 wk</span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="hud-row" style="display:flex;justify-content:space-between;align-items:center;">
             <span>Σ signal</span>
             <span id="gri-total" style="color:#86f2b0;font-weight:600;font-family:ui-monospace,monospace;">— au</span>
           </div>
@@ -313,6 +313,8 @@ code {
 
   function mul(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 
+  var GL={G:["01110","10001","10000","10011","10001","10001","01110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["11111","00100","00100","00100","00100","00100","11111"]};
+
   function initData() {
     counts=[]; dates=[]; kmag=[]; grid=[];
     var rnd=mul(20260531);
@@ -331,6 +333,25 @@ code {
         dayDate.setDate(today.getDate()-((51-w)*7+(6-d)));
         dates[w][d]=dayDate.toISOString().split('T')[0];
       }
+    }
+    // Embed "GRI" letters
+    var letters=['G','R','I'], sx=17;
+    for(var li=0;li<3;li++){
+      var g=GL[letters[li]];
+      for(var cy=0;cy<7;cy++){
+        var row=g[cy];
+        for(var cx=0;cx<5;cx++){
+          if(row[cx]==='1'){
+            var ww=sx+cx;
+            if(ww<WEEKS){
+              grid[ww][cy]=rnd()>0.35?4:3;
+              counts[ww][cy]=rnd()>0.35?20:15;
+              kmag[ww][cy]=rnd()>0.35?0.9:0.7;
+            }
+          }
+        }
+      }
+      sx+=6;
     }
     // Recalculate total
     total=0;
@@ -627,6 +648,12 @@ code {
     peEl.style.color = C.text;
     trEl.style.color = C.text;
 
+    // Update HUD row borders
+    var hudRows = document.querySelectorAll('.hud-row');
+    hudRows.forEach(function(row){
+      row.style.borderBottomColor = C.border;
+    });
+
     // Update status and total colors based on current mode
     var currentMode = statusEl.textContent === 'SCAN COMPLETE' ? 'DONE' : (statusEl.textContent === 'RECON · iFFT' ? 'REC' : 'ACQ');
     if(currentMode === 'DONE'){
@@ -665,7 +692,16 @@ code {
     el.className = 'status-msg' + (type ? ' ' + type : '');
   }
 
-  function loadUser() {
+  // Expose functions to global scope for HTML onclick handlers
+  window.switchTheme = function(theme) {
+    currentTheme = theme;
+    document.querySelectorAll('.tab').forEach(function(t) {
+      t.classList.toggle('active', t.dataset.theme === theme);
+    });
+    applyTheme(theme);
+  };
+
+  window.loadUser = function() {
     var username = document.getElementById('username-input').value.trim();
     if (!username) {
       setStatus('Please enter a GitHub username', 'error');
@@ -696,15 +732,17 @@ code {
 
         for (var w = 0; w < weeks.length && w < 52; w++) {
           var days = weeks[w];
+          if (!days || !days.length) continue;
           var maxCount = 1;
           for (var d = 0; d < days.length; d++) {
-            if (days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
+            if (days[d] && days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
           }
-          for (var d = 0; d < 7; d++) {
+          for (var d = 0; d < 7 && d < days.length; d++) {
             var day = days[d];
+            if (!day) continue;
             grid[w][d] = levelMap[day.contributionLevel] || 0;
-            counts[w][d] = day.contributionCount;
-            kmag[w][d] = maxCount > 0 ? day.contributionCount / maxCount : 0;
+            counts[w][d] = day.contributionCount || 0;
+            kmag[w][d] = maxCount > 0 ? (day.contributionCount || 0) / maxCount : 0;
             dates[w][d] = day.date;
           }
         }
@@ -722,17 +760,9 @@ code {
       .catch(function(err) {
         setStatus(err.message, 'error');
       });
-  }
+  };
 
-  function switchTheme(theme) {
-    currentTheme = theme;
-    document.querySelectorAll('.tab').forEach(function(t) {
-      t.classList.toggle('active', t.dataset.theme === theme);
-    });
-    applyTheme(theme);
-  }
-
-  function copyCode() {
+  window.copyCode = function() {
     var code = document.getElementById('embed-code').textContent;
     navigator.clipboard.writeText(code).then(function() {
       var btn = document.querySelector('.embed-header button');
@@ -740,7 +770,7 @@ code {
       btn.textContent = 'Copied!';
       setTimeout(function() { btn.textContent = original; }, 1500);
     });
-  }
+  };
 
   // Default: show simulated GRI animation without loading real data
   // User must click Load to fetch real contribution data
