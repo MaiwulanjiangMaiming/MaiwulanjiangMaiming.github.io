@@ -178,3 +178,14 @@ section h2{font-family:var(--font-heading);font-weight:600;font-size:1.4rem;lett
 .contribution-months{display:flex;justify-content:space-between;width:100%;max-width:720px;padding:0 2px;margin-top:.25rem;gap:2px}
 .month-label{font-size:.6rem;color:var(--muted);font-family:var(--font-mono);padding:2px 4px;border-radius:4px;transition:all var(--duration-fast) var(--ease-smooth);flex:1;text-align:center}
 .month-label.current{background:var(--accent);color:var(--bg);font-weight:600}
+
+/* Theme transition animations */
+html,body{transition:background-color .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1)}
+.site-header,.card,.research-item,.project-line,.cv-card,.timeline a,.about-social a,#theme-toggle,#search-btn,.contrib-cell,.contrib-tooltip{transition:background-color .5s cubic-bezier(.4,0,.2,1),color .5s cubic-bezier(.4,0,.2,1),border-color .5s cubic-bezier(.4,0,.2,1),box-shadow .5s cubic-bezier(.4,0,.2,1)}
+.nav a,.brand,.muted,.pill{transition:color .5s cubic-bezier(.4,0,.2,1),background-color .5s cubic-bezier(.4,0,.2,1),border-color .5s cubic-bezier(.4,0,.2,1)}
+.theme-atmosphere{position:fixed;inset:0;z-index:9998;pointer-events:none}
+.theme-atmosphere.sunrise{background:radial-gradient(circle at var(--tx) var(--ty),rgba(255,245,210,.5),rgba(255,220,100,.2) 35%,rgba(255,180,50,.06) 60%,transparent 75%);clip-path:circle(0% at var(--tx) var(--ty));animation:sunriseSpread .9s cubic-bezier(.22,.61,.36,1) forwards}
+.theme-atmosphere.nightfall{background:linear-gradient(180deg,rgba(6,8,20,.5),rgba(10,15,35,.3) 50%,rgba(15,20,40,.1));clip-path:inset(0 0 100% 0);animation:nightfallSpread 1s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes sunriseSpread{0%{clip-path:circle(0% at var(--tx) var(--ty))}50%{clip-path:circle(70% at var(--tx) var(--ty))}100%{clip-path:circle(150% at var(--tx) var(--ty));opacity:0}}
+@keyframes nightfallSpread{0%{clip-path:inset(0 0 100% 0)}50%{clip-path:inset(0 0 35% 0)}100%{clip-path:inset(0 0 0 0);opacity:0}}
+@media(prefers-reduced-motion:reduce){.theme-atmosphere.sunrise,.theme-atmosphere.nightfall{animation-duration:.01ms}html,body,.site-header,.card,.research-item,.project-line,.cv-card,.timeline a,.about-social a,#theme-toggle,#search-btn{transition-duration:.01ms}}
