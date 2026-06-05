@@ -31,7 +31,44 @@ function openSearch(){setupSearchOverlay();var overlay=document.getElementById('
 function closeSearch(){var overlay=document.getElementById('search-overlay');if(overlay)overlay.style.display='none'}
 function setupSearchInput(){document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch()}if(e.key==='Escape')closeSearch()});document.addEventListener('input',function(e){if(e.target.id!=='search-input'||!fuseIndex)return;var q=e.target.value.trim();var results=document.getElementById('search-results');if(!q){results.innerHTML='';return}var matches=fuseIndex.search(q).slice(0,8);results.innerHTML=matches.map(function(m){var d=m.item;var typePill='<span class="pill">'+d.type+'</span>';return'<div class="card" style="padding:.75rem 1rem"><h3 style="margin:0 0 .25rem;font-size:1rem"><a href="'+d.url+'">'+d.title+'</a></h3><div style="font-size:.85rem;color:var(--muted)">'+d.body.slice(0,120)+'…</div><div style="margin-top:.35rem">'+typePill+'</div></div>'}).join('')||'<p class="muted" style="padding:1rem">No results found.</p>'})}
 function setupClickEmojis(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var emojis=['🧲','⚛️','🔬','🩻','💻','🖥️','⚙️','🎥','👁️','📸','🤖','🧠','📊','🚀','✨','💡','🎯','📡','🔍','🎓'];var activeEmojis=0;var maxEmojis=20;document.addEventListener('click',function(e){var target=e.target;if(target.closest('a, button, input, textarea, [role="button"]'))return;if(activeEmojis>=maxEmojis)return;var emoji=emojis[Math.floor(Math.random()*emojis.length)];var el=document.createElement('div');el.className='click-emoji';el.textContent=emoji;el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';document.body.appendChild(el);activeEmojis++;var timeoutId=setTimeout(function(){el.remove();activeEmojis--;clearTimeout(timeoutId)},1500)})}
-function setupThemeToggle(){var saved=localStorage.getItem('theme');if(saved)document.documentElement.setAttribute('data-theme',saved);updateThemeIcon();var btn=document.getElementById('theme-toggle');if(!btn)return;btn.addEventListener('click',function(){var current=document.documentElement.getAttribute('data-theme');var isLight=current==='light'||(!current&&window.matchMedia('(prefers-color-scheme: light)').matches);var next=isLight?'dark':'light';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('theme',next);updateThemeIcon();document.documentElement.dispatchEvent(new CustomEvent('themechange'))})}
-function updateThemeIcon(){var btn=document.getElementById('theme-toggle');if(!btn)return;var current=document.documentElement.getAttribute('data-theme');var isLight=current==='light'||(!current&&window.matchMedia('(prefers-color-scheme: light)').matches);btn.textContent=isLight?'🌙':'☀️'}
+function setupThemeToggle(){
+  var saved=localStorage.getItem('theme');
+  var systemPrefersLight=window.matchMedia('(prefers-color-scheme: light)').matches;
+  if(saved){
+    document.documentElement.setAttribute('data-theme',saved);
+  }else if(systemPrefersLight){
+    document.documentElement.setAttribute('data-theme','light');
+  }else{
+    document.documentElement.setAttribute('data-theme','dark');
+  }
+  updateThemeIcon();
+  var btn=document.getElementById('theme-toggle');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var current=document.documentElement.getAttribute('data-theme');
+    var isLight=current==='light';
+    var next=isLight?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next);
+    localStorage.setItem('theme',next);
+    updateThemeIcon();
+    document.documentElement.dispatchEvent(new CustomEvent('themechange'))
+  })
+}
+function updateThemeIcon(){var btn=document.getElementById('theme-toggle');if(!btn)return;var current=document.documentElement.getAttribute('data-theme');var isLight=current==='light';btn.textContent=isLight?'🌙':'☀️'}
+var systemThemeListener=null;
+function setupSystemThemeListener(){
+  if(systemThemeListener)return;
+  var mql=window.matchMedia('(prefers-color-scheme: light)');
+  systemThemeListener=function(e){
+    var saved=localStorage.getItem('theme');
+    if(!saved){
+      var next=e.matches?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      updateThemeIcon();
+      document.documentElement.dispatchEvent(new CustomEvent('themechange'))
+    }
+  };
+  if(mql.addEventListener){mql.addEventListener('change',systemThemeListener)}else{mql.addListener(systemThemeListener)}
+}
 function setupTypewriter(){var el=document.getElementById('typewriter');if(!el)return;var phrases=['MRI reconstruction.','quantitative mapping.','clinical AI.','making images from nothing.','teaching machines to see.'];var i=0,j=0,deleting=false;function tick(){var phrase=phrases[i%phrases.length];el.textContent=deleting?phrase.slice(0,j--):phrase.slice(0,j++);if(!deleting&&j>phrase.length){deleting=true;setTimeout(tick,1800);return}if(deleting&&j<0){deleting=false;i++;setTimeout(tick,400);return}setTimeout(tick,deleting?40:75)}tick()}
-document.addEventListener('DOMContentLoaded',function(){injectHeaderFooter();setActiveNav();setupThemeToggle();setupTypewriter();setupSearchInput();var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();setupViewTransitions();setupClickEmojis()});
+document.addEventListener('DOMContentLoaded',function(){injectHeaderFooter();setActiveNav();setupThemeToggle();setupSystemThemeListener();setupTypewriter();setupSearchInput();var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();setupViewTransitions();setupClickEmojis()});
