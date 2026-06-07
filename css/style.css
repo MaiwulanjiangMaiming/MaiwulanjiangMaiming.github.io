@@ -140,6 +140,10 @@ article{animation:fadeUp var(--duration-slow) var(--ease-out-expo)}
 .lang-dot[data-lang="Shell"]{background:#89e051}
 .repo-stat{display:flex;align-items:center;gap:.25rem}
 .repo-stat svg{opacity:.6}
+.ext-badge{color:var(--accent);font-weight:500;font-size:.8rem}
+.ext-badge svg{opacity:1}
+.ext-badge.has-downloads{color:var(--accent)}
+.ext-downloads .dl-count{font-size:.8rem;color:var(--muted)}
 .repo-topics{margin-top:.5rem}
 .loading{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:2rem;color:var(--muted)}
 .loading-spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
