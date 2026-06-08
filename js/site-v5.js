@@ -23,9 +23,108 @@ function renderPersonalProjects(){j(dp()+'data/projects.json').then(function(lis
 function fetchGitHubRepos(username,retries){retries=retries||0;var maxRetries=2;var cacheKey='github_repos_'+username;var cacheTimeKey=cacheKey+'_time';var cached=localStorage.getItem(cacheKey);var cacheTime=localStorage.getItem(cacheTimeKey);if(cached&&cacheTime&&(Date.now()-parseInt(cacheTime))<43200000){var data=JSON.parse(cached);var filtered=data.filter(function(repo){return repo.name!==username});if(filtered.length!==data.length){localStorage.setItem(cacheKey,JSON.stringify(filtered));localStorage.setItem(cacheTimeKey,Date.now().toString())}return Promise.resolve(filtered)}return fetch('https://api.github.com/users/'+username+'/repos?sort=updated&per_page=100&type=owner',{headers:{'Accept':'application/vnd.github.v3+json'}}).then(function(r){if(r.status===403||r.status===429){var resetHeader=r.headers.get('x-ratelimit-reset');if(resetHeader){var resetTime=parseInt(resetHeader,10)*1000;var waitMs=Math.max(resetTime-Date.now(),0);console.warn('GitHub API rate limited. Resets at '+new Date(resetTime).toLocaleString())}if(retries<maxRetries)return fetchGitHubRepos(username,retries+1);throw new Error('API rate limit exceeded')}if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(repos){if(repos.message){if(retries<maxRetries)return fetchGitHubRepos(username,retries+1);throw new Error(repos.message)}var filtered=repos.filter(function(repo){return !repo.private && !repo.fork && repo.name!==username}).sort(function(a,b){return b.stargazers_count-a.stargazers_count});localStorage.setItem(cacheKey,JSON.stringify(filtered));localStorage.setItem(cacheTimeKey,Date.now().toString());return filtered}).catch(function(err){if(retries<maxRetries){console.log('Retrying GitHub fetch... (attempt '+(retries+1)+')');return new Promise(function(resolve){setTimeout(function(){resolve(fetchGitHubRepos(username,retries+1))},2000)})}console.error('Failed to fetch GitHub repos:',err);throw err})}
 var EXT_MAP={'MatrixSpy':'MaiwulanjiangMaiming.matrixspy','Project-Manager-X':'MaiwulanjiangMaiming.project-manager-x','NiftiSpy':'MaiwulanjiangMaiming.niftispy'};
 var EXT_OPENVSX={'MatrixSpy':'maiwulanjiangmaiming/matrixspy','Project-Manager-X':'maiwulanjiangmaiming/project-manager-x','NiftiSpy':'maiwulanjiangmaiming/niftispy'};
-var EXT_EXTRA=[{name:'NiftiSpy',html_url:'https://github.com/MaiwulanjiangMaiming/NiftiSpy',description:'High-performance NIfTI medical image viewer with streaming, Range requests, and WebWorker parsing',language:'TypeScript',stargazers_count:0,forks_count:0,topics:['nifti','medical-imaging','mri','neuroimaging','viewer']}];
-function fetchExtDownloads(repoName){var cacheKey='ext_dl_'+repoName;var cacheTimeKey=cacheKey+'_time';var cached=localStorage.getItem(cacheKey);var cacheTime=localStorage.getItem(cacheTimeKey);if(cached&&cacheTime&&(Date.now()-parseInt(cacheTime))<3600000){try{return Promise.resolve(JSON.parse(cached))}catch(e){}}var result={vscode:0,openvsx:0};var promises=[];var vsId=EXT_MAP[repoName];if(vsId){promises.push(fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:[{criteria:[{filterType:7,value:vsId}]}],assetTypes:[],flags:0x192})}).then(function(r){return r.json()}).then(function(d){try{var ext=d.results[0].extensions[0];var stat=ext.statistics.find(function(s){return s.statisticName==='install'});if(stat)result.vscode=stat.value}catch(e){}}).catch(function(){}))}var ovId=EXT_OPENVSX[repoName];if(ovId){promises.push(fetch('https://open-vsx.org/api/'+ovId).then(function(r){return r.json()}).then(function(d){if(d.downloadCount)result.openvsx=d.downloadCount}).catch(function(){}))}return Promise.all(promises).then(function(){localStorage.setItem(cacheKey,JSON.stringify(result));localStorage.setItem(cacheTimeKey,Date.now().toString());return result})}
-function renderGitHubRepos(username){var container=document.getElementById('github-repos');if(!container)return;container.innerHTML='<div class="loading"><span class="loading-spinner"></span>Loading repositories...</div>';fetchGitHubRepos(username).then(function(repos){repos=repos.filter(function(repo){return repo.name!==username});var existingNames={};repos.forEach(function(r){existingNames[r.name]=true});EXT_EXTRA.forEach(function(e){if(!existingNames[e.name])repos.push(e)});if(!repos||repos.length===0){container.innerHTML='<div class="loading"><p class="muted">No public repositories found.</p></div>';return}var html=repos.map(function(repo,i){var lang=repo.language?'<span class="repo-lang"><span class="lang-dot" data-lang="'+repo.language+'"></span>'+repo.language+'</span>':'';var stars=repo.stargazers_count>0?'<span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg> '+repo.stargazers_count+'</span>':'';var forks=repo.forks_count>0?'<span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-.878a2.25 2.25 0 111.5 0v.878a2.25 2.25 0 01-2.25 2.25h-1.5v2.128a2.251 2.251 0 11-1.5 0V8.5h-1.5A2.25 2.25 0 013.5 6.25v-.878a2.25 2.25 0 111.5 0zM5 3.25a.75.75 0 10-1.5 0 .75.75 0 001.5 0zm6.75.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8 12.25a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg> '+repo.forks_count+'</span>':'';var isExt=!!EXT_MAP[repo.name];var extBadge=isExt?'<span class="repo-stat ext-badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg> Extension</span>':'';var dlPlaceholder=isExt?'<span class="repo-stat ext-downloads" data-repo="'+repo.name+'"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"/></svg> <span class="dl-count">—</span></span>':'';var topics=(repo.topics||[]).slice(0,3).map(function(t){return'<span class="pill">'+t+'</span>'}).join('');return'<div class="card card-reveal github-repo" style="animation-delay:'+(i*60)+'ms"><h3><a href="'+repo.html_url+'" target="_blank" rel="noopener">'+repo.name+'</a></h3><p class="repo-desc">'+(repo.description||'No description provided')+'</p><div class="repo-meta">'+lang+extBadge+stars+forks+dlPlaceholder+'</div>'+(topics?'<div class="repo-topics">'+topics+'</div>':'')+'</div>'}).join('');container.innerHTML=html;setupScrollReveal();repos.forEach(function(repo){if(EXT_MAP[repo.name]){fetchExtDownloads(repo.name).then(function(dl){var el=container.querySelector('.ext-downloads[data-repo="'+repo.name+'"] .dl-count');if(!el)return;var parts=[];if(dl.vscode>0)parts.push(formatNum(dl.vscode)+' VS Code');if(dl.openvsx>0)parts.push(formatNum(dl.openvsx)+' OpenVSX');el.textContent=parts.length>0?parts.join(' / '):'0';if(dl.vscode+dl.openvsx>0){var badge=el.closest('.github-repo').querySelector('.ext-badge');if(badge)badge.classList.add('has-downloads')}})})}})}
+var EXT_EXTRA=[{name:'NiftiSpy',html_url:'https://github.com/MaiwulanjiangMaiming/NiftiSpy',description:'High-performance NIfTI medical image viewer with streaming, Range requests, and WebWorker parsing',language:'TypeScript',stargazers_count:0,forks_count:0,topics:['nifti','medical-imaging','mri','neuroimaging','viewer'],category:'Extension'},{name:'DualWeChat',html_url:'https://github.com/MaiwulanjiangMaiming/DualWeChat',description:'macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色',language:'Shell',stargazers_count:2,forks_count:0,topics:[],category:'Tool'}];
+function classifyRepo(repo){if(repo.category)return repo.category;var isExt=!!EXT_MAP[repo.name];if(isExt)return'Extension';var desc=(repo.description||'').toLowerCase();var topics=(repo.topics||[]).map(function(t){return t.toLowerCase()});var lang=(repo.language||'').toLowerCase();if(/github\.io|website|personal|blog|portfolio/i.test(desc+topics.join(',')))return'Website';if(/research|paper|thesis|dissertation|academic|study/i.test(desc+topics.join(',')))return'Research';if(/library|framework|sdk|api/i.test(desc+topics.join(',')))return'Library';if(/cli|tool|utility|script|automation/i.test(desc+topics.join(',')))return'Tool';if(/tutorial|learning|course|notes|cheatsheet/i.test(desc+topics.join(',')))return'Learning';if(/demo|example|playground|sandbox/i.test(desc+topics.join(',')))return'Demo';return'Project'}
+function fetchExtDownloads(repoName){var cacheKey='ext_dl_'+repoName;var cacheTimeKey=cacheKey+'_time';var cached=localStorage.getItem(cacheKey);var cacheTime=localStorage.getItem(cacheTimeKey);if(cached&&cacheTime&&(Date.now()-parseInt(cacheTime))<3600000){try{return Promise.resolve(JSON.parse(cached))}catch(e){}}var result={vscode:0,openvsx:0};var promises=[];var vsId=EXT_MAP[repoName];if(vsId){promises.push(fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=3.0-preview.1',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json; api-version=3.0-preview.1'},body:JSON.stringify({filters:[{criteria:[{filterType:7,value:vsId}]}],assetTypes:[],flags:0x192})}).then(function(r){return r.json()}).then(function(d){try{var ext=d.results[0].extensions[0];var stat=ext.statistics.find(function(s){return s.statisticName==='install'});if(stat)result.vscode=stat.value}catch(e){}}).catch(function(){}))}var ovId=EXT_OPENVSX[repoName];if(ovId){promises.push(fetch('https://open-vsx.org/api/'+ovId).then(function(r){return r.json()}).then(function(d){if(d.downloadCount)result.openvsx=d.downloadCount}).catch(function(){}))}return Promise.all(promises).then(function(){localStorage.setItem(cacheKey,JSON.stringify(result));localStorage.setItem(cacheTimeKey,Date.now().toString());return result})}
+function renderGitHubRepos(username) {
+  var container = document.getElementById('github-repos');
+  if (!container) return;
+  container.innerHTML = '<div class="loading"><span class="loading-spinner"></span>Loading repositories...</div>';
+
+  fetchGitHubRepos(username).then(function(repos) {
+    // Filter out the user page itself
+    repos = repos.filter(function(repo) {
+      return repo.name !== username;
+    });
+
+    // Add any extra repos from EXT_EXTRA that don't already exist
+    var existingNames = {};
+    repos.forEach(function(r) {
+      existingNames[r.name] = true;
+    });
+    EXT_EXTRA.forEach(function(e) {
+      if (!existingNames[e.name]) {
+        repos.push(e);
+      }
+    });
+
+    if (!repos || repos.length === 0) {
+      container.innerHTML = '<div class="loading"><p class="muted">No public repositories found.</p></div>';
+      return;
+    }
+
+    var html = repos.map(function(repo, i) {
+      // Language pill
+      var lang = repo.language
+        ? '<span class="repo-lang"><span class="lang-dot" data-lang="' + repo.language + '"></span>' + repo.language + '</span>'
+        : '';
+
+      // Stars
+      var stars = repo.stargazers_count > 0
+        ? '<span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg> ' + repo.stargazers_count + '</span>'
+        : '';
+
+      // Forks
+      var forks = repo.forks_count > 0
+        ? '<span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-.878a2.25 2.25 0 111.5 0v.878a2.25 2.25 0 01-2.25 2.25h-1.5v2.128a2.251 2.251 0 11-1.5 0V8.5h-1.5A2.25 2.25 0 013.5 6.25v-.878a2.25 2.25 0 111.5 0zM5 3.25a.75.75 0 10-1.5 0 .75.75 0 001.5 0zm6.75.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8 12.25a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg> ' + repo.forks_count + '</span>'
+        : '';
+
+      // Is this repo an extension?
+      var isExt = !!EXT_MAP[repo.name];
+
+      // Legacy variable kept for compatibility; not used in the template
+      var extBadge = isExt
+        ? '<span class="repo-stat ext-badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg> Extension</span>'
+        : '';
+
+      // Extension downloads placeholder (only for extension repos)
+      var dlPlaceholder = isExt
+        ? '<span class="repo-stat ext-downloads" data-repo="' + repo.name + '"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"/></svg> <span class="dl-count">—</span></span>'
+        : '';
+
+      // Topics pills
+      var topics = (repo.topics || []).slice(0, 3).map(function(t) {
+        return '<span class="pill">' + t + '</span>';
+      }).join('');
+
+      // Category banner (placed AFTER the h3 and BEFORE description)
+      var category = classifyRepo(repo);
+      var banner = '<div class="repo-banner cat-' + category.toLowerCase() + '">' + category + '</div>';
+
+      return '<div class="card card-reveal github-repo" style="animation-delay:' + (i * 60) + 'ms">' +
+        '<h3><a href="' + repo.html_url + '" target="_blank" rel="noopener">' + repo.name + '</a></h3>' +
+        banner +
+        '<p class="repo-desc">' + (repo.description || 'No description provided') + '</p>' +
+        '<div class="repo-meta">' + lang + stars + forks + dlPlaceholder + '</div>' +
+        (topics ? '<div class="repo-topics">' + topics + '</div>' : '') +
+        '</div>';
+    }).join('');
+
+    container.innerHTML = html;
+    setupScrollReveal();
+
+    // Fetch extension downloads for each extension repo and update the placeholder
+    repos.forEach(function(repo) {
+      if (EXT_MAP[repo.name]) {
+        fetchExtDownloads(repo.name).then(function(dl) {
+          var el = container.querySelector('.ext-downloads[data-repo="' + repo.name + '"] .dl-count');
+          if (!el) return;
+          var dlText;
+          if (dl.vscode > 0 && dl.openvsx > 0) {
+            dlText = formatNum(dl.vscode) + ' VS Code / ' + formatNum(dl.openvsx) + ' OpenVSX';
+          } else if (dl.vscode > 0) {
+            dlText = formatNum(dl.vscode) + ' VS Code';
+          } else if (dl.openvsx > 0) {
+            dlText = formatNum(dl.openvsx) + ' OpenVSX';
+          } else {
+            dlText = '0';
+          }
+          el.textContent = dlText;
+        });
+      }
+    });
+  });
+}
 function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()}
 function clearRepoCache(username){localStorage.removeItem('github_repos_'+username);localStorage.removeItem('github_repos_'+username+'_time');renderGitHubRepos(username)}
 function renderMoments(){var el=document.getElementById('gallery');if(el)el.innerHTML='<div class="loading" style="grid-column:1/-1"><span class="loading-spinner"></span>Loading gallery...</div>';j(dp()+'data/moments.json').then(function(list){var html=list.map(function(m,i){return '<img src="'+m.url+'" alt="'+(m.caption||'')+'." class="card-reveal" style="animation-delay:'+(i*60)+'ms">'}).join('');if(el)el.innerHTML=html;bindLightbox('#gallery img');setupScrollReveal()}).catch(function(err){if(el)el.innerHTML='<p class="muted" style="grid-column:1/-1">Failed to load gallery. Please try again later.</p>'})}
