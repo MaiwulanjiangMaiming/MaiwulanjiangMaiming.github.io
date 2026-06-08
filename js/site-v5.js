@@ -37,7 +37,14 @@ function renderGitHubRepos(username) {
       return repo.name !== username;
     });
 
-    // Add any extra repos from EXT_EXTRA that don't already exist
+    // Merge EXT_EXTRA category into existing repos & add missing ones
+    var extraMap = {};
+    EXT_EXTRA.forEach(function(e) { extraMap[e.name] = e; });
+    repos.forEach(function(r) {
+      if (extraMap[r.name] && extraMap[r.name].category) {
+        r.category = extraMap[r.name].category;
+      }
+    });
     var existingNames = {};
     repos.forEach(function(r) {
       existingNames[r.name] = true;
