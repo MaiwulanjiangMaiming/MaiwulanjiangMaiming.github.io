@@ -31,7 +31,15 @@ function renderGitHubRepos(username) {
   if (!container) return;
   container.innerHTML = '<div class="loading"><span class="loading-spinner"></span>Loading repositories...</div>';
 
-  fetchGitHubRepos(username).then(function(repos) {
+  // Try local repos.json first, fall back to GitHub API
+  var reposPromise = j(dp() + 'data/repos.json').then(function(repos) {
+    if (repos && repos.length > 0) return repos;
+    return fetchGitHubRepos(username);
+  }).catch(function() {
+    return fetchGitHubRepos(username);
+  });
+
+  reposPromise.then(function(repos) {
     // Filter out the user page itself
     repos = repos.filter(function(repo) {
       return repo.name !== username;
