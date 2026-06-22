@@ -10,6 +10,36 @@
     "updated_at": "2026-06-12T06:40:28Z"
   },
   {
+    "name": "MatrixSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
+    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-22T03:36:47Z"
+  },
+  {
+    "name": "Project-Manager-X",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/Project-Manager-X",
+    "description": "A powerful VS Code extension for managing projects with tags, tasks, milestones, and lifecycle tracking.",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-22T03:30:53Z"
+  },
+  {
+    "name": "MaiwulanjiangMaiming.github.io",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
+    "description": "My Website",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-21T09:54:34Z"
+  },
+  {
     "name": "NiftiSpy",
     "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
     "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
@@ -20,16 +50,6 @@
     "updated_at": "2026-06-21T03:15:33Z"
   },
   {
-    "name": "MaiwulanjiangMaiming.github.io",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
-    "description": "My Website",
-    "language": "HTML",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-20T09:20:40Z"
-  },
-  {
     "name": "Desktop-Widget",
     "html_url": "https://github.com/MaiwulanjiangMaiming/Desktop-Widget",
     "description": "A beautiful desktop todo widget for Übersicht on macOS with priority, due date, and section management support.",
@@ -38,26 +58,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-09T06:09:12Z"
-  },
-  {
-    "name": "Project-Manager-X",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/Project-Manager-X",
-    "description": "A powerful VS Code extension for managing projects with tags, tasks, milestones, and lifecycle tracking.",
-    "language": "TypeScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-08T06:14:18Z"
-  },
-  {
-    "name": "MatrixSpy",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
-    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
-    "language": "TypeScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-08T06:11:30Z"
   },
   {
     "name": "GRI-contribution-graph",
