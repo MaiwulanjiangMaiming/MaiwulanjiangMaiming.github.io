@@ -10,6 +10,16 @@
     "updated_at": "2026-06-12T06:40:28Z"
   },
   {
+    "name": "NiftiSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
+    "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-23T16:11:27Z"
+  },
+  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -17,7 +27,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-06-22T12:10:14Z"
+    "updated_at": "2026-06-23T09:46:35Z"
   },
   {
     "name": "MatrixSpy",
@@ -38,16 +48,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-22T03:30:53Z"
-  },
-  {
-    "name": "NiftiSpy",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
-    "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
-    "language": "TypeScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-21T03:15:33Z"
   },
   {
     "name": "Desktop-Widget",
