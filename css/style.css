@@ -213,8 +213,10 @@ html,body{transition:background-color .5s cubic-bezier(.4,0,.2,1),color .5s cubi
 .em-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 .em-phase{margin-bottom:1rem}
 .em-goal{font-style:italic;margin:-.25rem 0 1rem;font-size:.92rem}
-.em-paper .em-paper-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem}
+.em-paper .em-paper-head{display:flex;align-items:center;gap:.4rem;justify-content:space-between;margin-bottom:.35rem;flex-wrap:wrap}
 .em-id{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);letter-spacing:.02em}
+.em-doi-link{font-size:.75rem;text-decoration:none;color:var(--accent,#3b82f6);opacity:.85;transition:opacity .2s}
+.em-doi-link:hover{opacity:1;text-decoration:underline}
 .em-meta{font-size:.88rem;margin-bottom:.5rem}
 .em-tags{display:flex;flex-wrap:wrap;gap:.25rem}
 .em-note-link{cursor:pointer}

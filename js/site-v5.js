@@ -42,8 +42,9 @@ function renderEveryday(){
         var stBadge='<span class="pill '+st+'">'+pa.status+'</span>';
         var topic=pa.topic?'<span class="pill">'+pa.topic+'</span>':'';
         var meta=pa.authors+(pa.year?(' · '+pa.year):'')+' · '+pa.venue;
+        var doiHtml=pa.doi?'<a class="em-doi-link" href="https://doi.org/'+pa.doi+'" target="_blank" rel="noopener">📄 Paper ↗</a>':'';
         var titleHtml=(pa.note&&pa.status==='done')?'<a href="#" data-note="'+pa.note+'" class="em-note-link">'+pa.title+'</a>':'<span>'+pa.title+'</span>';
-        return '<div class="card card-reveal em-paper" style="animation-delay:'+(i*40)+'ms"><div class="em-paper-head"><span class="em-id">'+pa.id+'</span>'+stBadge+'</div><h3>'+titleHtml+'</h3><div class="muted em-meta">'+meta+'</div><div class="em-tags">'+topic+'</div></div>'
+        return '<div class="card card-reveal em-paper" style="animation-delay:'+(i*40)+'ms"><div class="em-paper-head"><span class="em-id">'+pa.id+'</span>'+stBadge+doiHtml+'</div><h3>'+titleHtml+'</h3><div class="muted em-meta">'+meta+'</div><div class="em-tags">'+topic+'</div></div>'
       }).join('');
       var focus=p.focus?'<span class="pill em-focus">★ focus</span>':'';
       return '<section class="em-phase"><h2 class="year-heading" id="'+p.id+'">'+p.id+' · '+p.title+' '+focus+'</h2><p class="muted em-goal">'+(p.goal||'')+'</p><div class="list">'+cards+'</div></section>'
