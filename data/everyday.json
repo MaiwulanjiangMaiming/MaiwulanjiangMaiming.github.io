@@ -1,0 +1,187 @@
+{
+  "title": "Everyday MRI",
+  "subtitle": "Read 3 MRI papers every day, focused on non-Cartesian magnetic resonance fingerprinting",
+  "repo": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
+  "lastUpdated": "2026-06-26",
+  "phases": [
+    {
+      "id": "P0",
+      "title": "MRI Physics & Signal Fundamentals",
+      "goal": "Build a complete physical intuition from spin to image",
+      "papers": [
+        {"id": "P0-01", "title": "Nuclear Induction", "authors": "Bloch F.", "year": 1946, "venue": "Phys Rev", "topic": "Bloch equation", "note": "notes/P0/P0-01-bloch-1946.md", "status": "done"},
+        {"id": "P0-02", "title": "Image Formation by Induced Local Interactions; Examples Employing Magnetic Resonance", "authors": "Lauterbur P.C.", "year": 1973, "venue": "Nature", "topic": "MRI foundation", "note": "notes/P0/P0-02-lauterbur-1973.md", "status": "done"},
+        {"id": "P0-03", "title": "NMR Fourier Zeugmatography", "authors": "Kumar A., Welti D., Ernst R.R.", "year": 1975, "venue": "J Magn Reson", "topic": "Fourier imaging / K-space", "note": "notes/P0/P0-03-kumar-ernst-1975.md", "status": "done"},
+        {"id": "P0-04", "title": "The k-trajectory formulation of the NMR imaging process", "authors": "Twieg D.B.", "year": 1983, "venue": "Med Phys", "topic": "K-trajectory", "note": null, "status": "planned"},
+        {"id": "P0-05", "title": "Multi-planar image formation using NMR spin echoes", "authors": "Mansfield P.", "year": 1977, "venue": "J Phys C", "topic": "EPI", "note": null, "status": "planned"},
+        {"id": "P0-06", "title": "Application of Fourier Transform Spectroscopy to Magnetic Resonance", "authors": "Ernst R.R., Anderson W.A.", "year": 1966, "venue": "Rev Sci Instrum", "topic": "Pulse + Fourier", "note": null, "status": "planned"},
+        {"id": "P0-07", "title": "The signal-to-noise ratio of the NMR experiment", "authors": "Hoult D.I., Richards R.E.", "year": 1976, "venue": "J Magn Reson", "topic": "SNR essence", "note": null, "status": "planned"},
+        {"id": "P0-08", "title": "The intrinsic signal-to-noise ratio in NMR imaging", "authors": "Edelstein W.A. et al.", "year": 1986, "venue": "Magn Reson Med", "topic": "SNR / voxel", "note": null, "status": "planned"},
+        {"id": "P0-09", "title": "Phase & susceptibility (chemical shift basics)", "authors": "Haacke E.M. et al.", "year": 0, "venue": "—", "topic": "Phase", "note": null, "status": "planned"},
+        {"id": "P0-10", "title": "Echoes—how they arise and what we can do with them", "authors": "Hennig J.", "year": 1991, "venue": "J Magn Reson", "topic": "Echo principle", "note": null, "status": "planned"},
+        {"id": "P0-11", "title": "Separation of diffusion and perfusion in MRI", "authors": "Le Bihan D. et al.", "year": 1986, "venue": "Radiology", "topic": "Diffusion/perfusion", "note": null, "status": "planned"},
+        {"id": "P0-12", "title": "Handbook of MRI Pulse Sequences (selected chapters)", "authors": "Bernstein M.A. et al.", "year": 2004, "venue": "Book", "topic": "Systematic review", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "Sampling & Reconstruction Basics",
+      "goal": "Master all classic weapons for undersampling and reconstruction",
+      "papers": [
+        {"id": "P1-01", "title": "SENSE: Sensitivity encoding for fast MRI", "authors": "Pruessmann K.P. et al.", "year": 1999, "venue": "MRM", "topic": "SENSE", "note": null, "status": "planned"},
+        {"id": "P1-02", "title": "Generalized autocalibrating partially parallel acquisitions (GRAPPA)", "authors": "Griswold M.A. et al.", "year": 2002, "venue": "MRM", "topic": "GRAPPA", "note": null, "status": "planned"},
+        {"id": "P1-03", "title": "Simultaneous acquisition of spatial harmonics (SMASH)", "authors": "Sodickson D.K., Manning W.J.", "year": 1997, "venue": "MRM", "topic": "SMASH", "note": null, "status": "planned"},
+        {"id": "P1-04", "title": "Sparse MRI: The application of compressed sensing for rapid MR imaging", "authors": "Lustig M., Donoho D., Pauly J.M.", "year": 2007, "venue": "MRM", "topic": "Compressed sensing", "note": null, "status": "planned"},
+        {"id": "P1-05", "title": "ESPIRiT—an eigenvalue approach to autocalibrating parallel MRI", "authors": "Uecker M. et al.", "year": 2014, "venue": "MRM", "topic": "ESPIRiT", "note": null, "status": "planned"},
+        {"id": "P1-06", "title": "SPIRiT: Iterative self-consistent parallel imaging reconstruction", "authors": "Lustig M., Pauly J.M.", "year": 2010, "venue": "MRM", "topic": "SPIRiT", "note": null, "status": "planned"},
+        {"id": "P1-07", "title": "Encoding and reconstruction in parallel MRI", "authors": "Pruessmann K.P.", "year": 2004, "venue": "NMR Biomed", "topic": "Encoding theory", "note": null, "status": "planned"},
+        {"id": "P1-08", "title": "Parallel MRI using the GRAPPA operator formalism", "authors": "Griswold M.A. et al.", "year": 2005, "venue": "MRM", "topic": "GRAPPA operator", "note": null, "status": "planned"},
+        {"id": "P1-09", "title": "SMASH, SENSE, PILS, GRAPPA—how to choose", "authors": "Blaimer M. et al.", "year": 2004, "venue": "Top MRI", "topic": "PI review", "note": null, "status": "planned"},
+        {"id": "P1-10", "title": "Undersampled radial MRI with real-time reconstruction", "authors": "Block K.T., Uecker M., Frahm J.", "year": 2007, "venue": "MRM", "topic": "Radial / real-time", "note": null, "status": "planned"},
+        {"id": "P1-11", "title": "Parallel magnetic resonance imaging (review)", "authors": "King K.F.", "year": 2004, "venue": "Top MRI", "topic": "Implementation", "note": null, "status": "planned"},
+        {"id": "P1-12", "title": "CS combined with parallel imaging (review)", "authors": "Liang D. et al.", "year": 0, "venue": "—", "topic": "CS + PI", "note": null, "status": "planned"},
+        {"id": "P1-13", "title": "Berkeley Advanced Reconstruction Toolbox (BART)", "authors": "Uecker M. et al.", "year": 2015, "venue": "ISMRM", "topic": "Reconstruction toolbox", "note": null, "status": "planned"},
+        {"id": "P1-14", "title": "Model-based image reconstruction for MRI", "authors": "Fessler J.A.", "year": 2010, "venue": "IEEE TCI", "topic": "Inverse problem", "note": null, "status": "planned"},
+        {"id": "P1-15", "title": "Parallel MR image reconstruction (CG-SENSE / split Bregman)", "authors": "Ramani A., Fessler J.A.", "year": 2011, "venue": "IEEE TMI", "topic": "Iterative recon", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Non-Cartesian Sampling",
+      "goal": "Master Radial / Spiral / NUFFT / gridding / density compensation",
+      "focus": true,
+      "papers": [
+        {"id": "P2-01", "title": "High-speed spiral-scan echo planar NMR imaging", "authors": "Ahn C.B., Kim J.H., Cho Z.H.", "year": 1986, "venue": "IEEE TMI", "topic": "Spiral origin", "note": null, "status": "planned"},
+        {"id": "P2-02", "title": "Fast spiral coronary artery imaging", "authors": "Meyer C.H. et al.", "year": 1992, "venue": "MRM", "topic": "Spiral practical", "note": null, "status": "planned"},
+        {"id": "P2-03", "title": "Gradient moment reduction (spiral)", "authors": "Glover G.H., Pauly J.M.", "year": 1992, "venue": "MRM", "topic": "Spiral / motion", "note": null, "status": "planned"},
+        {"id": "P2-04", "title": "Nonuniform fast Fourier transforms using min-max interpolation", "authors": "Fessler J.A., Sutton B.P.", "year": 2003, "venue": "IEEE TSP", "topic": "NUFFT", "note": null, "status": "planned"},
+        {"id": "P2-05", "title": "Rapid gridding reconstruction with a minimal oversampling ratio", "authors": "Beatty P.J., Nishimura D.G., Pauly J.M.", "year": 2005, "venue": "IEEE TMI", "topic": "Density compensation", "note": null, "status": "planned"},
+        {"id": "P2-06", "title": "Motion correction with PROPELLER MRI", "authors": "Pipe J.G.", "year": 1999, "venue": "MRM", "topic": "PROPELLER", "note": null, "status": "planned"},
+        {"id": "P2-07", "title": "A pictorial description of steady-states (radial)", "authors": "Scheffler K.", "year": 1999, "venue": "MRM", "topic": "Radial steady-state", "note": null, "status": "planned"},
+        {"id": "P2-08", "title": "Optimal radial sampling (golden-angle)", "authors": "Winkelmann S. et al.", "year": 2007, "venue": "IEEE TMI", "topic": "Golden-angle", "note": null, "status": "planned"},
+        {"id": "P2-09", "title": "Suppression of MRI artifacts (robust radial)", "authors": "Block K.T., Uecker M., Frahm J.", "year": 2007, "venue": "MRM", "topic": "Radial robustness", "note": null, "status": "planned"},
+        {"id": "P2-10", "title": "Selection of a convolution function for Fourier inversion", "authors": "Jackson J.I. et al.", "year": 1991, "venue": "IEEE TMI", "topic": "Gridding kernel", "note": null, "status": "planned"},
+        {"id": "P2-11", "title": "A fast sinc function gridding algorithm", "authors": "O'Sullivan J.", "year": 1985, "venue": "IEEE ASSP", "topic": "Gridding theory", "note": null, "status": "planned"},
+        {"id": "P2-12", "title": "Sampling density compensation", "authors": "Pipe J.G., Menon P.", "year": 1999, "venue": "MRM", "topic": "DCF estimation", "note": null, "status": "planned"},
+        {"id": "P2-13", "title": "Fast three dimensional magnetic resonance imaging", "authors": "Irarrazabal P., Nishimura D.G.", "year": 1995, "venue": "MRM", "topic": "3D non-Cartesian", "note": null, "status": "planned"},
+        {"id": "P2-14", "title": "Rapid and accurate gridding (review)", "authors": "Dale B.M. et al.", "year": 2001, "venue": "Magn Reson Imaging", "topic": "Gridding review", "note": null, "status": "planned"},
+        {"id": "P2-15", "title": "Design and analysis of a practical 3D cones trajectory", "authors": "Gurney P.T. et al.", "year": 2006, "venue": "MRM", "topic": "3D cones design", "note": null, "status": "planned"},
+        {"id": "P2-16", "title": "Improved spiral imaging (clinical)", "authors": "Vasanawala S.S. et al.", "year": 2000, "venue": "MRM", "topic": "Spiral clinical", "note": null, "status": "planned"},
+        {"id": "P2-17", "title": "Rosette trajectories", "authors": "Klaiborger W., Gmitro A.", "year": 0, "venue": "—", "topic": "Rosette", "note": null, "status": "planned"},
+        {"id": "P2-18", "title": "Golden ratio sparse MRI (radial pulse)", "authors": "Wundrak S. et al.", "year": 2015, "venue": "Tomography", "topic": "Golden-ratio timing", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Quantitative Imaging Basics",
+      "goal": "Understand how T1/T2/T2* are measured",
+      "papers": [
+        {"id": "P3-01", "title": "Time saving in measurement of NMR and EPR relaxation times", "authors": "Look D.C., Locker H.R.", "year": 1970, "venue": "Rev Sci Instrum", "topic": "Look-Locker", "note": null, "status": "planned"},
+        {"id": "P3-02", "title": "Rapid combined T1 and T2 mapping (DESPOT)", "authors": "Deoni S.C.L., Rutt B.K., Peters T.M.", "year": 2003, "venue": "MRM", "topic": "DESPOT", "note": null, "status": "planned"},
+        {"id": "P3-03", "title": "T1 estimation (IR-SE gold standard)", "authors": "Christensen G.E. et al.", "year": 0, "venue": "—", "topic": "Inversion recovery", "note": null, "status": "planned"},
+        {"id": "P3-04", "title": "T1 FLAIR quantification", "authors": "Wang J. et al.", "year": 0, "venue": "—", "topic": "Clinical T1", "note": null, "status": "planned"},
+        {"id": "P3-05", "title": "T2 determination (multi-echo SE)", "authors": "Brix G. et al.", "year": 1990, "venue": "JCAT", "topic": "T2 fitting", "note": null, "status": "planned"},
+        {"id": "P3-06", "title": "Rapid high-resolution T1 mapping (variable flip)", "authors": "Cheng H.L.M., Wright G.A.", "year": 2006, "venue": "MRM", "topic": "Variable flip angle", "note": null, "status": "planned"},
+        {"id": "P3-07", "title": "Quantitative relaxometry of the brain (review)", "authors": "Deoni S.C.L.", "year": 2010, "venue": "Top MRI", "topic": "Quantitative review", "note": null, "status": "planned"},
+        {"id": "P3-08", "title": "T1/T2 mapping review", "authors": "Schwenzer N.F. et al.", "year": 2010, "venue": "Invest Radiol", "topic": "Clinical review", "note": null, "status": "planned"},
+        {"id": "P3-09", "title": "RAPID T1 mapping", "authors": "Maier O. et al.", "year": 0, "venue": "—", "topic": "Fast T1", "note": null, "status": "planned"},
+        {"id": "P3-10", "title": "Highly accelerated T2 mapping", "authors": "Wood T.C.", "year": 0, "venue": "—", "topic": "Fast T2", "note": null, "status": "planned"},
+        {"id": "P3-11", "title": "T1 quantification (MPRAGE optimization)", "authors": "Deichmann R. et al.", "year": 0, "venue": "—", "topic": "MPRAGE", "note": null, "status": "planned"},
+        {"id": "P3-12", "title": "Fast T1 mapping (modern Look-Locker)", "authors": "Henderson E. et al.", "year": 1999, "venue": "MRM", "topic": "Look-Locker impl", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "MRF Principles",
+      "goal": "Master the pseudo-random acquisition → dictionary → pattern-matching paradigm",
+      "papers": [
+        {"id": "P4-01", "title": "Magnetic resonance fingerprinting", "authors": "Ma D. et al.", "year": 2013, "venue": "Nature", "topic": "MRF foundation", "note": null, "status": "planned"},
+        {"id": "P4-02", "title": "MR fingerprinting using fast imaging with steady-state precession (FISP)", "authors": "Jiang Y. et al.", "year": 2015, "venue": "MRM", "topic": "FISP-MRF", "note": null, "status": "planned"},
+        {"id": "P4-03", "title": "SVD compression for MRF dictionaries", "authors": "McGivney D.F. et al.", "year": 2014, "venue": "MRM", "topic": "SVD compression", "note": null, "status": "planned"},
+        {"id": "P4-04", "title": "SVD-based dictionary compression (extension)", "authors": "Cruz G. et al.", "year": 0, "venue": "—", "topic": "Dictionary optimization", "note": null, "status": "planned"},
+        {"id": "P4-05", "title": "Magnetic resonance fingerprinting theory", "authors": "Assländer J. et al.", "year": 0, "venue": "—", "topic": "MRF theory", "note": null, "status": "planned"},
+        {"id": "P4-06", "title": "MRF sampling optimization / CRLB", "authors": "Zhao B. et al.", "year": 0, "venue": "—", "topic": "Sampling design", "note": null, "status": "planned"},
+        {"id": "P4-07", "title": "MR fingerprinting review", "authors": "Hamilton J.I. et al.", "year": 2015, "venue": "Top MRI", "topic": "MRF review", "note": null, "status": "planned"},
+        {"id": "P4-08", "title": "MRF T1/T2 clinical", "authors": "Badve C. et al.", "year": 0, "venue": "—", "topic": "Clinical feasibility", "note": null, "status": "planned"},
+        {"id": "P4-09", "title": "B1+ correction in MRF", "authors": "Hacking C.A. et al.", "year": 0, "venue": "—", "topic": "B1 correction", "note": null, "status": "planned"},
+        {"id": "P4-10", "title": "MRF artifacts / blunting", "authors": "Breuer F.A. et al.", "year": 0, "venue": "—", "topic": "Artifacts", "note": null, "status": "planned"},
+        {"id": "P4-11", "title": "MRF dictionary + noise model", "authors": "Körzdörfer G. et al.", "year": 0, "venue": "—", "topic": "Noise modeling", "note": null, "status": "planned"},
+        {"id": "P4-12", "title": "MRF review (advanced)", "authors": "Deshmane A. et al.", "year": 0, "venue": "—", "topic": "Engineering", "note": null, "status": "planned"},
+        {"id": "P4-13", "title": "MRF reconstruction / TI-LOC", "authors": "Jiang Y., Ma D. et al.", "year": 0, "venue": "—", "topic": "Reconstruction strategy", "note": null, "status": "planned"},
+        {"id": "P4-14", "title": "MRF B1/T1/T2 joint", "authors": "Wang C.Y. et al.", "year": 0, "venue": "—", "topic": "Multi-parametric", "note": null, "status": "planned"},
+        {"id": "P4-15", "title": "MRF sequence design (flip-train)", "authors": "Ma D. et al.", "year": 0, "venue": "—", "topic": "Sequence design", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "Non-Cartesian MRF (Core)",
+      "goal": "Main battlefield: combining non-Cartesian sampling with MRF",
+      "focus": true,
+      "papers": [
+        {"id": "P5-01", "title": "Spiral magnetic resonance fingerprinting", "authors": "Zhao B. et al.", "year": 2014, "venue": "ISMRM", "topic": "Spiral MRF origin", "note": null, "status": "planned"},
+        {"id": "P5-02", "title": "Multiparametric imaging with spiral MRF", "authors": "Cloos M.A. et al.", "year": 2016, "venue": "Nat Commun", "topic": "Spiral MRF", "note": null, "status": "planned"},
+        {"id": "P5-03", "title": "GRASE-MRF / 3D MRF", "authors": "Jiang Y. et al.", "year": 0, "venue": "—", "topic": "3D MRF", "note": null, "status": "planned"},
+        {"id": "P5-04", "title": "MRF + radial (free-breathing)", "authors": "Ma D. et al.", "year": 0, "venue": "—", "topic": "Radial MRF", "note": null, "status": "planned"},
+        {"id": "P5-05", "title": "Radial MRF theory", "authors": "Assländer J. et al.", "year": 0, "venue": "—", "topic": "Radial steady-state", "note": null, "status": "planned"},
+        {"id": "P5-06", "title": "Radial MRF (3D)", "authors": "Buonincontri G. et al.", "year": 0, "venue": "—", "topic": "3D radial", "note": null, "status": "planned"},
+        {"id": "P5-07", "title": "3D spiral MRF", "authors": "Borisch E.A. et al.", "year": 0, "venue": "—", "topic": "3D spiral", "note": null, "status": "planned"},
+        {"id": "P5-08", "title": "Spiral MRF dictionary / reconstruction", "authors": "Rieger B. et al.", "year": 0, "venue": "—", "topic": "Reconstruction details", "note": null, "status": "planned"},
+        {"id": "P5-09", "title": "Non-Cartesian MRF clinical", "authors": "Christen T. et al.", "year": 0, "venue": "—", "topic": "Clinical validation", "note": null, "status": "planned"},
+        {"id": "P5-10", "title": "Deep learning MRF reconstruction", "authors": "Cohen O. et al.", "year": 2018, "venue": "MRM", "topic": "DL-MRF", "note": null, "status": "planned"},
+        {"id": "P5-11", "title": "DL-MRF / dictionary replacement", "authors": "Hoppe P. et al.", "year": 0, "venue": "—", "topic": "DL matching", "note": null, "status": "planned"},
+        {"id": "P5-12", "title": "Deep MRF matching", "authors": "Fang Z. et al.", "year": 0, "venue": "—", "topic": "Deep matching", "note": null, "status": "planned"},
+        {"id": "P5-13", "title": "DL non-Cartesian MRF", "authors": "Cao X. et al.", "year": 0, "venue": "—", "topic": "DL + non-Cartesian", "note": null, "status": "planned"},
+        {"id": "P5-14", "title": "MRF subspace constraint", "authors": "Zhang H. et al.", "year": 0, "venue": "—", "topic": "Subspace", "note": null, "status": "planned"},
+        {"id": "P5-15", "title": "Non-Cartesian MRF review", "authors": "Blümler P. et al.", "year": 0, "venue": "—", "topic": "Field review", "note": null, "status": "planned"},
+        {"id": "P5-16", "title": "MRF trajectory optimization / CRLB", "authors": "Sommer K. et al.", "year": 0, "venue": "—", "topic": "Trajectory design", "note": null, "status": "planned"},
+        {"id": "P5-17", "title": "MRF quantification precision (non-Cartesian)", "authors": "Ma D. et al.", "year": 0, "venue": "—", "topic": "Precision analysis", "note": null, "status": "planned"},
+        {"id": "P5-18", "title": "Real-time non-Cartesian MRF", "authors": "Hamilton J.I. et al.", "year": 0, "venue": "—", "topic": "Real-time", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P6",
+      "title": "Pulse-Sequence Design (Emphasis)",
+      "goal": "Master the internals of every sequence you will use",
+      "focus": true,
+      "papers": [
+        {"id": "P6-01", "title": "FLASH imaging. Rapid NMR imaging using low flip-angle pulses", "authors": "Haase A., Frahm J., Matthaei D.", "year": 1986, "venue": "J Magn Reson", "topic": "FLASH", "note": null, "status": "planned"},
+        {"id": "P6-02", "title": "FISP—a new fast MRI sequence", "authors": "Oppelt A., Graumann R., Barfuß H.", "year": 1986, "venue": "Electromedica", "topic": "FISP/bSSFP", "note": null, "status": "planned"},
+        {"id": "P6-03", "title": "Steady-state free precession in nuclear magnetic resonance", "authors": "Carr H.Y.", "year": 1958, "venue": "Phys Rev", "topic": "SSFP origin", "note": null, "status": "planned"},
+        {"id": "P6-04", "title": "SSFP steady-state analysis", "authors": "Kaiser R., Bartholdi E., Ernst R.R.", "year": 1974, "venue": "J Chem Phys", "topic": "SSFP theory", "note": null, "status": "planned"},
+        {"id": "P6-05", "title": "The steady-state signals (SSFP signal)", "authors": "Gyngell M.L.", "year": 1988, "venue": "J Magn Reson", "topic": "SSFP derivation", "note": null, "status": "planned"},
+        {"id": "P6-06", "title": "bSSFP review / transient", "authors": "Scheffler K. et al.", "year": 2003, "venue": "Concepts Magn Reson", "topic": "bSSFP review", "note": null, "status": "planned"},
+        {"id": "P6-07", "title": "Fast gradient echo / transition", "authors": "Leupold J. et al.", "year": 2009, "venue": "MRM", "topic": "GRE transient", "note": null, "status": "planned"},
+        {"id": "P6-08", "title": "Quantitative analysis of bSSFP (multi-parametric)", "authors": "Bangerter N.D. et al.", "year": 0, "venue": "—", "topic": "bSSFP→MRF", "note": null, "status": "planned"},
+        {"id": "P6-09", "title": "Pulseq: A rapid and open-source framework for pulse sequences", "authors": "Layton K.J. et al.", "year": 2017, "venue": "MRM", "topic": "Pulseq", "note": null, "status": "planned"},
+        {"id": "P6-10", "title": "Versatile gradient waveform design", "authors": "Hargreaves B.A. et al.", "year": 0, "venue": "—", "topic": "Gradient design", "note": null, "status": "planned"},
+        {"id": "P6-11", "title": "Gradient system characterization", "authors": "Vannesjo S.J. et al.", "year": 2013, "venue": "MRM", "topic": "Gradient modeling", "note": null, "status": "planned"},
+        {"id": "P6-12", "title": "k-space analysis of RF pulse design", "authors": "Pauly J.M. et al.", "year": 0, "venue": "—", "topic": "RF pulse design", "note": null, "status": "planned"},
+        {"id": "P6-13", "title": "Multiecho imaging (RARE/TSE)", "authors": "Hennig J.", "year": 0, "venue": "—", "topic": "Spin-echo family", "note": null, "status": "planned"},
+        {"id": "P6-14", "title": "Handbook of MRI Pulse Sequences (GRE/SSFP)", "authors": "Bernstein M.A.", "year": 2004, "venue": "Book", "topic": "Sequence families", "note": null, "status": "planned"},
+        {"id": "P6-15", "title": "Sequence engineering review", "authors": "Crozier S., Bilecen D.", "year": 0, "venue": "—", "topic": "Modern review", "note": null, "status": "planned"}
+      ]
+    },
+    {
+      "id": "P7",
+      "title": "Advanced Reconstruction & Frontier",
+      "goal": "Add modern deep-learning reconstruction and frontier methods to the toolbox",
+      "papers": [
+        {"id": "P7-01", "title": "Learning a variational network for representation of accelerating MRI", "authors": "Hammernik K. et al.", "year": 2018, "venue": "MRM", "topic": "VarNet", "note": null, "status": "planned"},
+        {"id": "P7-02", "title": "A deep cascade of convolutional neural networks for dynamic MR image reconstruction", "authors": "Schlemper J. et al.", "year": 2018, "venue": "IEEE TMI", "topic": "Cascaded CNN", "note": null, "status": "planned"},
+        {"id": "P7-03", "title": "MoDL: Model-Based Deep Learning Architecture for Inverse Problems", "authors": "Aggarwal H.K., Mani M.P., Jacob M.", "year": 2019, "venue": "IEEE TMI", "topic": "MoDL", "note": null, "status": "planned"},
+        {"id": "P7-04", "title": "Image reconstruction by domain-transform manifold learning", "authors": "Zhu B. et al.", "year": 2018, "venue": "MRM", "topic": "End-to-end recon", "note": null, "status": "planned"},
+        {"id": "P7-05", "title": "Scan-specific robust DL (unsupervised)", "authors": "Akçakaya M. et al.", "year": 0, "venue": "—", "topic": "Unsupervised DL", "note": null, "status": "planned"},
+        {"id": "P7-06", "title": "DL raw reconstruction / losses", "authors": "Muckley M.J. et al.", "year": 0, "venue": "—", "topic": "Loss design", "note": null, "status": "planned"},
+        {"id": "P7-07", "title": "DL reconstruction review", "authors": "Hammernik K. et al.", "year": 0, "venue": "—", "topic": "DL-MRI review", "note": null, "status": "planned"},
+        {"id": "P7-08", "title": "Recurrent inference", "authors": "Lonning K. et al.", "year": 0, "venue": "—", "topic": "Recurrent network", "note": null, "status": "planned"},
+        {"id": "P7-09", "title": "NC-PDAM / parallel DL reconstruction", "authors": "Ramzi Z. et al.", "year": 0, "venue": "—", "topic": "Fast training", "note": null, "status": "planned"},
+        {"id": "P7-10", "title": "Deep generative (GAN recon)", "authors": "Mardani M. et al.", "year": 0, "venue": "—", "topic": "Generative model", "note": null, "status": "planned"},
+        {"id": "P7-11", "title": "DL non-Cartesian reconstruction", "authors": "Cheng J.Y. et al.", "year": 0, "venue": "—", "topic": "DL + non-Cartesian", "note": null, "status": "planned"},
+        {"id": "P7-12", "title": "DL-MRF advanced", "authors": "Cohen O. / Fang Z.", "year": 0, "venue": "—", "topic": "DL-MRF frontier", "note": null, "status": "planned"},
+        {"id": "P7-13", "title": "Low-rank / subspace reconstruction", "authors": "Zhang T. et al.", "year": 0, "venue": "—", "topic": "Subspace", "note": null, "status": "planned"},
+        {"id": "P7-14", "title": "Real-time non-Cartesian reconstruction", "authors": "Uecker M. / BART", "year": 0, "venue": "—", "topic": "Real-time", "note": null, "status": "planned"},
+        {"id": "P7-15", "title": "Motion-corrected reconstruction", "authors": "Odille F. et al.", "year": 0, "venue": "—", "topic": "Motion correction", "note": null, "status": "planned"}
+      ]
+    }
+  ]
+}

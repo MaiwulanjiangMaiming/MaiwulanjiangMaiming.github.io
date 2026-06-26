@@ -3,7 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 — Image Reconstruction Failed</title>
+<meta name="description" content="Everyday MRI — a daily reading log of 3 MRI papers, focused on non-Cartesian magnetic resonance fingerprinting. Reading notes, roadmap, and progress.">
+<meta property="og:title" content="Everyday MRI - Maiwulanjiang Maiming">
+<meta property="og:description" content="A daily MRI paper-reading journal focused on non-Cartesian MRF.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://mawlan.me/images/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://mawlan.me/feed.xml">
+<title>Everyday MRI - Maiwulanjiang Maiming</title>
 <link rel="icon" type="image/svg+xml" href="../images/web_icon.svg">
 <script>
 (function(){var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: light)').matches;document.documentElement.setAttribute('data-theme',s||(p?'light':'dark'))})();
@@ -12,11 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
-<link rel="prefetch" href="../data/papers.json">
-<link rel="prefetch" href="../data/research.json">
-<link rel="prefetch" href="../data/projects.json">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
-<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://mawlan.me/feed.xml">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -33,17 +37,22 @@
     </nav>
   </div>
 </header>
-<main class="container" style="text-align:center;padding:5rem 0;">
-  <div style="font-size:5rem;margin-bottom:1rem;">🩻</div>
-  <h1 style="font-family:var(--font-heading);font-size:2rem;">Image Reconstruction Failed</h1>
-  <p class="muted" style="margin:1rem 0 2rem;">HTTP 404 — The k-space data for this page has been lost beyond undersampling recovery.</p>
-  <a href="../index.html" class="card" style="display:inline-block;padding:.75rem 1.5rem;">Return to Homepage →</a>
+<main class="container two-col">
+  <aside class="timeline"><div id="timeline"></div></aside>
+  <section>
+    <h1>Everyday MRI</h1>
+    <p class="muted" style="margin-top:-.5rem;margin-bottom:1.5rem">3 papers a day · non-Cartesian MRF · deep notes + writing lessons</p>
+    <div id="everyday"></div>
+  </section>
 </main>
 <footer class="site-footer">
   <div class="container">© <span id="year"></span> Maiwulanjiang Maiming
     <div class="motto">"Everything negative — pressure, challenges — is all an opportunity for me to rise." — Kobe Bryant</div>
   </div>
 </footer>
-<script src="../js/site-v5.js"></script>
+<script src="../js/site-v5.js?v=14"></script>
+<script>
+renderEveryday();
+</script>
 </body>
 </html>
