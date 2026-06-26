@@ -10,6 +10,16 @@
     "updated_at": "2026-06-12T06:40:28Z"
   },
   {
+    "name": "EverydayMRI",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
+    "description": null,
+    "language": null,
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-26T09:28:13Z"
+  },
+  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -17,7 +27,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-06-24T09:35:54Z"
+    "updated_at": "2026-06-25T09:27:27Z"
   },
   {
     "name": "NiftiSpy",
