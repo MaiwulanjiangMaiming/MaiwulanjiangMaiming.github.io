@@ -1,15 +1,5 @@
 [
   {
-    "name": "EverydayMRI",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
-    "description": "Daily MRI reading journal — 3 papers/day, 8-phase roadmap from MRI physics to non-Cartesian MRF and deep learning reconstruction. Deep reading notes with writing lessons.",
-    "language": "Markdown",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": ["mri", "mrf", "non-cartesian", "reading-notes", "fingerprinting", "reconstruction", "pulse-sequences"],
-    "updated_at": "2026-06-26T12:00:00Z"
-  },
-  {
     "name": "DualWeChat",
     "html_url": "https://github.com/MaiwulanjiangMaiming/DualWeChat",
     "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色",
@@ -20,16 +10,6 @@
     "updated_at": "2026-06-12T06:40:28Z"
   },
   {
-    "name": "EverydayMRI",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
-    "description": null,
-    "language": null,
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-26T09:28:13Z"
-  },
-  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -37,7 +17,17 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-06-25T09:27:27Z"
+    "updated_at": "2026-06-26T11:32:50Z"
+  },
+  {
+    "name": "EverydayMRI",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
+    "description": null,
+    "language": null,
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-26T11:32:32Z"
   },
   {
     "name": "NiftiSpy",
