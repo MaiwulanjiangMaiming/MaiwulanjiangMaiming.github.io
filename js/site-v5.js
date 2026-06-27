@@ -1,6 +1,8 @@
 function injectHeaderFooter(){var header=document.querySelector('header.site-header');var footer=document.querySelector('footer.site-footer');var isInPages=location.pathname.includes('/pages/');var prefix=isInPages?'../':'';var brandText='Under Achiever Hub';var navLinks=[{text:'Home',href:prefix+'index.html'},{text:'Publications',href:'papers.html'},{text:'Research',href:'research.html'},{text:'Projects',href:'projects.html'},{text:'Everyday MRI',href:'everyday.html'},{text:'Moments',href:'moments.html'},{text:'About me',href:'about.html'}];var motto='"Everything negative — pressure, challenges — is all an opportunity for me to rise." - Kobe Bryant';var toggleBtn='<button id="theme-toggle" aria-label="Toggle theme">☀️</button>';var searchBtn='<button id="search-btn" aria-label="Search" onclick="openSearch()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>';if(!header){header=document.createElement('header');header.className='site-header';var navHtml='<nav class="nav">'+navLinks.map(function(l){return'<a href="'+l.href+'">'+l.text+'</a>'}).join('')+'</nav>';header.innerHTML='<div class="container"><div class="brand">'+brandText+'</div>'+navHtml+searchBtn+toggleBtn+'</div>';document.body.insertBefore(header,document.body.firstChild)}else{var existingNav=header.querySelector('.nav');if(existingNav&&!document.getElementById('theme-toggle')){existingNav.insertAdjacentHTML('afterend',searchBtn+toggleBtn)}}if(!footer){footer=document.createElement('footer');footer.className='site-footer';footer.innerHTML='<div class="container">© <span id="year"></span> Maiwulanjiang Maiming<div class="motto">'+motto+'</div></div>';document.body.appendChild(footer);if(!document.getElementById('year')){var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear()}}}function setActiveNav(){var p=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('.nav a').forEach(function(a){var h=a.getAttribute('href');if(h===p)a.classList.add('active')})}
-function dp(){return location.pathname.includes('/pages/')?'../':''}function j(u){return fetch(u,{cache:'force-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(err){console.error('Failed to load '+u+':',err);throw err})}
-function t(u){return fetch(u,{cache:'force-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).catch(function(err){console.error('Failed to load '+u+':',err);throw err})}
+function dp(){return location.pathname.includes('/pages/')?'../':''}
+var EM_CB='?v=20260626c';
+function j(u){var url=u+(u.indexOf('?')===-1?EM_CB:'');return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(err){console.error('Failed to load '+url+':',err);throw err})}
+function t(u){var url=u+(u.indexOf('?')===-1?EM_CB:'');return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).catch(function(err){console.error('Failed to load '+url+':',err);throw err})}
 function fmtDate(s){var d=new Date(s);return d.getFullYear()+"-"+(String(d.getMonth()+1).padStart(2,'0'))+"-"+(String(d.getDate()).padStart(2,'0'))}
 function cardHtml(title,meta,desc,href,tags,idx){var tagHtml=(tags||[]).map(function(x){return '<span class="pill">'+x+'</span>'}).join('');var delay=idx!==undefined?' style="animation-delay:'+((idx||0)*80)+'ms"':'';return '<div class="card card-reveal"'+delay+'><h3><a href="'+href+'">'+title+'</a></h3><div class="muted">'+meta+'</div><p>'+desc+'</p><div>'+tagHtml+'</div></div>'}
 function sortByDateDesc(list){return (list||[]).slice().sort(function(a,b){var da=new Date(a.date||0).getTime();var db=new Date(b.date||0).getTime();return db-da})}
@@ -19,7 +21,16 @@ function renderPapers(){var el=document.getElementById('papers');if(el)el.innerH
 /* ===== Everyday MRI (reads from the EverydayMRI GitHub repo via jsDelivr) ===== */
 var EM_BASE='https://cdn.jsdelivr.net/gh/MaiwulanjiangMaiming/EverydayMRI@main/';
 var EM_BASE_RAW='https://raw.githubusercontent.com/MaiwulanjiangMaiming/EverydayMRI/main/';
-function emFetchJson(){return j(EM_BASE+'index.json').catch(function(){return j(EM_BASE_RAW+'index.json').catch(function(){return j(dp()+'data/everyday.json')})})}
+function emFetchJson(){
+  // When running locally (localhost or file://), prefer the local data file first
+  var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+  if (isLocal) {
+    return j(dp() + 'data/everyday.json').catch(function(){
+      return j(EM_BASE + 'index.json').catch(function(){ return j(EM_BASE_RAW + 'index.json') });
+    });
+  }
+  return j(EM_BASE+'index.json').catch(function(){return j(EM_BASE_RAW+'index.json').catch(function(){return j(dp()+'data/everyday.json')})});
+}
 function emFetchText(u){return t(u).catch(function(){return t(u.replace(EM_BASE,EM_BASE_RAW))})}
 function renderEveryday(){
   var wrap=document.getElementById('everyday');if(!wrap)return;
@@ -83,7 +94,7 @@ function renderPersonalProjects(){j(dp()+'data/projects.json').then(function(lis
 function fetchGitHubRepos(username,retries){retries=retries||0;var maxRetries=2;var cacheKey='github_repos_'+username;var cacheTimeKey=cacheKey+'_time';var cached=localStorage.getItem(cacheKey);var cacheTime=localStorage.getItem(cacheTimeKey);if(cached&&cacheTime&&(Date.now()-parseInt(cacheTime))<43200000){var data=JSON.parse(cached);var filtered=data.filter(function(repo){return repo.name!==username});if(filtered.length!==data.length){localStorage.setItem(cacheKey,JSON.stringify(filtered));localStorage.setItem(cacheTimeKey,Date.now().toString())}return Promise.resolve(filtered)}return fetch('https://api.github.com/users/'+username+'/repos?sort=updated&per_page=100&type=owner',{headers:{'Accept':'application/vnd.github.v3+json'}}).then(function(r){if(r.status===403||r.status===429){var resetHeader=r.headers.get('x-ratelimit-reset');if(resetHeader){var resetTime=parseInt(resetHeader,10)*1000;var waitMs=Math.max(resetTime-Date.now(),0);console.warn('GitHub API rate limited. Resets at '+new Date(resetTime).toLocaleString())}if(retries<maxRetries)return fetchGitHubRepos(username,retries+1);throw new Error('API rate limit exceeded')}if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(repos){if(repos.message){if(retries<maxRetries)return fetchGitHubRepos(username,retries+1);throw new Error(repos.message)}var filtered=repos.filter(function(repo){return !repo.private && !repo.fork && repo.name!==username}).sort(function(a,b){return b.stargazers_count-a.stargazers_count});localStorage.setItem(cacheKey,JSON.stringify(filtered));localStorage.setItem(cacheTimeKey,Date.now().toString());return filtered}).catch(function(err){if(retries<maxRetries){console.log('Retrying GitHub fetch... (attempt '+(retries+1)+')');return new Promise(function(resolve){setTimeout(function(){resolve(fetchGitHubRepos(username,retries+1))},2000)})}console.error('Failed to fetch GitHub repos:',err);throw err})}
 var EXT_MAP={'MatrixSpy':'MaiwulanjiangMaiming.matrixspy','Project-Manager-X':'MaiwulanjiangMaiming.project-manager-x','NiftiSpy':'MaiwulanjiangMaiming.niftispy'};
 var EXT_OPENVSX={'MatrixSpy':'maiwulanjiangmaiming/matrixspy','Project-Manager-X':'maiwulanjiangmaiming/project-manager-x','NiftiSpy':'maiwulanjiangmaiming/niftispy'};
-var EXT_EXTRA=[{name:'NiftiSpy',html_url:'https://github.com/MaiwulanjiangMaiming/NiftiSpy',description:'High-performance NIfTI medical image viewer with streaming, Range requests, and WebWorker parsing',language:'TypeScript',stargazers_count:0,forks_count:0,topics:['nifti','medical-imaging','mri','neuroimaging','viewer'],category:'Extension'},{name:'DualWeChat',html_url:'https://github.com/MaiwulanjiangMaiming/DualWeChat',description:'macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色',language:'Shell',stargazers_count:2,forks_count:0,topics:[],category:'Tool'}];
+var EXT_EXTRA=[{name:'EverydayMRI',description:'Daily MRI reading journal — 3 papers/day, 8-phase roadmap from MRI physics to non-Cartesian MRF and deep learning reconstruction. Deep reading notes with writing lessons.',topics:['mri','mrf','non-cartesian','reading-notes','fingerprinting','reconstruction'],category:'Research'},{name:'NiftiSpy',html_url:'https://github.com/MaiwulanjiangMaiming/NiftiSpy',description:'High-performance NIfTI medical image viewer with streaming, Range requests, and WebWorker parsing',language:'TypeScript',stargazers_count:0,forks_count:0,topics:['nifti','medical-imaging','mri','neuroimaging','viewer'],category:'Extension'},{name:'DualWeChat',html_url:'https://github.com/MaiwulanjiangMaiming/DualWeChat',description:'macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色',language:'Shell',stargazers_count:2,forks_count:0,topics:[],category:'Tool'}];
 function classifyRepo(repo){if(repo.category)return repo.category;var isExt=!!EXT_MAP[repo.name];if(isExt)return'Extension';var desc=(repo.description||'').toLowerCase();var topics=(repo.topics||[]).map(function(t){return t.toLowerCase()});var lang=(repo.language||'').toLowerCase();if(/github\.io|website|personal|blog|portfolio/i.test(desc+topics.join(',')))return'Website';if(/research|paper|thesis|dissertation|academic|study/i.test(desc+topics.join(',')))return'Research';if(/library|framework|sdk|api/i.test(desc+topics.join(',')))return'Library';if(/cli|tool|utility|script|automation/i.test(desc+topics.join(',')))return'Tool';if(/tutorial|learning|course|notes|cheatsheet/i.test(desc+topics.join(',')))return'Learning';if(/demo|example|playground|sandbox/i.test(desc+topics.join(',')))return'Demo';return'Project'}
 function fetchExtDownloads(repoName){var cacheKey='ext_dl_'+repoName;var cacheTimeKey=cacheKey+'_time';var cached=localStorage.getItem(cacheKey);var cacheTime=localStorage.getItem(cacheTimeKey);if(cached&&cacheTime&&(Date.now()-parseInt(cacheTime))<3600000){try{return Promise.resolve(JSON.parse(cached))}catch(e){}}var result={vscode:0,openvsx:0};var promises=[];var vsId=EXT_MAP[repoName];if(vsId){promises.push(fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=3.0-preview.1',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json; api-version=3.0-preview.1'},body:JSON.stringify({filters:[{criteria:[{filterType:7,value:vsId}]}],assetTypes:[],flags:0x192})}).then(function(r){return r.json()}).then(function(d){try{var ext=d.results[0].extensions[0];var stat=ext.statistics.find(function(s){return s.statisticName==='install'});if(stat)result.vscode=stat.value}catch(e){}}).catch(function(){}))}var ovId=EXT_OPENVSX[repoName];if(ovId){promises.push(fetch('https://open-vsx.org/api/'+ovId).then(function(r){return r.json()}).then(function(d){if(d.downloadCount)result.openvsx=d.downloadCount}).catch(function(){}))}return Promise.all(promises).then(function(){localStorage.setItem(cacheKey,JSON.stringify(result));localStorage.setItem(cacheTimeKey,Date.now().toString());return result})}
 function renderGitHubRepos(username) {
@@ -91,26 +102,27 @@ function renderGitHubRepos(username) {
   if (!container) return;
   container.innerHTML = '<div class="loading"><span class="loading-spinner"></span>Loading repositories...</div>';
 
-  // Try local repos.json first, fall back to GitHub API
-  var reposPromise = j(dp() + 'data/repos.json').then(function(repos) {
-    if (repos && repos.length > 0) return repos;
-    return fetchGitHubRepos(username);
-  }).catch(function() {
-    return fetchGitHubRepos(username);
-  });
+  // Fetch all repos from GitHub API (with localStorage cache)
+  var reposPromise = fetchGitHubRepos(username);
 
   reposPromise.then(function(repos) {
-    // Filter out the user page itself
+    // Filter out the user page itself & deduplicate by name
+    var seen = {};
     repos = repos.filter(function(repo) {
-      return repo.name !== username;
+      if (repo.name === username || seen[repo.name]) return false;
+      seen[repo.name] = true;
+      return true;
     });
 
-    // Merge EXT_EXTRA category into existing repos & add missing ones
+    // Merge EXT_EXTRA overrides into existing repos & add missing ones
     var extraMap = {};
     EXT_EXTRA.forEach(function(e) { extraMap[e.name] = e; });
     repos.forEach(function(r) {
-      if (extraMap[r.name] && extraMap[r.name].category) {
-        r.category = extraMap[r.name].category;
+      var ex = extraMap[r.name];
+      if (ex) {
+        if (ex.category) r.category = ex.category;
+        if (ex.description) r.description = ex.description;
+        if (ex.topics && ex.topics.length) r.topics = ex.topics;
       }
     });
     var existingNames = {};
@@ -203,62 +215,95 @@ function renderGitHubRepos(username) {
 function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return n.toString()}
 function clearRepoCache(username){localStorage.removeItem('github_repos_'+username);localStorage.removeItem('github_repos_'+username+'_time');renderGitHubRepos(username)}
 function renderMoments(){var el=document.getElementById('gallery');if(el)el.innerHTML='<div class="loading" style="grid-column:1/-1"><span class="loading-spinner"></span>Loading gallery...</div>';j(dp()+'data/moments.json').then(function(list){var html=list.map(function(m,i){return '<img src="'+m.url+'" alt="'+(m.caption||'')+'." class="card-reveal" style="animation-delay:'+(i*60)+'ms">'}).join('');if(el)el.innerHTML=html;bindLightbox('#gallery img');setupScrollReveal()}).catch(function(err){if(el)el.innerHTML='<p class="muted" style="grid-column:1/-1">Failed to load gallery. Please try again later.</p>'})}
-function setupSearchOverlay(){if(document.getElementById('search-overlay'))return;var overlay=document.createElement('div');overlay.id='search-overlay';overlay.style.cssText='display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)';overlay.innerHTML='<div style="max-width:600px;margin:10vh auto;padding:0 1rem"><input id="search-input" placeholder="Search papers, research, projects…" style="width:100%;padding:1rem 1.25rem;font-size:1.1rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-family:var(--font-body)"><div id="search-results" class="list" style="margin-top:.75rem;max-height:60vh;overflow-y:auto"></div></div>';overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.style.display='none'});document.body.appendChild(overlay)}
+function setupSearchOverlay(){if(document.getElementById('search-overlay'))return;var overlay=document.createElement('div');overlay.id='search-overlay';overlay.innerHTML='<div id="search-overlay-inner"><input id="search-input" placeholder="Search papers, research, projects…"><div id="search-results" class="list"></div></div>';overlay.addEventListener('click',function(e){if(e.target===overlay)closeSearch()});document.body.appendChild(overlay)}
 var fuseIndex=null;
 function buildSearchIndex(){return Promise.all([j(dp()+'data/papers.json'),j(dp()+'data/research.json'),j(dp()+'data/projects.json'),emFetchJson().catch(function(){return{phases:[]}})]).then(function(arr){var docs=[];arr[0].forEach(function(p){docs.push({type:'paper',title:p.title,body:(p.abstract||'')+' '+(p.authors||[]).join(' '),url:p.pdf||p.link||'#'})});arr[1].forEach(function(r){docs.push({type:'research',title:r.title,body:r.summary||'',url:'research.html'})});arr[2].forEach(function(p){docs.push({type:'project',title:p.name,body:p.summary||'',url:p.link||'projects.html'})});(arr[3].phases||[]).forEach(function(ph){(ph.papers||[]).forEach(function(pa){if(pa.status==='done')docs.push({type:'everyday',title:pa.title,body:pa.topic||'',url:'everyday.html'})})});fuseIndex=new Fuse(docs,{keys:['title','body'],threshold:0.35,includeScore:true})})}
-function openSearch(){setupSearchOverlay();var overlay=document.getElementById('search-overlay');overlay.style.display='block';document.getElementById('search-input').focus();if(!fuseIndex)buildSearchIndex()}
-function closeSearch(){var overlay=document.getElementById('search-overlay');if(overlay)overlay.style.display='none'}
+function openSearch(){setupSearchOverlay();var overlay=document.getElementById('search-overlay');overlay.classList.add('open');setTimeout(function(){var input=document.getElementById('search-input');if(input)input.focus()},80);if(!fuseIndex)buildSearchIndex()}
+function closeSearch(){var overlay=document.getElementById('search-overlay');if(overlay)overlay.classList.remove('open')}
 function setupSearchInput(){document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch()}if(e.key==='Escape')closeSearch()});document.addEventListener('input',function(e){if(e.target.id!=='search-input'||!fuseIndex)return;var q=e.target.value.trim();var results=document.getElementById('search-results');if(!q){results.innerHTML='';return}var matches=fuseIndex.search(q).slice(0,8);results.innerHTML=matches.map(function(m){var d=m.item;var typePill='<span class="pill">'+d.type+'</span>';return'<div class="card" style="padding:.75rem 1rem"><h3 style="margin:0 0 .25rem;font-size:1rem"><a href="'+d.url+'">'+d.title+'</a></h3><div style="font-size:.85rem;color:var(--muted)">'+d.body.slice(0,120)+'…</div><div style="margin-top:.35rem">'+typePill+'</div></div>'}).join('')||'<p class="muted" style="padding:1rem">No results found.</p>'})}
 function setupClickEmojis(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var emojis=['🧲','⚛️','🔬','🩻','💻','🖥️','⚙️','🎥','👁️','📸','🤖','🧠','📊','🚀','✨','💡','🎯','📡','🔍','🎓'];var activeEmojis=0;var maxEmojis=20;document.addEventListener('click',function(e){var target=e.target;if(target.closest('a, button, input, textarea, [role="button"]'))return;if(activeEmojis>=maxEmojis)return;var emoji=emojis[Math.floor(Math.random()*emojis.length)];var el=document.createElement('div');el.className='click-emoji';el.textContent=emoji;el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';document.body.appendChild(el);activeEmojis++;var timeoutId=setTimeout(function(){el.remove();activeEmojis--;clearTimeout(timeoutId)},1500)})}
-function setupThemeToggle(){
-  var saved=localStorage.getItem('theme');
-  var systemPrefersLight=window.matchMedia('(prefers-color-scheme: light)').matches;
-  if(saved){
-    document.documentElement.setAttribute('data-theme',saved);
-  }else if(systemPrefersLight){
-    document.documentElement.setAttribute('data-theme','light');
-  }else{
-    document.documentElement.setAttribute('data-theme','dark');
+function getEffectiveTheme(mode){
+  if(mode==='light'||mode==='dark')return mode;
+  return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+}
+function getThemeMode(){
+  var mode=localStorage.getItem('theme-mode');
+  if(!mode){
+    var legacy=localStorage.getItem('theme');
+    mode=(legacy&&legacy!=='auto')?legacy:'auto';
+    if(legacy){localStorage.setItem('theme-mode',mode);localStorage.removeItem('theme')}
   }
+  return mode;
+}
+function setupThemeToggle(){
+  var mode=getThemeMode();
+  document.documentElement.setAttribute('data-theme',getEffectiveTheme(mode));
+  document.documentElement.setAttribute('data-theme-mode',mode);
   updateThemeIcon();
   var btn=document.getElementById('theme-toggle');
   if(!btn)return;
   btn.addEventListener('click',function(e){
-    var current=document.documentElement.getAttribute('data-theme');
-    var isLight=current==='light';
-    var next=isLight?'dark':'light';
-    animateThemeTransition(next,e.clientX,e.clientY);
-  })
+    var currentMode=document.documentElement.getAttribute('data-theme-mode')||'auto';
+    var nextMode=currentMode==='light'?'dark':(currentMode==='dark'?'auto':'light');
+    var nextEff=getEffectiveTheme(nextMode);
+    var curEff=document.documentElement.getAttribute('data-theme');
+    localStorage.setItem('theme-mode',nextMode);
+    document.documentElement.setAttribute('data-theme-mode',nextMode);
+    if(nextEff!==curEff){
+      animateThemeTransition(nextEff,e.clientX,e.clientY);
+    }else{
+      updateThemeIcon();
+      document.documentElement.dispatchEvent(new CustomEvent('themechange'));
+    }
+  });
 }
 function animateThemeTransition(next,cx,cy){
   var atm=document.createElement('div');
   atm.className='theme-atmosphere '+(next==='light'?'sunrise':'nightfall');
   if(next==='light'){
-    atm.style.setProperty('--tx',cx+'px');
-    atm.style.setProperty('--ty',cy+'px');
+    var x=cx!==undefined?cx:window.innerWidth/2;
+    var y=cy!==undefined?cy:window.innerHeight/2;
+    atm.style.setProperty('--tx',x+'px');
+    atm.style.setProperty('--ty',y+'px');
   }
   document.body.appendChild(atm);
   document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('theme',next);
   updateThemeIcon();
   document.documentElement.dispatchEvent(new CustomEvent('themechange'));
   atm.addEventListener('animationend',function(){atm.remove()})
 }
-function updateThemeIcon(){var btn=document.getElementById('theme-toggle');if(!btn)return;var current=document.documentElement.getAttribute('data-theme');var isLight=current==='light';btn.textContent=isLight?'🌙':'☀️'}
+function updateThemeIcon(){
+  var btn=document.getElementById('theme-toggle');
+  if(!btn)return;
+  var mode=document.documentElement.getAttribute('data-theme-mode')||'auto';
+  var eff=document.documentElement.getAttribute('data-theme')||'dark';
+  btn.textContent=eff==='light'?'☀️':'🌙';
+  btn.setAttribute('data-mode',mode);
+  btn.classList.remove('icon-swap');
+  void btn.offsetWidth;
+  btn.classList.add('icon-swap');
+  var title=mode==='light'?'Light mode (click → dark)':(mode==='dark'?'Dark mode (click → auto)':'Auto · follows system (click → light)');
+  btn.setAttribute('title',title);
+  btn.setAttribute('aria-label',title);
+}
 var systemThemeListener=null;
 function setupSystemThemeListener(){
   if(systemThemeListener)return;
   var mql=window.matchMedia('(prefers-color-scheme: light)');
   systemThemeListener=function(e){
-    var saved=localStorage.getItem('theme');
-    if(!saved){
-      var next=e.matches?'light':'dark';
-      document.documentElement.setAttribute('data-theme',next);
-      updateThemeIcon();
-      document.documentElement.dispatchEvent(new CustomEvent('themechange'))
-    }
+    var mode=document.documentElement.getAttribute('data-theme-mode')||'auto';
+    if(mode!=='auto')return;
+    var next=e.matches?'light':'dark';
+    var current=document.documentElement.getAttribute('data-theme');
+    if(next===current)return;
+    var btn=document.getElementById('theme-toggle');
+    var r=btn&&btn.getBoundingClientRect?btn.getBoundingClientRect():null;
+    var cx=r?r.left+r.width/2:window.innerWidth/2;
+    var cy=r?r.top+r.height/2:window.innerHeight/2;
+    animateThemeTransition(next,cx,cy);
   };
   if(mql.addEventListener){mql.addEventListener('change',systemThemeListener)}else{mql.addListener(systemThemeListener)}
 }
 function setupTypewriter(){var el=document.getElementById('typewriter');if(!el)return;var phrases=['MRI reconstruction.','quantitative mapping.','clinical AI.','making images from nothing.','teaching machines to see.'];var i=0,j=0,deleting=false;function tick(){var phrase=phrases[i%phrases.length];el.textContent=deleting?phrase.slice(0,j--):phrase.slice(0,j++);if(!deleting&&j>phrase.length){deleting=true;setTimeout(tick,1800);return}if(deleting&&j<0){deleting=false;i++;setTimeout(tick,400);return}setTimeout(tick,deleting?40:75)}tick()}
-document.addEventListener('DOMContentLoaded',function(){injectHeaderFooter();setActiveNav();setupThemeToggle();setupSystemThemeListener();setupTypewriter();setupSearchInput();var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();setupViewTransitions();setupClickEmojis()});
+function setupHeaderScroll(){var header=document.querySelector('.site-header');if(!header)return;var lastScroll=window.pageYOffset||0;var ticking=false;window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(function(){var scroll=window.pageYOffset||0;if(scroll>lastScroll&&scroll>140){header.classList.add('hidden')}else{header.classList.remove('hidden')}lastScroll=scroll;ticking=false})}},{passive:true})}
+document.addEventListener('DOMContentLoaded',function(){injectHeaderFooter();setActiveNav();setupThemeToggle();setupSystemThemeListener();setupTypewriter();setupSearchInput();setupHeaderScroll();var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();setupViewTransitions();setupClickEmojis()});
