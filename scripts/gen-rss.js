@@ -12,7 +12,7 @@ const items = papers.map(function(p) {
   return '  <item>\n    <title>' + title + '</title>\n    <link>' + link + '</link>\n    <pubDate>' + pubDate + '</pubDate>\n    <description>' + desc + '</description>\n  </item>';
 }).join('\n');
 
-const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Maiwulanjiang Maiming — Publications</title>\n    <link>https://mawlan.me/papers.html</link>\n    <description>Academic publications in medical imaging, MRI reconstruction, and clinical AI.</description>\n    <language>en</language>\n' + items + '\n  </channel>\n</rss>';
+const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Maiwulanjiang Maiming — Publications</title>\n    <link>https://maiwulanjiangmaiming.github.io/papers.html</link>\n    <description>Academic publications in medical imaging, MRI reconstruction, and clinical AI.</description>\n    <language>en</language>\n' + items + '\n  </channel>\n</rss>';
 
 const outPath = path.join(__dirname, '..', 'feed.xml');
 fs.writeFileSync(outPath, xml);
