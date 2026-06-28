@@ -1,0 +1,132 @@
+[
+  {
+    "name": "DualWeChat",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/DualWeChat",
+    "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色",
+    "language": "Shell",
+    "stargazers_count": 3,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-12T06:40:28Z"
+  },
+  {
+    "name": "MatrixSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
+    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-27T19:41:39Z"
+  },
+  {
+    "name": "MaiwulanjiangMaiming.github.io",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
+    "description": "My Website",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-27T18:57:19Z"
+  },
+  {
+    "name": "EverydayMRI",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/EverydayMRI",
+    "description": null,
+    "language": null,
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-26T11:32:32Z"
+  },
+  {
+    "name": "NiftiSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
+    "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-23T16:11:27Z"
+  },
+  {
+    "name": "Project-Manager-X",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/Project-Manager-X",
+    "description": "A powerful VS Code extension for managing projects with tags, tasks, milestones, and lifecycle tracking.",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-22T03:30:53Z"
+  },
+  {
+    "name": "Desktop-Widget",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/Desktop-Widget",
+    "description": "A beautiful desktop todo widget for Übersicht on macOS with priority, due date, and section management support.",
+    "language": "CoffeeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-09T06:09:12Z"
+  },
+  {
+    "name": "GRI-contribution-graph",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/GRI-contribution-graph",
+    "description": "An animated MRI scan visualization of GitHub contribution graphs.",
+    "language": "JavaScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-08T00:49:26Z"
+  },
+  {
+    "name": "academic-gantt",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/academic-gantt",
+    "description": "A zero-dependency, single-file HTML Gantt chart template for academic research proposals. Print-to-PDF ready, with 16:9 and 2.45:1 layouts for PPT embedding. (CC BY-NC 4.0)",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-06-05T10:04:34Z"
+  },
+  {
+    "name": "DualTrae",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/DualTrae",
+    "description": "Run multiple Trae instances on macOS with one click",
+    "language": "Shell",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-05-31T04:27:40Z"
+  },
+  {
+    "name": "PET-Simulator-with-GEANT4",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/PET-Simulator-with-GEANT4",
+    "description": "Geant4-based PET scanner Monte Carlo simulation with cylindrical detector geometry, water phantom, and back-to-back 511 keV gamma ray source.",
+    "language": "C++",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-04-24T11:13:09Z"
+  },
+  {
+    "name": "QuickEvent",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/QuickEvent",
+    "description": "Generates ics file for calender apps.",
+    "language": "Swift",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-04-24T09:00:11Z"
+  },
+  {
+    "name": "ML-Learning",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/ML-Learning",
+    "description": "📚 Deep Learning Knowledge Summary",
+    "language": "Jupyter Notebook",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-03-31T13:12:20Z"
+  }
+]
