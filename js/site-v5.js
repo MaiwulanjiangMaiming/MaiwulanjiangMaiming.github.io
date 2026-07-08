@@ -1,4 +1,4 @@
-function injectHeaderFooter(){var header=document.querySelector('header.site-header');var footer=document.querySelector('footer.site-footer');var isInPages=location.pathname.includes('/pages/');var prefix=isInPages?'../':'';var brandText='Under Achiever Hub';var navLinks=[{text:'Home',href:prefix+'index.html'},{text:'Publications',href:'papers.html'},{text:'Research',href:'research.html'},{text:'Projects',href:'projects.html'},{text:'Everyday MRI',href:'everyday.html'},{text:'Moments',href:'moments.html'},{text:'About me',href:'about.html'}];var motto='"Everything negative — pressure, challenges — is all an opportunity for me to rise." - Kobe Bryant';var toggleBtn='<button id="theme-toggle" aria-label="Toggle theme">☀️</button>';var searchBtn='<button id="search-btn" aria-label="Search" onclick="openSearch()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>';if(!header){header=document.createElement('header');header.className='site-header';var navHtml='<nav class="nav">'+navLinks.map(function(l){return'<a href="'+l.href+'">'+l.text+'</a>'}).join('')+'</nav>';header.innerHTML='<div class="container"><div class="brand">'+brandText+'</div>'+navHtml+searchBtn+toggleBtn+'</div>';document.body.insertBefore(header,document.body.firstChild)}else{var existingNav=header.querySelector('.nav');if(existingNav&&!document.getElementById('theme-toggle')){existingNav.insertAdjacentHTML('afterend',searchBtn+toggleBtn)}}if(!footer){footer=document.createElement('footer');footer.className='site-footer';footer.innerHTML='<div class="container">© <span id="year"></span> Maiwulanjiang Maiming<div class="motto">'+motto+'</div></div>';document.body.appendChild(footer);if(!document.getElementById('year')){var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear()}}}function setActiveNav(){var p=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('.nav a').forEach(function(a){var h=a.getAttribute('href');if(h===p)a.classList.add('active')})}
+function injectHeaderFooter(){var header=document.querySelector('header.site-header');var footer=document.querySelector('footer.site-footer');var isInPages=location.pathname.includes('/pages/');var prefix=isInPages?'../':'';var brandText='Under Achiever Hub';var navLinks=[{text:'Home',href:prefix+'index.html'},{text:'Publications',href:'papers.html'},{text:'Research',href:'research.html'},{text:'Projects',href:'projects.html'},{text:'Everyday MRI',href:'everyday.html'},{text:'Moments',href:'moments.html'},{text:'About me',href:'about.html'}];var motto='"Everything negative, pressure, challenges, is all an opportunity for me to rise." - Kobe Bryant';var toggleBtn='<button id="theme-toggle" aria-label="Toggle theme"><svg class="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>';var searchBtn='<button id="search-btn" aria-label="Search" onclick="openSearch()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>';if(!header){header=document.createElement('header');header.className='site-header';var navHtml='<nav class="nav">'+navLinks.map(function(l){return'<a href="'+l.href+'">'+l.text+'</a>'}).join('')+'</nav>';header.innerHTML='<div class="container"><div class="brand">'+brandText+'</div>'+navHtml+searchBtn+toggleBtn+'</div>';document.body.insertBefore(header,document.body.firstChild)}else{var existingNav=header.querySelector('.nav');if(existingNav&&!document.getElementById('theme-toggle')){existingNav.insertAdjacentHTML('afterend',searchBtn+toggleBtn)}}if(!footer){footer=document.createElement('footer');footer.className='site-footer';footer.innerHTML='<div class="container">© <span id="year"></span> Maiwulanjiang Maiming<div class="motto">'+motto+'</div></div>';document.body.appendChild(footer);if(!document.getElementById('year')){var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear()}}}function setActiveNav(){var p=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('.nav a').forEach(function(a){var h=a.getAttribute('href');if(h===p)a.classList.add('active')})}
 function dp(){return location.pathname.includes('/pages/')?'../':''}
 var EM_CB='?v=20260626c';
 function j(u){var url=u+(u.indexOf('?')===-1?EM_CB:'');return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(err){console.error('Failed to load '+url+':',err);throw err})}
@@ -53,11 +53,11 @@ function renderEveryday(){
         var stBadge='<span class="pill '+st+'">'+pa.status+'</span>';
         var topic=pa.topic?'<span class="pill">'+pa.topic+'</span>':'';
         var meta=pa.authors+(pa.year?(' · '+pa.year):'')+' · '+pa.venue;
-        var doiHtml=pa.doi?'<a class="em-doi-link" href="https://doi.org/'+pa.doi+'" target="_blank" rel="noopener">📄 Paper ↗</a>':'';
+        var doiHtml=pa.doi?'<a class="em-doi-link" href="https://doi.org/'+pa.doi+'" target="_blank" rel="noopener">Paper ↗</a>':'';
         var titleHtml=(pa.note&&pa.status==='done')?'<a href="#" data-note="'+pa.note+'" class="em-note-link">'+pa.title+'</a>':'<span>'+pa.title+'</span>';
         return '<div class="card card-reveal em-paper" style="animation-delay:'+(i*40)+'ms"><div class="em-paper-head"><span class="em-id">'+pa.id+'</span>'+stBadge+doiHtml+'</div><h3>'+titleHtml+'</h3><div class="muted em-meta">'+meta+'</div><div class="em-tags">'+topic+'</div></div>'
       }).join('');
-      var focus=p.focus?'<span class="pill em-focus">★ focus</span>':'';
+      var focus=p.focus?'<span class="pill em-focus">focus</span>':'';
       return '<section class="em-phase"><h2 class="year-heading" id="'+p.id+'">'+p.id+' · '+p.title+' '+focus+'</h2><p class="muted em-goal">'+(p.goal||'')+'</p><div class="list">'+cards+'</div></section>'
     }).join('');
     wrap.innerHTML=stats+body;
@@ -221,7 +221,7 @@ function buildSearchIndex(){return Promise.all([j(dp()+'data/papers.json'),j(dp(
 function openSearch(){setupSearchOverlay();var overlay=document.getElementById('search-overlay');overlay.classList.add('open');setTimeout(function(){var input=document.getElementById('search-input');if(input)input.focus()},80);if(!fuseIndex)buildSearchIndex()}
 function closeSearch(){var overlay=document.getElementById('search-overlay');if(overlay)overlay.classList.remove('open')}
 function setupSearchInput(){document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch()}if(e.key==='Escape')closeSearch()});document.addEventListener('input',function(e){if(e.target.id!=='search-input'||!fuseIndex)return;var q=e.target.value.trim();var results=document.getElementById('search-results');if(!q){results.innerHTML='';return}var matches=fuseIndex.search(q).slice(0,8);results.innerHTML=matches.map(function(m){var d=m.item;var typePill='<span class="pill">'+d.type+'</span>';return'<div class="card" style="padding:.75rem 1rem"><h3 style="margin:0 0 .25rem;font-size:1rem"><a href="'+d.url+'">'+d.title+'</a></h3><div style="font-size:.85rem;color:var(--muted)">'+d.body.slice(0,120)+'…</div><div style="margin-top:.35rem">'+typePill+'</div></div>'}).join('')||'<p class="muted" style="padding:1rem">No results found.</p>'})}
-function setupClickEmojis(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var emojis=['🧲','⚛️','🔬','🩻','💻','🖥️','⚙️','🎥','👁️','📸','🤖','🧠','📊','🚀','✨','💡','🎯','📡','🔍','🎓'];var activeEmojis=0;var maxEmojis=20;document.addEventListener('click',function(e){var target=e.target;if(target.closest('a, button, input, textarea, [role="button"]'))return;if(activeEmojis>=maxEmojis)return;var emoji=emojis[Math.floor(Math.random()*emojis.length)];var el=document.createElement('div');el.className='click-emoji';el.textContent=emoji;el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';document.body.appendChild(el);activeEmojis++;var timeoutId=setTimeout(function(){el.remove();activeEmojis--;clearTimeout(timeoutId)},1500)})}
+function setupClickEmojis(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var shapes=['<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><circle cx="12" cy="12" r="8"/></svg>','<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>','<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><polygon points="12,3 22,21 2,21"/></svg>','<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><line x1="4" y1="20" x2="20" y2="4"/></svg>','<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z"/></svg>','<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20"/></svg>'];var activeEmojis=0;var maxEmojis=20;document.addEventListener('click',function(e){var target=e.target;if(target.closest('a, button, input, textarea, [role="button"]'))return;if(activeEmojis>=maxEmojis)return;var shape=shapes[Math.floor(Math.random()*shapes.length)];var el=document.createElement('div');el.className='click-emoji';el.innerHTML=shape;el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';document.body.appendChild(el);activeEmojis++;var timeoutId=setTimeout(function(){el.remove();activeEmojis--;clearTimeout(timeoutId)},1500)})}
 function getEffectiveTheme(mode){
   if(mode==='light'||mode==='dark')return mode;
   return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
@@ -252,7 +252,7 @@ function setupThemeToggle(){
     if(nextEff!==curEff){
       animateThemeTransition(nextEff,e.clientX,e.clientY);
     }else{
-      updateThemeIcon();
+      updateThemeIcon(true);
       document.documentElement.dispatchEvent(new CustomEvent('themechange'));
     }
   });
@@ -268,20 +268,25 @@ function animateThemeTransition(next,cx,cy){
   }
   document.body.appendChild(atm);
   document.documentElement.setAttribute('data-theme',next);
-  updateThemeIcon();
+  updateThemeIcon(true);
   document.documentElement.dispatchEvent(new CustomEvent('themechange'));
   atm.addEventListener('animationend',function(){atm.remove()})
 }
-function updateThemeIcon(){
+function updateThemeIcon(animate){
   var btn=document.getElementById('theme-toggle');
   if(!btn)return;
   var mode=document.documentElement.getAttribute('data-theme-mode')||'auto';
   var eff=document.documentElement.getAttribute('data-theme')||'dark';
-  btn.textContent=eff==='light'?'☀️':'🌙';
+  var sunIcon=btn.querySelector('.theme-icon-sun');
+  var moonIcon=btn.querySelector('.theme-icon-moon');
+  if(sunIcon)sunIcon.style.display=eff==='light'?'block':'none';
+  if(moonIcon)moonIcon.style.display=eff==='light'?'none':'block';
   btn.setAttribute('data-mode',mode);
-  btn.classList.remove('icon-swap');
-  void btn.offsetWidth;
-  btn.classList.add('icon-swap');
+  if(animate){
+    btn.classList.remove('icon-swap');
+    void btn.offsetWidth;
+    btn.classList.add('icon-swap');
+  }
   var title=mode==='light'?'Light mode (click → dark)':(mode==='dark'?'Dark mode (click → auto)':'Auto · follows system (click → light)');
   btn.setAttribute('title',title);
   btn.setAttribute('aria-label',title);
