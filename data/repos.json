@@ -10,16 +10,6 @@
     "updated_at": "2026-07-07T06:29:42Z"
   },
   {
-    "name": "MaiwulanjiangMaiming.github.io",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
-    "description": "My Website",
-    "language": "HTML",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-07-08T05:45:25Z"
-  },
-  {
     "name": "MatrixSpy",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
     "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
@@ -27,7 +17,27 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-06-27T19:41:39Z"
+    "updated_at": "2026-07-09T08:32:37Z"
+  },
+  {
+    "name": "NiftiSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
+    "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
+    "language": "TypeScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-07-09T07:16:55Z"
+  },
+  {
+    "name": "MaiwulanjiangMaiming.github.io",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
+    "description": "My Website",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-07-08T08:33:39Z"
   },
   {
     "name": "EverydayMRI",
@@ -38,16 +48,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-26T11:32:32Z"
-  },
-  {
-    "name": "NiftiSpy",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
-    "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
-    "language": "TypeScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-23T16:11:27Z"
   },
   {
     "name": "Project-Manager-X",
