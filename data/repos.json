@@ -10,6 +10,16 @@
     "updated_at": "2026-07-07T06:29:42Z"
   },
   {
+    "name": "academic-gantt",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/academic-gantt",
+    "description": "A zero-dependency, single-file HTML Gantt chart template for academic research proposals. Print-to-PDF ready, with 16:9 and 2.45:1 layouts for PPT embedding. (CC BY-NC 4.0)",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-07-13T08:42:40Z"
+  },
+  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -17,7 +27,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-07-11T08:00:23Z"
+    "updated_at": "2026-07-12T08:21:54Z"
   },
   {
     "name": "MatrixSpy",
@@ -78,16 +88,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-08T00:49:26Z"
-  },
-  {
-    "name": "academic-gantt",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/academic-gantt",
-    "description": "A zero-dependency, single-file HTML Gantt chart template for academic research proposals. Print-to-PDF ready, with 16:9 and 2.45:1 layouts for PPT embedding. (CC BY-NC 4.0)",
-    "language": "HTML",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-05T10:04:34Z"
   },
   {
     "name": "DualTrae",
