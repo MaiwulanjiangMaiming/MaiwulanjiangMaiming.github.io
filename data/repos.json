@@ -17,7 +17,17 @@
     "stargazers_count": 1,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-07-17T19:09:23Z"
+    "updated_at": "2026-07-19T08:22:06Z"
+  },
+  {
+    "name": "DualTrae",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/DualTrae",
+    "description": "Run multiple Trae instances on macOS with one click",
+    "language": "Shell",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-07-19T00:07:32Z"
   },
   {
     "name": "MaiwulanjiangMaiming.github.io",
@@ -27,7 +37,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-07-17T08:14:11Z"
+    "updated_at": "2026-07-18T07:55:25Z"
   },
   {
     "name": "academic-gantt",
@@ -88,16 +98,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-08T00:49:26Z"
-  },
-  {
-    "name": "DualTrae",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/DualTrae",
-    "description": "Run multiple Trae instances on macOS with one click",
-    "language": "Shell",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-05-31T04:27:40Z"
   },
   {
     "name": "PET-Simulator-with-GEANT4",
