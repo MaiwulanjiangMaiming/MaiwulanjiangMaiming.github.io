@@ -20,6 +20,16 @@
     "updated_at": "2026-08-03T09:57:18Z"
   },
   {
+    "name": "MaiwulanjiangMaiming.github.io",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
+    "description": "My Website",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-08-04T08:42:12Z"
+  },
+  {
     "name": "Project-Manager-X",
     "html_url": "https://github.com/MaiwulanjiangMaiming/Project-Manager-X",
     "description": "A powerful VS Code extension for managing projects with tags, tasks, milestones, and lifecycle tracking.",
@@ -28,16 +38,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-08-03T10:09:15Z"
-  },
-  {
-    "name": "MaiwulanjiangMaiming.github.io",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
-    "description": "My Website",
-    "language": "HTML",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-08-03T09:50:39Z"
   },
   {
     "name": "Cairn",
@@ -128,15 +128,5 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-04-24T09:00:11Z"
-  },
-  {
-    "name": "ML-Learning",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/ML-Learning",
-    "description": "📚 Deep Learning Knowledge Summary",
-    "language": "Jupyter Notebook",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-03-31T13:12:20Z"
   }
 ]
