@@ -715,16 +715,16 @@ code {
 
     setStatus('Loading...');
 
-    fetch('https://github-contributions-api.deno.dev/' + username + '.json')
+    fetch('https://github-contributions-api.jogruber.de/v4/' + encodeURIComponent(username) + '?y=last')
       .then(function(r) {
         if (!r.ok) throw new Error('API error: ' + r.status);
         return r.json();
       })
       .then(function(result) {
-        if (!result.contributions) throw new Error('No contributions data');
+        if (!result.contributions || !result.contributions.length) throw new Error('No contributions data');
 
-        var weeks = result.contributions;
-        var levelMap = { NONE: 0, FIRST_QUARTILE: 1, SECOND_QUARTILE: 2, THIRD_QUARTILE: 3, FOURTH_QUARTILE: 4 };
+        // Flat day list: [{date, count, level}] ascending, level 0-4
+        var allDays = result.contributions;
 
         // Reset and fill with real data
         for (var w = 0; w < WEEKS; w++) {
@@ -732,23 +732,36 @@ code {
             counts[w][d] = 0;
             grid[w][d] = 0;
             kmag[w][d] = 0;
+            dates[w][d] = null;
           }
         }
 
-        for (var w = 0; w < weeks.length && w < 52; w++) {
-          var days = weeks[w];
-          if (!days || !days.length) continue;
+        // Anchor the grid to the last day: its week (Sun..Sat) is the final column
+        var lastDate = new Date(allDays[allDays.length - 1].date + 'T00:00:00');
+        var weekEnd = new Date(lastDate);
+        weekEnd.setDate(weekEnd.getDate() + (6 - weekEnd.getDay()));
+        var MS = 86400000;
+
+        for (var i = 0; i < allDays.length; i++) {
+          var day = allDays[i];
+          if (!day || !day.date) continue;
+          var dt = new Date(day.date + 'T00:00:00');
+          var w = WEEKS - 1 - Math.floor((weekEnd - dt) / MS / 7);
+          var d = dt.getDay();
+          if (w < 0 || w >= WEEKS) continue;
+          counts[w][d] = day.count || 0;
+          grid[w][d] = day.level || 0;
+          dates[w][d] = day.date;
+        }
+
+        // k-space magnitude normalized per week
+        for (var w = 0; w < WEEKS; w++) {
           var maxCount = 1;
-          for (var d = 0; d < days.length; d++) {
-            if (days[d] && days[d].contributionCount > maxCount) maxCount = days[d].contributionCount;
+          for (var d = 0; d < DAYS; d++) {
+            if (counts[w][d] > maxCount) maxCount = counts[w][d];
           }
-          for (var d = 0; d < 7 && d < days.length; d++) {
-            var day = days[d];
-            if (!day) continue;
-            grid[w][d] = levelMap[day.contributionLevel] || 0;
-            counts[w][d] = day.contributionCount || 0;
-            kmag[w][d] = maxCount > 0 ? (day.contributionCount || 0) / maxCount : 0;
-            dates[w][d] = day.date;
+          for (var d = 0; d < DAYS; d++) {
+            kmag[w][d] = counts[w][d] / maxCount;
           }
         }
 
