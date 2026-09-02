@@ -20,6 +20,16 @@
     "updated_at": "2026-08-30T15:01:33Z"
   },
   {
+    "name": "GRI-contribution-graph",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/GRI-contribution-graph",
+    "description": "An animated MRI scan visualization of GitHub contribution graphs.",
+    "language": "JavaScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-09-02T06:28:46Z"
+  },
+  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -27,7 +37,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-08-31T13:17:15Z"
+    "updated_at": "2026-09-01T13:39:57Z"
   },
   {
     "name": "Project-Manager-X",
@@ -98,16 +108,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-06-09T06:09:12Z"
-  },
-  {
-    "name": "GRI-contribution-graph",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/GRI-contribution-graph",
-    "description": "An animated MRI scan visualization of GitHub contribution graphs.",
-    "language": "JavaScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-06-08T00:49:26Z"
   },
   {
     "name": "PET-Simulator-with-GEANT4",
