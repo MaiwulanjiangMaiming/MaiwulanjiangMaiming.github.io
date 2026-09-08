@@ -10,6 +10,16 @@
     "updated_at": "2026-09-03T01:26:40Z"
   },
   {
+    "name": "MatrixSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
+    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
+    "language": "TypeScript",
+    "stargazers_count": 1,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-09-08T07:49:35Z"
+  },
+  {
     "name": "NiftiSpy",
     "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
     "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
@@ -27,7 +37,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-09-06T10:31:49Z"
+    "updated_at": "2026-09-07T11:54:48Z"
   },
   {
     "name": "GRI-contribution-graph",
@@ -78,16 +88,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-07-13T08:42:40Z"
-  },
-  {
-    "name": "MatrixSpy",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
-    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
-    "language": "TypeScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-07-09T08:32:37Z"
   },
   {
     "name": "EverydayMRI",
