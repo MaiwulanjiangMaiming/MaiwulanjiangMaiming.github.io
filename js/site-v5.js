@@ -4,7 +4,7 @@ var EM_CB='?v=20260626c';
 function j(u){var url=u+(u.indexOf('?')===-1?EM_CB:'');return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).catch(function(err){console.error('Failed to load '+url+':',err);throw err})}
 function t(u){var url=u+(u.indexOf('?')===-1?EM_CB:'');return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).catch(function(err){console.error('Failed to load '+url+':',err);throw err})}
 function fmtDate(s){var d=new Date(s);return d.getFullYear()+"-"+(String(d.getMonth()+1).padStart(2,'0'))+"-"+(String(d.getDate()).padStart(2,'0'))}
-function cardHtml(title,meta,desc,href,tags,idx){var tagHtml=(tags||[]).map(function(x){return '<span class="pill">'+x+'</span>'}).join('');var delay=idx!==undefined?' style="animation-delay:'+((idx||0)*80)+'ms"':'';return '<div class="card card-reveal"'+delay+'><h3><a href="'+href+'">'+title+'</a></h3><div class="muted">'+meta+'</div><p>'+desc+'</p><div>'+tagHtml+'</div></div>'}
+function cardHtml(title,meta,desc,href,idx){var delay=idx!==undefined?' style="animation-delay:'+((idx||0)*80)+'ms':'';return '<div class="card card-reveal"'+delay+'><h3><a href="'+href+'">'+title+'</a></h3><div class="muted">'+meta+'</div><p>'+desc+'</p></div>'}
 function sortByDateDesc(list){return (list||[]).slice().sort(function(a,b){var da=new Date(a.date||0).getTime();var db=new Date(b.date||0).getTime();return db-da})}
 function groupByYear(list){var g={};(list||[]).forEach(function(pa){var y=Number(pa.year||0);g[y]=(g[y]||[]);g[y].push(pa)});var years=Object.keys(g).map(function(x){return Number(x)}).sort(function(a,b){return b-a});return {years:years,groups:g}}
 function renderTimeline(years){var tl=document.getElementById('timeline');if(!tl)return;tl.innerHTML=years.map(function(y){return '<a href="#y-'+y+'">'+y+'</a>'}).join('')}
@@ -16,8 +16,8 @@ function ensureLightbox(){if(document.querySelector('.lightbox'))return;var d=do
 function bindLightbox(sel){ensureLightbox();var d=document.querySelector('.lightbox');document.querySelectorAll(sel).forEach(function(img){img.addEventListener('click',function(){d.querySelector('img').src=img.src;d.classList.add('open')})})}
 function sanitizeSup(s){if(!s)return '';return s.replace(/^\s*(Supervisor(s)?\s*:\s*)/i,'').trim()}
 function shortenSentences(s,n){if(!s)return '';var txt=s.replace(/\s+/g,' ').trim();var parts=txt.split(/[。.!?]+\s*/).filter(Boolean);return parts.slice(0,n).join('. ')+ (parts.length>n?'.':'' )}
-function renderHome(){Promise.all([j(dp()+'data/projects.json'),j(dp()+'data/papers.json')]).then(function(arr){var projects=arr[0].slice(0,3).map(function(pr,i){return cardHtml(pr.name,(pr.tech||[]).join(', '),pr.summary,pr.link||'#',pr.tags,i)}).join('');var lpr=document.getElementById('latest-projects');if(lpr)lpr.innerHTML=projects;var papers=arr[1].slice(0,3).map(function(pa,i){var meta=(pa.authors||[]).join(', ')+' · '+pa.venue+' · '+pa.year;var h=pa.pdf||pa.link||'#';return cardHtml(pa.title,meta,pa.abstract||'',h,pa.tags,i)}).join('');var lpa=document.getElementById('latest-papers');if(lpa)lpa.innerHTML=papers;enhanceLinks();setupScrollReveal()}).catch(function(err){console.error('Error loading home data:',err)})}
-function renderPapers(){var el=document.getElementById('papers');if(el)el.innerHTML='<div class="loading"><span class="loading-spinner"></span>Loading publications...</div>';j(dp()+'data/papers.json').then(function(list){var gb=groupByYear(list);renderTimeline(gb.years);var html=gb.years.map(function(y){var items=gb.groups[y].map(function(pa,i){var l=pa.pdf||pa.link||'#';var meta=(pa.authors||[]).join(', ')+' · '+pa.venue+' · '+pa.year;var extra=pa.type?'<span class="pill">'+pa.type+'</span>':'';return '<div class="card card-reveal" style="animation-delay:'+(i*60)+'ms"><h3><a href="'+l+'" target="_blank">'+pa.title+'</a></h3><div>'+meta+' '+extra+'</div><p>'+ (pa.abstract||'') +'</p></div>'}).join('');return '<h2 class="year-heading" id="y-'+y+'">'+y+'</h2>'+items}).join('');if(el)el.innerHTML=html;observeYearHeadings(gb.years);setupScrollReveal()}).catch(function(err){if(el)el.innerHTML='<p class="muted">Failed to load publications. Please try again later.</p>'})}
+function renderHome(){Promise.all([j(dp()+'data/projects.json'),j(dp()+'data/papers.json')]).then(function(arr){var projects=arr[0].slice(0,3).map(function(pr,i){return cardHtml(pr.name,(pr.tech||[]).join(', '),pr.summary,pr.link||'#',i)}).join('');var lpr=document.getElementById('latest-projects');if(lpr)lpr.innerHTML=projects;var papers=arr[1].slice(0,3).map(function(pa,i){var meta=(pa.authors||[]).join(', ')+' · '+pa.venue+' · '+pa.year;var h=pa.pdf||pa.link||'#';return cardHtml(pa.title,meta,pa.abstract||'',h,i)}).join('');var lpa=document.getElementById('latest-papers');if(lpa)lpa.innerHTML=papers;enhanceLinks();setupScrollReveal()}).catch(function(err){console.error('Error loading home data:',err)})}
+function renderPapers(){var el=document.getElementById('papers');if(el)el.innerHTML='<div class="loading"><span class="loading-spinner"></span>Loading publications...</div>';j(dp()+'data/papers.json').then(function(list){var gb=groupByYear(list);renderTimeline(gb.years);var html=gb.years.map(function(y){var items=gb.groups[y].map(function(pa,i){var l=pa.pdf||pa.link||'#';var meta=(pa.authors||[]).join(', ')+' · '+pa.venue+' · '+pa.year;return '<div class="card card-reveal" style="animation-delay:'+(i*60)+'ms"><h3><a href="'+l+'" target="_blank">'+pa.title+'</a></h3><div>'+meta+'</div><p>'+ (pa.abstract||'') +'</p></div>'}).join('');return '<h2 class="year-heading" id="y-'+y+'">'+y+'</h2>'+items}).join('');if(el)el.innerHTML=html;observeYearHeadings(gb.years);setupScrollReveal()}).catch(function(err){if(el)el.innerHTML='<p class="muted">Failed to load publications. Please try again later.</p>'})}
 /* ===== Everyday MRI (reads from the EverydayMRI GitHub repo via jsDelivr) ===== */
 var EM_BASE='https://cdn.jsdelivr.net/gh/MaiwulanjiangMaiming/EverydayMRI@main/';
 var EM_BASE_RAW='https://raw.githubusercontent.com/MaiwulanjiangMaiming/EverydayMRI/main/';
@@ -51,11 +51,10 @@ function renderEveryday(){
       var cards=(p.papers||[]).map(function(pa,i){
         var st=pa.status==='done'?'em-done':(pa.status==='reading'?'em-reading':'em-planned');
         var stBadge='<span class="pill '+st+'">'+pa.status+'</span>';
-        var topic=pa.topic?'<span class="pill">'+pa.topic+'</span>':'';
         var meta=pa.authors+(pa.year?(' · '+pa.year):'')+' · '+pa.venue;
         var doiHtml=pa.doi?'<a class="em-doi-link" href="https://doi.org/'+pa.doi+'" target="_blank" rel="noopener">Paper ↗</a>':'';
         var titleHtml=(pa.note&&pa.status==='done')?'<a href="#" data-note="'+pa.note+'" class="em-note-link">'+pa.title+'</a>':'<span>'+pa.title+'</span>';
-        return '<div class="card card-reveal em-paper" style="animation-delay:'+(i*40)+'ms"><div class="em-paper-head"><span class="em-id">'+pa.id+'</span>'+stBadge+doiHtml+'</div><h3>'+titleHtml+'</h3><div class="muted em-meta">'+meta+'</div><div class="em-tags">'+topic+'</div></div>'
+        return '<div class="card card-reveal em-paper" style="animation-delay:'+(i*40)+'ms"><div class="em-paper-head"><span class="em-id">'+pa.id+'</span>'+stBadge+doiHtml+'</div><h3>'+titleHtml+'</h3><div class="muted em-meta">'+meta+'</div></div>'
       }).join('');
       var focus=p.focus?'<span class="pill em-focus">focus</span>':'';
       return '<section class="em-phase"><h2 class="year-heading" id="'+p.id+'">'+p.id+' · '+p.title+' '+focus+'</h2><p class="muted em-goal">'+(p.goal||'')+'</p><div class="list">'+cards+'</div></section>'
@@ -169,11 +168,6 @@ function renderGitHubRepos(username) {
         ? '<span class="repo-stat ext-downloads" data-repo="' + repo.name + '"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"/></svg> <span class="dl-count">—</span></span>'
         : '';
 
-      // Topics pills
-      var topics = (repo.topics || []).slice(0, 3).map(function(t) {
-        return '<span class="pill">' + t + '</span>';
-      }).join('');
-
       // Category banner (placed AFTER the h3 and BEFORE description)
       var category = classifyRepo(repo);
       var banner = '<div class="repo-banner cat-' + category.toLowerCase() + '">' + category + '</div>';
@@ -183,7 +177,6 @@ function renderGitHubRepos(username) {
         banner +
         '<p class="repo-desc">' + (repo.description || 'No description provided') + '</p>' +
         '<div class="repo-meta">' + lang + stars + forks + dlPlaceholder + '</div>' +
-        (topics ? '<div class="repo-topics">' + topics + '</div>' : '') +
         '</div>';
     }).join('');
 

@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en" data-theme="light" data-theme-mode="light"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="GitHub projects showcasing code in medical imaging, machine learning, and research.">
@@ -16,8 +15,8 @@
 (function(){var m=localStorage.getItem('theme-mode')||localStorage.getItem('theme')||'auto';var p=window.matchMedia('(prefers-color-scheme: light)').matches;var t=m==='auto'?(p?'light':'dark'):m;document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-theme-mode',m)})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&amp;family=Outfit:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=20">
 <link rel="prefetch" href="../data/papers.json">
 <link rel="prefetch" href="../data/research.json">
@@ -32,11 +31,11 @@
       <a href="../index.html">Home</a>
       <a href="papers.html">Publications</a>
       <a href="research.html">Research</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html" class="active">Projects</a>
       <a href="everyday.html">Everyday MRI</a>
       <a href="moments.html">Moments</a>
       <a href="about.html">About me</a>
-    </nav>
+    </nav><button id="search-btn" aria-label="Search" onclick="openSearch()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button><button id="theme-toggle" aria-label="Light mode (click → dark)" data-mode="light" title="Light mode (click → dark)"><svg class="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg><svg class="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
   </div>
 </header>
 <main class="container">
@@ -48,75 +47,75 @@
     <div id="gri-scanner">
       <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Animated demo of a GitHub contribution graph styled as an MRI scan. Weeks act as phase-encode lines, days as frequency-encode, commits as signal intensity. A scan line sweeps left to right, filling k-space and forming an echo, then reconstructs a contribution image that reads GRI.</h2>
       <div style="padding:1rem 0;">
-        <div id="scanner-card" style="max-width:640px;margin:0 auto;background:#0b0f14;border:1px solid #1e2b38;border-radius:16px;padding:20px 24px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfeae4;overflow-x:auto;box-shadow:0 1px 3px rgba(0,0,0,0.2),0 8px 24px rgba(0,0,0,0.3);">
+        <div id="scanner-card" style="max-width: 640px; margin: 0px auto; background: rgb(255, 255, 255); border: 1px solid rgb(232, 236, 241); border-radius: 16px; padding: 20px 24px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: rgb(30, 41, 59); overflow-x: auto; box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 3px, rgba(0, 0, 0, 0.04) 0px 8px 24px;">
           <!-- Header -->
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
             <div style="display:flex;align-items:center;gap:10px;">
-              <svg id="hdr-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#45e0d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-              <span id="hdr-title" style="font-size:14px;color:#cfeae4;letter-spacing:0.3px;font-weight:500;">GitHub Resonance Imaging <span id="hdr-gri" style="color:#45e0d8;font-weight:600;">(GRI)</span></span>
+              <svg id="hdr-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              <span id="hdr-title" style="font-size: 14px; color: rgb(30, 41, 59); letter-spacing: 0.3px; font-weight: 500;">GitHub Resonance Imaging <span id="hdr-gri" style="color: rgb(8, 145, 178); font-weight: 600;">(GRI)</span></span>
             </div>
-            <span id="hdr-badge" style="display:flex;align-items:center;gap:6px;font-size:11px;background:#0f1f1c;border:1px solid #1a3d36;border-radius:20px;padding:3px 10px;">
+            <span id="hdr-badge" style="display: flex; align-items: center; gap: 6px; font-size: 11px; background: rgb(240, 253, 250); border: 1px solid rgb(204, 251, 241); border-radius: 20px; padding: 3px 10px;">
               <span style="width:6px;height:6px;border-radius:50%;background:#45e0d8;animation:pulse 2s ease-in-out infinite;"></span>
-              <span id="gri-status" style="color:#45e0d8;font-weight:500;">ACQUIRING</span>
+              <span id="gri-status" style="color: rgb(8, 145, 178); font-weight: 500;">ACQUIRING</span>
             </span>
           </div>
           <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
 
           <!-- Parameters -->
           <div id="params-row" style="display:flex;flex-wrap:nowrap;gap:4px;margin-bottom:16px;font-size:10px;overflow-x:auto;">
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Seq <span class="param-val" style="color:#45e0d8;font-weight:600;">GitEcho</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TR <span class="param-val" style="color:#45e0d8;font-weight:600;">7 d</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">TE <span class="param-val" style="color:#45e0d8;font-weight:600;">24 h</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FA <span class="param-val" style="color:#45e0d8;font-weight:600;">42°</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Matrix <span class="param-val" style="color:#45e0d8;font-weight:600;">52×7</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">FOV <span class="param-val" style="color:#45e0d8;font-weight:600;">365 d</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">NEX <span class="param-val" style="color:#45e0d8;font-weight:600;">1</span></span>
-            <span class="param-chip" style="background:#0f1620;border:1px solid #1e2b38;border-radius:6px;padding:3px 8px;color:#9fc4bd;white-space:nowrap;">Slice <span class="param-val" style="color:#45e0d8;font-weight:600;">main</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">Seq <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">GitEcho</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">TR <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">7 d</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">TE <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">24 h</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">FA <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">42°</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">Matrix <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">52×7</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">FOV <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">365 d</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">NEX <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">1</span></span>
+            <span class="param-chip" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 6px; padding: 3px 8px; color: rgb(100, 116, 139); white-space: nowrap;">Slice <span class="param-val" style="color: rgb(8, 145, 178); font-weight: 600;">main</span></span>
           </div>
 
           <!-- Tooltip -->
-          <div id="gri-tooltip" style="position:fixed;background:#161b22;border:1px solid #30363d;border-radius:6px;padding:6px 10px;font-size:11px;color:#cfeae4;pointer-events:none;opacity:0;transition:opacity 0.15s ease;z-index:1000;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.3);"></div>
+          <div id="gri-tooltip" style="position: fixed; background: rgb(246, 248, 250); border: 1px solid rgb(208, 215, 222); border-radius: 6px; padding: 6px 10px; font-size: 11px; color: rgb(30, 41, 59); pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 1000; white-space: nowrap; box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px; left: 560px; top: 172px;"><strong>0</strong> echo on <strong>2025-12-04</strong></div>
 
           <!-- Main Canvas -->
-          <div id="main-wrap" style="background:#080c11;border:1px solid #1e2b38;border-radius:12px;padding:12px 14px;position:relative;">
-            <canvas id="gri-main" style="display:block;"></canvas>
+          <div id="main-wrap" style="background: rgb(255, 255, 255); border: 1px solid rgb(226, 232, 240); border-radius: 12px; padding: 12px 14px; position: relative;">
+            <canvas id="gri-main" style="display: block; width: 596px; height: 93px; cursor: default;" width="1192" height="186"></canvas>
           </div>
 
           <!-- Bottom Panel -->
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;align-items:flex-start;">
             <!-- k-space -->
             <div style="flex:0 0 auto;">
-              <div id="k-label" style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">k-space</div>
-              <canvas id="gri-k" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
+              <div id="k-label" style="font-size: 10px; color: rgb(148, 163, 184); margin-bottom: 4px; padding-left: 2px;">k-space</div>
+              <canvas id="gri-k" style="border: 1px solid rgb(226, 232, 240); border-radius: 8px; background: rgb(255, 255, 255); display: block; width: 168px; height: 96px;" width="336" height="192"></canvas>
             </div>
             <!-- Echo -->
             <div style="flex:0 0 auto;">
-              <div id="e-label" style="font-size:10px;color:#5d7686;margin-bottom:4px;padding-left:2px;">MR signal (echo)</div>
-              <canvas id="gri-echo" style="border:1px solid #1e2b38;border-radius:8px;background:#080c11;display:block;"></canvas>
+              <div id="e-label" style="font-size: 10px; color: rgb(148, 163, 184); margin-bottom: 4px; padding-left: 2px;">MR signal (echo)</div>
+              <canvas id="gri-echo" style="border: 1px solid rgb(226, 232, 240); border-radius: 8px; background: rgb(255, 255, 255); display: block; width: 196px; height: 96px;" width="392" height="192"></canvas>
             </div>
             <!-- HUD -->
-            <div id="hud-panel" style="flex:1;min-width:140px;background:#0f1620;border:1px solid #1e2b38;border-radius:10px;padding:12px 14px;font-size:12px;color:#5d7686;line-height:2;">
+            <div id="hud-panel" style="flex: 1 1 0%; min-width: 140px; background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 10px; padding: 12px 14px; font-size: 12px; color: rgb(148, 163, 184); line-height: 2;">
               <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
                 <span>PE line</span>
-                <span id="gri-pe" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 / 52</span>
+                <span id="gri-pe" style="color: rgb(30, 41, 59); font-weight: 600; font-family: ui-monospace, monospace;">49 / 52</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2b38;padding-bottom:6px;margin-bottom:6px;">
                 <span>TR elapsed</span>
-                <span id="gri-tr" style="color:#cfeae4;font-weight:600;font-family:ui-monospace,monospace;">0 wk</span>
+                <span id="gri-tr" style="color: rgb(30, 41, 59); font-weight: 600; font-family: ui-monospace, monospace;">49 wk</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span>Σ signal</span>
-                <span id="gri-total" style="color:#86f2b0;font-weight:600;font-family:ui-monospace,monospace;">— au</span>
+                <span id="gri-total" style="color:#86f2b0;font-weight:600;font-family:ui-monospace,monospace;">382 au</span>
               </div>
             </div>
           </div>
 
           <!-- Controls -->
           <div style="display:flex;gap:8px;margin-top:14px;">
-            <button id="gri-play" aria-label="Pause or play scan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 12px;font:inherit;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            <button id="gri-play" aria-label="Pause or play scan" style="background: rgb(255, 255, 255); border: 1px solid rgb(209, 213, 219); color: rgb(30, 41, 59); border-radius: 10px; padding: 7px 12px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: 0.15s; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px;" onmouseover="this.style.background='#f9fafb';this.style.borderColor='#9ca3af'" onmouseout="this.style.background='#ffffff';this.style.borderColor='#d1d5db'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
             </button>
-            <button id="gri-rescan" style="background:#0f1620;border:1px solid #2a3b49;color:#cfeae4;border-radius:10px;padding:7px 14px;font:inherit;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.1);" onmouseover="this.style.background='#162233';this.style.borderColor='#3a5063'" onmouseout="this.style.background='#0f1620';this.style.borderColor='#2a3b49'">Re-scan</button>
+            <button id="gri-rescan" style="background: rgb(255, 255, 255); border: 1px solid rgb(209, 213, 219); color: rgb(30, 41, 59); border-radius: 10px; padding: 7px 14px; font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-size: 12px; cursor: pointer; font-weight: 500; transition: 0.15s; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px;" onmouseover="this.style.background='#f9fafb';this.style.borderColor='#9ca3af'" onmouseout="this.style.background='#ffffff';this.style.borderColor='#d1d5db'">Re-scan</button>
           </div>
         </div>
       </div>
@@ -124,14 +123,14 @@
   </section>
 
   <p class="muted">Public repositories from <a href="https://github.com/MaiwulanjiangMaiming" target="_blank" rel="noopener">@MaiwulanjiangMaiming</a> · <a href="gri-demo.html">Try GRI Demo →</a></p>
-  <div id="github-repos" class="grid"></div>
+  <div id="github-repos" class="grid"><div class="card card-reveal github-repo revealed" style="animation-delay:0ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/DualWeChat" target="_blank" rel="noopener">DualWeChat</a></h3><div class="repo-banner cat-tool">Tool</div><p class="repo-desc">macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="Shell"></span>Shell</span><span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg> 6</span><span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-.878a2.25 2.25 0 111.5 0v.878a2.25 2.25 0 01-2.25 2.25h-1.5v2.128a2.251 2.251 0 11-1.5 0V8.5h-1.5A2.25 2.25 0 013.5 6.25v-.878a2.25 2.25 0 111.5 0zM5 3.25a.75.75 0 10-1.5 0 .75.75 0 001.5 0zm6.75.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8 12.25a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg> 1</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:60ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/NiftiSpy" target="_blank" rel="noopener">NiftiSpy</a></h3><div class="repo-banner cat-extension">Extension</div><p class="repo-desc">High-performance NIfTI medical image viewer with streaming, Range requests, and WebWorker parsing</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="TypeScript"></span>TypeScript</span><span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg> 1</span><span class="repo-stat ext-downloads" data-repo="NiftiSpy"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"></path></svg> <span class="dl-count">7.0K OpenVSX</span></span></div><div class="repo-topics"><span class="pill">nifti</span><span class="pill">medical-imaging</span><span class="pill">mri</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:120ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/MatrixSpy" target="_blank" rel="noopener">MatrixSpy</a></h3><div class="repo-banner cat-extension">Extension</div><p class="repo-desc">A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="TypeScript"></span>TypeScript</span><span class="repo-stat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg> 1</span><span class="repo-stat ext-downloads" data-repo="MatrixSpy"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"></path></svg> <span class="dl-count">8.7K OpenVSX</span></span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:180ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io" target="_blank" rel="noopener">MaiwulanjiangMaiming.github.io</a></h3><div class="repo-banner cat-website">Website</div><p class="repo-desc">My Website</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="HTML"></span>HTML</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:240ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/GRI-contribution-graph" target="_blank" rel="noopener">GRI-contribution-graph</a></h3><div class="repo-banner cat-project">Project</div><p class="repo-desc">An animated MRI scan visualization of GitHub contribution graphs.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="JavaScript"></span>JavaScript</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:300ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/Project-Manager-X" target="_blank" rel="noopener">Project-Manager-X</a></h3><div class="repo-banner cat-extension">Extension</div><p class="repo-desc">A powerful VS Code extension for managing projects with tags, tasks, milestones, and lifecycle tracking.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="TypeScript"></span>TypeScript</span><span class="repo-stat ext-downloads" data-repo="Project-Manager-X"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.25 7.689V2a.75.75 0 011.5 0v5.689l1.97-1.969a.749.749 0 011.275.326.749.749 0 01-.215.734l-3.25 3.25a.75.75 0 01-1.06 0l-3.25-3.25a.749.749 0 01.326-1.275.749.749 0 01.734.215L7.25 7.689z"></path></svg> <span class="dl-count">2.7K OpenVSX</span></span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:360ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/Cairn" target="_blank" rel="noopener">Cairn</a></h3><div class="repo-banner cat-project">Project</div><p class="repo-desc">No description provided</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="Swift"></span>Swift</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:420ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/DualTrae" target="_blank" rel="noopener">DualTrae</a></h3><div class="repo-banner cat-tool">Tool</div><p class="repo-desc">Run multiple Trae instances on macOS with one click</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="Shell"></span>Shell</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:480ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/academic-gantt" target="_blank" rel="noopener">academic-gantt</a></h3><div class="repo-banner cat-research">Research</div><p class="repo-desc">A zero-dependency, single-file HTML Gantt chart template for academic research proposals. Print-to-PDF ready, with 16:9 and 2.45:1 layouts for PPT embedding. (CC BY-NC 4.0)</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="HTML"></span>HTML</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:540ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/EverydayMRI" target="_blank" rel="noopener">EverydayMRI</a></h3><div class="repo-banner cat-research">Research</div><p class="repo-desc">Daily MRI reading journal — 3 papers/day, 8-phase roadmap from MRI physics to non-Cartesian MRF and deep learning reconstruction. Deep reading notes with writing lessons.</p><div class="repo-meta"></div><div class="repo-topics"><span class="pill">mri</span><span class="pill">mrf</span><span class="pill">non-cartesian</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:600ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/Desktop-Widget" target="_blank" rel="noopener">Desktop-Widget</a></h3><div class="repo-banner cat-project">Project</div><p class="repo-desc">A beautiful desktop todo widget for Übersicht on macOS with priority, due date, and section management support.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="CoffeeScript"></span>CoffeeScript</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:660ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/PET-Simulator-with-GEANT4" target="_blank" rel="noopener">PET-Simulator-with-GEANT4</a></h3><div class="repo-banner cat-project">Project</div><p class="repo-desc">Geant4-based PET scanner Monte Carlo simulation with cylindrical detector geometry, water phantom, and back-to-back 511 keV gamma ray source.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="C++"></span>C++</span></div></div><div class="card card-reveal github-repo revealed" style="animation-delay:720ms"><h3><a href="https://github.com/MaiwulanjiangMaiming/QuickEvent" target="_blank" rel="noopener">QuickEvent</a></h3><div class="repo-banner cat-project">Project</div><p class="repo-desc">Generates ics file for calender apps.</p><div class="repo-meta"><span class="repo-lang"><span class="lang-dot" data-lang="Swift"></span>Swift</span></div></div></div>
 </main>
 <footer class="site-footer">
-  <div class="container">© <span id="year"></span> Maiwulanjiang Maiming
+  <div class="container">© <span id="year">2026</span> Maiwulanjiang Maiming
     <div class="motto">"Everything negative, pressure, challenges, is all an opportunity for me to rise." - Kobe Bryant</div>
   </div>
 </footer>
-<script src="../js/site-v5.js?v=21"></script>
+<script src="../js/site-v5.js?v=22"></script>
 <script>
 (function(){
   // ====== THEME CONFIGURATION ======
@@ -611,5 +610,6 @@
   renderGitHubRepos('MaiwulanjiangMaiming');
 })();
 </script>
-</body>
-</html>
+
+
+</body></html>
