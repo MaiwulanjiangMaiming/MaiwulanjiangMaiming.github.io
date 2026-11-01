@@ -10,6 +10,21 @@
     "updated_at": "2026-10-26T07:42:08Z"
   },
   {
+    "name": "Deepseek-harness-SSH-toolkit",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/Deepseek-harness-SSH-toolkit",
+    "description": "SSH remote workspaces for DeepSeek Harness",
+    "language": "JavaScript",
+    "stargazers_count": 1,
+    "forks_count": 0,
+    "topics": [
+      "deepseek-harness",
+      "dsh-plugin",
+      "remote-development",
+      "ssh"
+    ],
+    "updated_at": "2026-11-01T07:44:56Z"
+  },
+  {
     "name": "NiftiSpy",
     "html_url": "https://github.com/MaiwulanjiangMaiming/NiftiSpy",
     "description": "🧠 High-performance NIfTI medical image viewer for VS Code",
@@ -30,21 +45,6 @@
     "updated_at": "2026-09-08T07:49:35Z"
   },
   {
-    "name": "Deepseek-harness-SSH-toolkit",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/Deepseek-harness-SSH-toolkit",
-    "description": "SSH remote workspaces for DeepSeek Harness 0.2 — host manager, ~/.ssh/config import, remote bash/file/search tools",
-    "language": "JavaScript",
-    "stargazers_count": 0,
-    "forks_count": 0,
-    "topics": [
-      "deepseek-harness",
-      "dsh-plugin",
-      "remote-development",
-      "ssh"
-    ],
-    "updated_at": "2026-10-31T08:31:51Z"
-  },
-  {
     "name": "MaiwulanjiangMaiming.github.io",
     "html_url": "https://github.com/MaiwulanjiangMaiming/MaiwulanjiangMaiming.github.io",
     "description": "My Website",
@@ -52,7 +52,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-10-28T12:36:33Z"
+    "updated_at": "2026-10-31T12:06:00Z"
   },
   {
     "name": "GRI-contribution-graph",
