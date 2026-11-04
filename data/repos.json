@@ -2,12 +2,20 @@
   {
     "name": "DualWeChat",
     "html_url": "https://github.com/MaiwulanjiangMaiming/DualWeChat",
-    "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 5 种自定义图标配色",
-    "language": "Shell",
+    "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 10 套自定义图标主题",
+    "language": "Python",
     "stargazers_count": 7,
     "forks_count": 1,
-    "topics": [],
-    "updated_at": "2026-10-26T07:42:08Z"
+    "topics": [
+      "dual-instance",
+      "icon-generator",
+      "macos",
+      "macos-app",
+      "python",
+      "shell",
+      "wechat"
+    ],
+    "updated_at": "2026-11-03T05:50:52Z"
   },
   {
     "name": "Deepseek-harness-SSH-toolkit",
@@ -22,7 +30,7 @@
       "remote-development",
       "ssh"
     ],
-    "updated_at": "2026-11-01T07:44:56Z"
+    "updated_at": "2026-11-04T03:47:44Z"
   },
   {
     "name": "NiftiSpy",
@@ -52,7 +60,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-10-31T12:06:00Z"
+    "updated_at": "2026-11-01T13:05:46Z"
   },
   {
     "name": "GRI-contribution-graph",
