@@ -5,7 +5,7 @@
     "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 10 套自定义图标主题",
     "language": "Python",
     "stargazers_count": 7,
-    "forks_count": 1,
+    "forks_count": 2,
     "topics": [
       "dual-instance",
       "icon-generator",
@@ -60,7 +60,7 @@
     "stargazers_count": 0,
     "forks_count": 0,
     "topics": [],
-    "updated_at": "2026-11-04T14:15:46Z"
+    "updated_at": "2026-11-07T12:49:55Z"
   },
   {
     "name": "GRI-contribution-graph",
