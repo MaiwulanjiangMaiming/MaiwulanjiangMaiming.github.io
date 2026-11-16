@@ -22,7 +22,7 @@
     "html_url": "https://github.com/MaiwulanjiangMaiming/Deepseek-harness-SSH-toolkit",
     "description": "SSH remote workspaces for DeepSeek Harness",
     "language": "JavaScript",
-    "stargazers_count": 1,
+    "stargazers_count": 2,
     "forks_count": 0,
     "topics": [
       "deepseek-harness",
@@ -30,7 +30,17 @@
       "remote-development",
       "ssh"
     ],
-    "updated_at": "2026-11-04T03:47:44Z"
+    "updated_at": "2026-11-15T11:21:04Z"
+  },
+  {
+    "name": "MatrixSpy",
+    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
+    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
+    "language": "TypeScript",
+    "stargazers_count": 2,
+    "forks_count": 0,
+    "topics": [],
+    "updated_at": "2026-11-15T02:52:45Z"
   },
   {
     "name": "NiftiSpy",
@@ -41,16 +51,6 @@
     "forks_count": 0,
     "topics": [],
     "updated_at": "2026-10-27T14:19:50Z"
-  },
-  {
-    "name": "MatrixSpy",
-    "html_url": "https://github.com/MaiwulanjiangMaiming/MatrixSpy",
-    "description": "A powerful VS Code extension for exploring, visualizing, and exporting MATLAB .mat files with image support and beautiful matrix visualization.",
-    "language": "TypeScript",
-    "stargazers_count": 1,
-    "forks_count": 0,
-    "topics": [],
-    "updated_at": "2026-09-08T07:49:35Z"
   },
   {
     "name": "MaiwulanjiangMaiming.github.io",
