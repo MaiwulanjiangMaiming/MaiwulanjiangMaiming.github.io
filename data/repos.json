@@ -5,7 +5,7 @@
     "description": "macOS 微信双开 — 修改 Bundle Identifier 绕过单实例检测，一键安装，支持 10 套自定义图标主题",
     "language": "Python",
     "stargazers_count": 7,
-    "forks_count": 3,
+    "forks_count": 4,
     "topics": [
       "dual-instance",
       "icon-generator",
@@ -22,7 +22,7 @@
     "html_url": "https://github.com/MaiwulanjiangMaiming/Deepseek-harness-SSH-toolkit",
     "description": "SSH remote workspaces for DeepSeek Harness",
     "language": "JavaScript",
-    "stargazers_count": 2,
+    "stargazers_count": 3,
     "forks_count": 0,
     "topics": [
       "deepseek-harness",
@@ -30,7 +30,7 @@
       "remote-development",
       "ssh"
     ],
-    "updated_at": "2026-11-15T11:21:04Z"
+    "updated_at": "2026-11-23T07:10:20Z"
   },
   {
     "name": "MatrixSpy",
